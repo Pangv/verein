@@ -364,7 +364,7 @@ fieldset {
 
 /*
  * 1. Corrects color not being inherited in IE6/7/8/9
- * 2. Corrects text not wrapping in FF3 
+ * 2. Corrects text not wrapping in FF3
  * 3. Corrects alignment displayed oddly in IE6/7
  */
 legend {
@@ -783,12 +783,15 @@ header p {
 }
 #banner #logo {
   position: absolute;
-  height: 36px;
-  width: 36px;
+  transform: scale(.5);
   right: 7px;
   top: 7px;
   display: block;
-  background: url(../images/octocat-logo.png);
+  background: url(../images/vfj_logo.png);
+}
+
+#logo {
+  width: 50%;
 }
 
 section {
