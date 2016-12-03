@@ -5,6 +5,8 @@
  */
 package de.lebk.verein.entry;
 
+
+
 /**
  *
  * @author sopaetzel
@@ -13,6 +15,11 @@ public class Entry {
     
     public static void main(String[] args) {
         System.out.println("It is alive!");
+        
+        
+        
+        window.initWindow();
+        
     }
     
 }
