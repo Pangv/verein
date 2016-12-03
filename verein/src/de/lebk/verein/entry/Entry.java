@@ -5,6 +5,7 @@
  */
 package de.lebk.verein.entry;
 
+import de.lebk.verein.view.MainFrame;
 
 
 /**
@@ -17,6 +18,7 @@ public class Entry {
         System.out.println("It is alive!");
         
         
+        MainFrame window = new MainFrame();
         
         window.initWindow();
         
