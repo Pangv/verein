@@ -5,37 +5,26 @@
  */
 package de.lebk.verein.entry;
 
+import de.lebk.verein.view.LoginDialog;
 import de.lebk.verein.view.MainFrame;
-
 
 /**
  *
  * @author sopaetzel
  */
 public class Entry {
-    
-    private boolean running = false;
-    private Thread thread;
+
+    private static MainFrame mainFrame;
+    private static LoginDialog loginDialog;
     
     public static void main(String[] args) {
         System.out.println("It is alive!");
-        
-        
+  
+        mainFrame = new MainFrame();
+        loginDialog = new LoginDialog(mainFrame,"Anmeldung");
+       
     }
-    
-    public synchronized void start(){
-        running = true;
-        thread = new Thread(, "Display");
-        thread.start();
-    }
-    
-    public synchronized void stop(){
-        running = false;
-        try {
-            thread.join();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
+
+
+
 }
