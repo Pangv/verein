@@ -17,11 +17,23 @@ public class Entry {
     private static MainFrame mainFrame;
     private static LoginDialog loginDialog;
     
+    //TODO: Remove later
+    static boolean loggedIn = true;
+    
     public static void main(String[] args) {
         System.out.println("It is alive!");
   
         mainFrame = new MainFrame();
-        loginDialog = new LoginDialog(mainFrame,"Anmeldung");
+        
+        
+        //TODO: Remove later
+        if (loggedIn) {
+            System.out.println("Your are logged in");
+        }else {
+            System.err.println("Your are not logged in");
+            loginDialog = new LoginDialog(mainFrame,"Anmeldung");
+        }
+        
        
     }
 
