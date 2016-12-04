@@ -6,23 +6,46 @@
 package de.lebk.verein.view;
 
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import javax.swing.JFrame;
 
 /**
  *
  * @author sopaetzel
  */
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame implements Runnable{
     
-    private int initWidth = 300;
+    private int initWidth = 500;
     private int initHeight = 250;
+    private int minWidth = 500;
+    private int minHeight = 250;
+   
+    Dimension initDimension = new Dimension(initWidth, initHeight);
+    Dimension minDimension = new Dimension(minWidth, minHeight);
+        
+    MainMenu mainMenu = new MainMenu();
+   
     
-    Dimension dimension = new Dimension(initWidth, initHeight);
     
-    public void initWindow(){
+    
+    private void initWindow(){
+        this.setJMenuBar(new MainMenu());
+        
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Vereinsverwaltung");
-        this.setPreferredSize(dimension);
+        
+        this.setSize(initDimension);
+        this.setMinimumSize(minDimension);
+        this.setPreferredSize(initDimension);
+        
+        
+        
         this.setVisible(true);
+    }
+
+    @Override
+    public void run() {
+      
     }
     
     

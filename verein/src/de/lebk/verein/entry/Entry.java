@@ -14,14 +14,28 @@ import de.lebk.verein.view.MainFrame;
  */
 public class Entry {
     
+    private boolean running = false;
+    private Thread thread;
+    
     public static void main(String[] args) {
         System.out.println("It is alive!");
         
         
-        MainFrame window = new MainFrame();
-        
-        window.initWindow();
-        
+    }
+    
+    public synchronized void start(){
+        running = true;
+        thread = new Thread(, "Display");
+        thread.start();
+    }
+    
+    public synchronized void stop(){
+        running = false;
+        try {
+            thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }
