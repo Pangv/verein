@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.lebk.verein.view;
+package de.lebk.verein.view.dialog;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -22,15 +22,9 @@ import javax.swing.JTextField;
 public class LoginDialog extends JDialog {
 
     // Properties
-    private final int initWidth = 350;
-    private final int initHeight = 150;
-
-
     private final int horizontalGap = 10;
     private final int verticalGap = 5;
     
-    
-    private final Dimension initDimension = new Dimension(initWidth, initHeight);
 
     // Components
     private JPanel jPanel;
@@ -52,9 +46,6 @@ public class LoginDialog extends JDialog {
     }
 
     private void addAndCreateDialog() {
-
-        this.setSize(initDimension);
-        this.setPreferredSize(initDimension);
         
         jPanel = new JPanel(new GridLayout(4, 2, horizontalGap, verticalGap));
 
@@ -71,7 +62,7 @@ public class LoginDialog extends JDialog {
 
         this.setTitle(dialogTitle);
 
-        jPanel.add(jLblMessage);
+        jPanel.add(jLblMessage, CENTER_ALIGNMENT);
         jPanel.add(jLblPlaceholder);
         
         jPanel.add(jLblLoginname);

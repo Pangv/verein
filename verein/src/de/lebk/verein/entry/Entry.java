@@ -1,12 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.lebk.verein.entry;
 
-import de.lebk.verein.view.LoginDialog;
+import de.lebk.verein.view.dialog.LoginDialog;
 import de.lebk.verein.view.MainFrame;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.SplashScreen;
 
 /**
  *
@@ -14,19 +13,18 @@ import de.lebk.verein.view.MainFrame;
  */
 public class Entry {
 
-    private static MainFrame mainFrame;
-    private static LoginDialog loginDialog;
-    
-    //TODO: Remove later
-    static boolean loggedIn = false;
-    
-    public static void main(String[] args) {
-        System.out.println("It is alive!");
-  
-        mainFrame = new MainFrame(loggedIn);
-     
-    }
+  private static MainFrame mainFrame;
+  private static LoginDialog loginDialog;
 
+  // TODO: Remove later
+  static boolean loggedIn = true;
 
+  public static void main(String[] args) {
+    System.out.println("It is alive!");
+
+    mainFrame = new MainFrame(loggedIn, "Steve Biffer");
+    
+
+  }
 
 }

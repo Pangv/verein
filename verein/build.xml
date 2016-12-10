@@ -70,4 +70,19 @@
     nbproject/build-impl.xml file. 
 
     -->
+     <manifest file="MANIFEST.MF">
+    <attribute name="Built-By" value="${user.name}"/>
+    <attribute name="SplashScreen-Image" value="assets/logo.png"/>
+    <section name="common">
+      <attribute name="Specification-Title" value="Example"/>
+      <attribute name="Specification-Version" value="${version}"/>
+      <attribute name="Specification-Vendor" value="Example Organization"/>
+      <attribute name="Implementation-Title" value="common"/>
+      <attribute name="Implementation-Version" value="${version} ${TODAY}"/> 
+      <attribute name="Implementation-Vendor" value="Example Corp."/>
+    </section>
+    <section name="common/class1.class">
+      <attribute name="Sealed" value="false"/>
+    </section>
+  </manifest>
 </project>

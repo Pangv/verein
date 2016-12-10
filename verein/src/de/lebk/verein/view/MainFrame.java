@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.lebk.verein.view;
 
+import de.lebk.verein.view.dialog.LoginDialog;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import javax.swing.JFrame;
@@ -24,26 +20,33 @@ public class MainFrame extends JFrame {
     Dimension minDimension = new Dimension(minWidth, minHeight);
 
     MainMenu mainMenu = new MainMenu();
+    TabContainer tabContainer = new TabContainer();
     LoginDialog loginDialog;
 
-    public MainFrame(boolean loggedIn) throws HeadlessException {
+    public MainFrame(boolean loggedIn, String username) throws HeadlessException {
         if (!loggedIn) {
             loginDialog = new LoginDialog(this, "Anmeldung");
             this.createAndHideGUI();
         } else if (loggedIn) {
             this.createAndShowGUI();
+            this.setTitle(this.getTitle() + " [" + username +"]");
         }
     }
 
+    /**
+     * Creates Main Frame (Window) of out Application
+     * and sets some initial values.
+     */
     private void createGUI(){
         this.setJMenuBar(new MainMenu());
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Vereinsverwaltung");
 
-        this.setSize(initDimension);
+//        this.setSize(initDimension);
         this.setMinimumSize(minDimension);
-        this.setPreferredSize(initDimension);
+//        this.setPreferredSize(initDimension);
+        this.getContentPane().add(tabContainer);
         
         this.pack();
     }

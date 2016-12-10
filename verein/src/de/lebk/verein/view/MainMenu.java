@@ -5,6 +5,10 @@
  */
 package de.lebk.verein.view;
 
+import de.lebk.verein.view.dialog.LoginDialog;
+import de.lebk.verein.view.dialog.ProfileDialog;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -13,27 +17,62 @@ import javax.swing.JMenuItem;
  *
  * @author sopaetzel
  */
-public class MainMenu extends JMenuBar{
-    
+public class MainMenu extends JMenuBar {
+
     // base menus
-    private JMenu jMenu = new JMenu("Datei");
+    private final JMenu jMenuFile = new JMenu("Datei");
+    private final JMenu jMenuTest = new JMenu("Test");
     // sub menus
-    private JMenuItem jMenuOpen = new JMenuItem("Öffnen");
-    private JMenuItem jMenuExit = new JMenuItem("Schließen");
+    private final JMenuItem jMenuLogin = new JMenuItem("Zeige Login");
+    private final JMenuItem jMenuProfile = new JMenuItem("Zeige Profil");
+
+    private final JMenuItem jMenuExit = new JMenuItem("Schließen");
 
     public MainMenu() {
         initParts();
     }
- 
-    
-    
-    private void initParts(){
+
+    private void initParts() {
         //addItems
-        jMenu.add(jMenuOpen);
-        jMenu.add(jMenuExit);
-        
+        jMenuTest.add(jMenuLogin);
+        jMenuTest.add(jMenuProfile);
+        jMenuFile.add(jMenuExit);
+
+        //TODO: addTestActions REMOVE LATER
+        this.defineTestActions();
+
         //addMenu
-        this.add(jMenu);
+        this.add(jMenuFile);
+        this.add(jMenuTest);
     }
-    
+
+    private void defineTestActions() {
+        /**
+         * Shows the Login dialog
+         */
+        jMenuLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginDialog l = new LoginDialog(null, "Test Login");
+                
+            }
+        });
+        
+        jMenuProfile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ProfileDialog d = new ProfileDialog(null, "Test Profile");
+            }
+        });
+        
+        
+        
+        jMenuExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+    }
 }
