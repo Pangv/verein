@@ -28,7 +28,7 @@ public class LoginDialog extends JDialog {
 
     // Components
     private JPanel jPanel;
-    private String dialogTitle;
+    private final String dialogTitle;
     private JLabel jLblPlaceholder;
     private JLabel jLblMessage;
     private JLabel jLblLoginname;

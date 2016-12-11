@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package de.lebk.verein.view.panel;
+package de.lebk.verein.view.component_secondlevel;
 
+import de.lebk.verein.view.component_thirdlevel.DashboardUsersPanel;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -16,25 +12,19 @@ import javax.swing.JPanel;
 public class Dashboard extends JPanel {
 
     public Dashboard() {
-        createAndShowComponent();
+        createComponent();
     }
-    
-    
 
-    public void createAndShowComponent() {
+    public void createComponent() {
 
         this.setLayout(new GridLayout(2, 2));
-        
 
-        this.add(new JButton("Links 1"));
+        this.add(new DashboardUsersPanel());
         this.add(new JButton("Rechts 1"));
         this.add(new JButton("Links 2"));
         this.add(new JButton("Rechts 2"));
-        
-        
+
         this.setVisible(true);
-        
-        
 
     }
 

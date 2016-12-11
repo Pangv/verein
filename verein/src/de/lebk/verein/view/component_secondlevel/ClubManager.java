@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.lebk.verein.view.panel;
+package de.lebk.verein.view.component_secondlevel;
 
 import javax.swing.JPanel;
 
@@ -11,6 +11,6 @@ import javax.swing.JPanel;
  *
  * @author sopaetzel
  */
-public class StorageManager extends JPanel{
-    
+public class ClubManager extends JPanel {
+
 }

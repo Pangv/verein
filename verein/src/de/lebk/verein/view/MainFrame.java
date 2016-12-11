@@ -1,18 +1,22 @@
 package de.lebk.verein.view;
 
+import de.lebk.verein.view.component_firstlevel.TabContainer;
+import de.lebk.verein.view.component_firstlevel.MainMenu;
+import de.lebk.verein.view.component_firstlevel.SideContainer;
 import de.lebk.verein.view.dialog.LoginDialog;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 /**
  *
  * @author sopaetzel
  */
 public class MainFrame extends JFrame {
-
+   
+  private LookAndFeel yourFeel;
   private final int initWidth = 600;
   private final int initHeight = 350;
   private final int minWidth = 490;
@@ -23,7 +27,7 @@ public class MainFrame extends JFrame {
 
   MainMenu mainMenu = new MainMenu();
   TabContainer tabContainer = new TabContainer();
-  Sidebar sidebar = new Sidebar();
+  SideContainer sidebar = new SideContainer();
   LoginDialog loginDialog;
 
   public MainFrame(boolean loggedIn, String username) throws HeadlessException {
@@ -45,6 +49,7 @@ public class MainFrame extends JFrame {
     this.setTitle("Vereinsverwaltung");
     this.setPreferredSize(initDimension);
     this.setMinimumSize(minDimension);
+    this.setCustomLookAndFeel(yourFeel);
 
     // components
     this.setJMenuBar(new MainMenu());
@@ -71,6 +76,23 @@ public class MainFrame extends JFrame {
 
   private void showGUI() {
     this.setVisible(true);
+  }
+  
+  
+  private void setCustomLookAndFeel(LookAndFeel uiStyle){
+      try {
+          switch (uiStyle){
+              case METAL: 
+              {
+                  UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+              }break;
+              case SYSTEM:
+              {
+                  UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+              }
+          }
+      } catch (Exception e) {
+      }
   }
 
 }

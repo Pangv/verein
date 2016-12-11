@@ -1,4 +1,4 @@
-package de.lebk.verein.view;
+package de.lebk.verein.view.component_firstlevel;
 
 import de.lebk.verein.view.dialog.LoginDialog;
 import de.lebk.verein.view.dialog.ProfileDialog;
@@ -24,10 +24,10 @@ public class MainMenu extends JMenuBar {
   private final JMenuItem jMenuExit = new JMenuItem("Schließen");
 
   public MainMenu() {
-    initParts();
+    createComponent();
   }
 
-  private void initParts() {
+  private void createComponent() {
     // addItems
     jMenuTest.add(jMenuLogin);
     jMenuTest.add(jMenuProfile);

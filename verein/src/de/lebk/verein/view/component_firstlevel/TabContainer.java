@@ -3,14 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.lebk.verein.view;
+package de.lebk.verein.view.component_firstlevel;
 
-import de.lebk.verein.view.panel.ClubManager;
-import de.lebk.verein.view.panel.Dashboard;
-import de.lebk.verein.view.panel.StorageManager;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import de.lebk.verein.view.component_secondlevel.ClubManager;
+import de.lebk.verein.view.component_secondlevel.Dashboard;
+import de.lebk.verein.view.component_secondlevel.StorageManager;
 import javax.swing.JTabbedPane;
 
 /**
@@ -27,8 +24,6 @@ public class TabContainer extends JTabbedPane {
         createAndAddTabs();
     }
     
-    
-
     public void createAndAddTabs() {
 
         dashboard = new Dashboard();
@@ -37,9 +32,7 @@ public class TabContainer extends JTabbedPane {
         
         this.setTabPlacement(TOP);
         this.setTabLayoutPolicy(WRAP_TAB_LAYOUT);
-
-       
-        
+      
         this.addTab("Dashboard", dashboard);
         this.addTab("Vereinsverwaltung", clubManager);
         this.addTab("Lagerverwaltung", storageManager);

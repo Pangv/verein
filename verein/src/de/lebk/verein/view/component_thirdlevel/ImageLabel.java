@@ -21,48 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.lebk.verein.view.panel;
+package de.lebk.verein.view.component_thirdlevel;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
  *
  * @author sopaetzel
  */
-
 //TODO: Change to LABEL
-public class ImagePanel extends JPanel {
+public class ImageLabel extends JLabel {
 
     private BufferedImage image;
     private BufferedImage scaledImage;
-    
 
-    public ImagePanel(String imagePath) throws IOException, MalformedURLException {
-
-        image = ImageIO.read(new File(imagePath));    
-        scaledImage = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
-        
-        
-        
-        System.err.println("Image Path: " + imagePath);
-        System.err.println("Image Path calc: " + new File(imagePath).toURI().toURL());
-
+    public ImageLabel(String imagePath) throws IOException {
+        image = ImageIO.read(new File(imagePath));
+        int ratio = image.getWidth() / image.getHeight();
+        scaledImage = new BufferedImage(100, 86, BufferedImage.TYPE_INT_ARGB);
+        scaledImage.getGraphics().drawImage(image, 0, 0, 100, 86, null);
+        this.setIcon(new ImageIcon(scaledImage));
     }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(scaledImage, 0, 0, 64, 64, this);
-    }
-
 }
