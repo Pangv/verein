@@ -72,7 +72,7 @@
     -->
      <manifest file="MANIFEST.MF">
     <attribute name="Built-By" value="${user.name}"/>
-    <attribute name="SplashScreen-Image" value="assets/logo.png"/>
+    <attribute name="SplashScreen-Image" value="resources/logo.png"/>
     <section name="common">
       <attribute name="Specification-Title" value="Example"/>
       <attribute name="Specification-Version" value="${version}"/>

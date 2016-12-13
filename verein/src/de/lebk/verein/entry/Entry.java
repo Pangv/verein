@@ -1,7 +1,7 @@
 package de.lebk.verein.entry;
 
-import de.lebk.verein.view.dialog.LoginDialog;
-import de.lebk.verein.view.MainFrame;
+import de.lebk.verein.login.LoginDialog;
+import de.lebk.verein.utilities.MainFrame;
 
 /**
  *
