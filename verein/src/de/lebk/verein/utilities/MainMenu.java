@@ -1,6 +1,7 @@
 package de.lebk.verein.utilities;
 
 import de.lebk.verein.login.LoginDialog;
+import de.lebk.verein.member.Member;
 import de.lebk.verein.member.ProfileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,8 +23,11 @@ public class MainMenu extends JMenuBar {
   private final JMenuItem jMenuProfile = new JMenuItem("Zeige Profil");
 
   private final JMenuItem jMenuExit = new JMenuItem("Schließen");
+  
+  private Member member;
 
-  public MainMenu() {
+  public MainMenu(Member member) {
+    this.member = member;
     createComponent();
   }
 
@@ -56,7 +60,7 @@ public class MainMenu extends JMenuBar {
     jMenuProfile.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        ProfileDialog d = new ProfileDialog(null, "Test Profile");
+        ProfileDialog d = new ProfileDialog(null, member);
       }
     });
 

@@ -20,6 +20,7 @@
  */
 package de.lebk.verein.utilities;
 
+import de.lebk.verein.member.Member;
 import java.awt.Dimension;
 import java.io.IOException;
 import javax.swing.Box;
@@ -37,15 +38,17 @@ public class SideContainer extends JPanel {
   private JButton jBtnConfig;
   private JButton jBtnLogout;
   private JLabel jLblUserImage;
+  
+  private Member member;
 
-  public SideContainer() {
+  public SideContainer(Member member) {
     this.createComponent();
   }
 
   public void createComponent() {
     try {
       jLblUserImage =
-          new ImageLabel("D:\\workspaces\\MultiProjects\\verein\\verein\\resources\\profile.png");
+          new ImageLabel("/Users/sven-oliverpatzel/Documents/workspace_8/verein_workingcopy/verein/resources/profile.png");
       this.add(jLblUserImage);
     
 
