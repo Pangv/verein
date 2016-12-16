@@ -20,6 +20,7 @@
  */
 package de.lebk.verein.entry;
 
+import de.lebk.verein.member.Member;
 import de.lebk.verein.utilities.ImageLabel;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -38,11 +39,13 @@ import javax.swing.JPanel;
 public class DashboardUsersPanel extends JPanel {
 
   private JLabel userProfileImage;
-  private String userName = "Test User";
   private Dimension prefDimension =
       new Dimension(this.getPreferredSize().width, this.getPreferredSize().width);
+  
+  private Member member;
 
-  public DashboardUsersPanel() {
+  public DashboardUsersPanel(Member member) {
+    this.member = member;
     this.createComponent();
   }
 
@@ -52,8 +55,8 @@ public class DashboardUsersPanel extends JPanel {
       for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 4; j++) {
           this.add(userProfileImage =
-              new ImageLabel("D:\\workspaces\\MultiProjects\\verein\\verein\\resources\\logo.png"));
-          userProfileImage.setToolTipText(userName);
+              new ImageLabel("/Users/sven-oliverpatzel/Documents/workspace_8/verein_workingcopy/verein/resources/profile.png"));
+          userProfileImage.setToolTipText(member.getUsernam());
           userProfileImage.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
         }
       }

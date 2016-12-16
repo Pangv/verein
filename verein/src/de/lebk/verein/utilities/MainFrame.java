@@ -1,6 +1,8 @@
 package de.lebk.verein.utilities;
 
+import de.lebk.verein.login.Auth;
 import de.lebk.verein.login.LoginDialog;
+import de.lebk.verein.member.Member;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
@@ -19,21 +21,23 @@ public class MainFrame extends JFrame {
   private final int minWidth = 490;
   private final int minHeight = 300;
 
-  Dimension initDimension = new Dimension(initWidth, initHeight);
-  Dimension minDimension = new Dimension(minWidth, minHeight);
+  private Dimension initDimension = new Dimension(initWidth, initHeight);
+  private Dimension minDimension = new Dimension(minWidth, minHeight);
 
-  MainMenu mainMenu = new MainMenu();
-  TabContainer tabContainer = new TabContainer();
-  SideContainer sidebar = new SideContainer();
-  LoginDialog loginDialog;
+  private MainMenu mainMenu;
+  private LoginDialog loginDialog;
+  
+  private Member member;
 
-  public MainFrame(boolean loggedIn, String username) throws HeadlessException {
+  public MainFrame(Member member, boolean loggedIn) throws HeadlessException {
+    this.member = member;
+    
     if (!loggedIn) {
       loginDialog = new LoginDialog(this, "Anmeldung");
       this.createAndHideGUI();
     } else if (loggedIn) {
       this.createAndShowGUI();
-      this.setTitle(this.getTitle() + " [" + username + "]");
+      this.setTitle(this.getTitle() + " [" + member.getFirstName() + " " + member.getLastName() + "]");
     }
   }
 
@@ -49,10 +53,9 @@ public class MainFrame extends JFrame {
     this.setCustomLookAndFeel(yourFeel);
 
     // components
-    this.setJMenuBar(new MainMenu());
-
-    this.getContentPane().add(tabContainer, BorderLayout.CENTER);
-    this.getContentPane().add(sidebar, BorderLayout.EAST);
+    this.setJMenuBar(new MainMenu(member));
+    this.getContentPane().add(new TabContainer(), BorderLayout.CENTER);
+    this.getContentPane().add(new SideContainer(member), BorderLayout.EAST);
 
     this.pack();
   }
