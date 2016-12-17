@@ -32,7 +32,8 @@ import java.util.List;
  * @author sopaetzel
  */
 public class Event {
-    
+
+    //TODO DOA
     private String eventType;
     private List<Member> attendees;
     private List<Member> organisator;
@@ -43,27 +44,26 @@ public class Event {
         this.organisator = organisator;
         this.dateTime = dateTime;
     }
-    
-    public void addAttendee(Member member){
+
+    public void addAttendee(Member member) {
         this.attendees.add(member);
     }
-    
-    public void removeAttendee(Member member){
+
+    public void removeAttendee(Member member) {
         this.attendees.remove(member);
     }
-    
-    public void addOrganisator(Member member){
-        this.organisator.add((Officer) member);
-    }
-    
-    public void removeOrganisator(Member member){
-        this.organisator.remove((Officer) member);
-    }
-    
-    public void cancelEvent(){
+
+//    
+//    public void addOrganisator(Member member){
+//        this.organisator.add((Officer) member);
+//    }
+//    
+//    public void removeOrganisator(Member member){
+//        this.organisator.remove((Officer) member);
+//    }
+    public void cancelEvent() {
         //TODO implement Method Cancel Event
     }
-    
+
     // TODO change dateTime
-    
 }

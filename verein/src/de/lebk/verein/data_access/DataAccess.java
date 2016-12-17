@@ -25,22 +25,17 @@ package de.lebk.verein.data_access;
 
 /**
  *
- * @author 
+ * @author
  */
 public class DataAccess {
-    
+
     /*
     XML
-    */
-    
-    
-    
-    /*
+     */
+ /*
     JSON
-    */
-    
-    /*
+     */
+ /*
     Java DB
-    */
-    
+     */
 }

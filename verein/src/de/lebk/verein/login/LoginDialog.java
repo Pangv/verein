@@ -24,7 +24,6 @@ public class LoginDialog extends JDialog {
     // Properties
     private final int horizontalGap = 10;
     private final int verticalGap = 5;
-    
 
     // Components
     private JPanel jPanel;
@@ -35,7 +34,7 @@ public class LoginDialog extends JDialog {
     private JLabel jLblPassword;
     private JTextField jTFLoginname;
     private JPasswordField jPFPassword;
-    
+
     private JButton jBtnLogin;
     private JButton jBtnRegister;
 
@@ -46,7 +45,7 @@ public class LoginDialog extends JDialog {
     }
 
     private void createDialog() {
-        
+
         jPanel = new JPanel(new GridLayout(4, 2, horizontalGap, verticalGap));
 
         jLblPlaceholder = new JLabel(" ");
@@ -55,22 +54,21 @@ public class LoginDialog extends JDialog {
         jLblPassword = new JLabel("Passwort");
         jTFLoginname = new JTextField();
         jPFPassword = new JPasswordField();
-        
+
         jBtnLogin = new JButton("Anmelden");
         jBtnRegister = new JButton("Registrieren");
-
 
         this.setTitle(dialogTitle);
 
         jPanel.add(jLblMessage, CENTER_ALIGNMENT);
         jPanel.add(jLblPlaceholder);
-        
+
         jPanel.add(jLblLoginname);
         jPanel.add(jTFLoginname);
-        
+
         jPanel.add(jLblPassword);
         jPanel.add(jPFPassword);
-        
+
         jPanel.add(jBtnLogin);
         jPanel.add(jBtnRegister);
 

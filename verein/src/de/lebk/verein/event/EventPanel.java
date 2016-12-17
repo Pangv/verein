@@ -24,6 +24,8 @@
 package de.lebk.verein.event;
 
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -34,11 +36,11 @@ import javax.swing.table.TableModel;
  *
  * @author Sven-Oliver Pätzel
  */
-public class EventPanel extends JPanel{
-    
+public class EventPanel extends JPanel {
+
     private JTable eventTable;
     private TableModel defaultModel;
-    
+
     private JButton jBtnJoin;
     private JButton jBtnLeave;
     private JButton jBtnCreate;
@@ -48,27 +50,41 @@ public class EventPanel extends JPanel{
         this.createComponent();
     }
 
-    private void createTableModel(){
+    private TableModel createTableModel() {
         String[] tableColumns = {"Titel", "Datum"};
-        defaultModel = new DefaultTableModel(tableColumns, 0);
+        return defaultModel = new DefaultTableModel(tableColumns, 0);
     }
-    
-    private void createComponent(){
+
+    private void createComponent() {
         this.setLayout(new GridBagLayout());
-        
-        
-        
+
         eventTable = new JTable();
-        eventTable.setModel(defaultModel);
-        
+        eventTable.setModel(createTableModel());
+
         jBtnJoin = new JButton();
         jBtnLeave = new JButton();
         jBtnCreate = new JButton();
         jBtnInfo = new JButton();
-        
+
+        this.add(jBtnJoin);
+        this.add(jBtnLeave);
+        this.add(jBtnCreate);
+        this.add(jBtnInfo);
+
     }
-    
-    
-    
-    
+
+    public void defineActions() {
+
+        /**
+         *
+         */
+        jBtnJoin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+    }
+
 }

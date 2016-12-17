@@ -34,77 +34,78 @@ import java.util.List;
  * @date 15.12.2016
  */
 public class Member {
-	private String firstName;
-	private String lastName;
-	private String password;
-	private String usernam;
-	private char sex;
-	private GregorianCalendar entered;
-	private List<Lease> leases;
 
-	public Member(String firstName, String lastName, String password, String usernam, char sex,
-		GregorianCalendar entered) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.usernam = usernam;
-		this.sex = sex;
-		this.entered = entered;
-	}
+    private String firstName;
+    private String lastName;
+    private String password;
+    private String usernam;
+    private char sex;
+    private GregorianCalendar entered;
+    private List<Lease> leases;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public Member(String firstName, String lastName, String password, String usernam, char sex,
+            GregorianCalendar entered) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.usernam = usernam;
+        this.sex = sex;
+        this.entered = entered;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getUsernam() {
-		return usernam;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setUsernam(String usernam) {
-		this.usernam = usernam;
-	}
+    public String getUsernam() {
+        return usernam;
+    }
 
-	public char getSex() {
-		return sex;
-	}
+    public void setUsernam(String usernam) {
+        this.usernam = usernam;
+    }
 
-	public void setSex(char sex) {
-		this.sex = sex;
-	}
+    public char getSex() {
+        return sex;
+    }
 
-	public GregorianCalendar getEntered() {
-		return entered;
-	}
+    public void setSex(char sex) {
+        this.sex = sex;
+    }
 
-	public void setEntered(GregorianCalendar entered) {
-		this.entered = entered;
-	}
+    public GregorianCalendar getEntered() {
+        return entered;
+    }
 
-	public List<Lease> getLeases() {
-		return leases;
-	}
+    public void setEntered(GregorianCalendar entered) {
+        this.entered = entered;
+    }
 
-	public void setLeases(List<Lease> leases) {
-		this.leases = leases;
-	}
+    public List<Lease> getLeases() {
+        return leases;
+    }
+
+    public void setLeases(List<Lease> leases) {
+        this.leases = leases;
+    }
 }

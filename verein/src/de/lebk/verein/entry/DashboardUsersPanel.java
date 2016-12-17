@@ -38,32 +38,32 @@ import javax.swing.JPanel;
  */
 public class DashboardUsersPanel extends JPanel {
 
-  private JLabel userProfileImage;
-  private Dimension prefDimension =
-      new Dimension(this.getPreferredSize().width, this.getPreferredSize().width);
-  
-  private Member member;
+    private JLabel userProfileImage;
+    private Dimension prefDimension
+            = new Dimension(this.getPreferredSize().width, this.getPreferredSize().width);
 
-  public DashboardUsersPanel(Member member) {
-    this.member = member;
-    this.createComponent();
-  }
+    private final Member member;
 
-  public void createComponent() {
-    try {
-      this.setLayout(new GridLayout(2, 4));
-      for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 4; j++) {
-          this.add(userProfileImage =
-              new ImageLabel("/Users/sven-oliverpatzel/Documents/workspace_8/verein_workingcopy/verein/resources/profile.png"));
-          userProfileImage.setToolTipText(member.getUsernam());
-          userProfileImage.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
-        }
-      }
-    } catch (IOException ex) {
-      Logger.getLogger(DashboardUsersPanel.class.getName()).log(Level.SEVERE, null, ex);
+    public DashboardUsersPanel(Member member) {
+        this.member = member;
+        this.createComponent();
     }
 
-  }
+    public void createComponent() {
+        try {
+            this.setLayout(new GridLayout(2, 4));
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 4; j++) {
+                    this.add(userProfileImage
+                            = new ImageLabel("./resources/profile.png"));
+                    userProfileImage.setToolTipText(member.getUsernam());
+                    userProfileImage.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardUsersPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
 }

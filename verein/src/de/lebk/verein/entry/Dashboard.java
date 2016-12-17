@@ -10,8 +10,7 @@ import javax.swing.JPanel;
  * @author sopaetzel
  */
 public class Dashboard extends JPanel {
-    
-    
+
     private Member member;
 
     public Dashboard(Member member) {

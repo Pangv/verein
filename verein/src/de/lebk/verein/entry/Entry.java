@@ -11,20 +11,19 @@ import java.util.GregorianCalendar;
  */
 public class Entry {
 
-  private static MainFrame mainFrame;
-  private static LoginDialog loginDialog;
+    private static MainFrame mainFrame;
+    private static LoginDialog loginDialog;
 
-  // TODO: Remove later
-  static boolean loggedIn = true;
+    // TODO: Remove later
+    static boolean loggedIn = true;
 
-  public static void main(String[] args) {
-    System.out.println("It is alive!");
-    
-    Member test = new Member("John", "Doe", "start", "jdoe", 'm', new GregorianCalendar());
+    public static void main(String[] args) {
+        System.out.println("It is alive!");
 
-    mainFrame = new MainFrame(test, loggedIn);
+        Member test = new Member("John", "Doe", "start", "jdoe", 'm', new GregorianCalendar());
 
+        mainFrame = new MainFrame(test, loggedIn);
 
-  }
+    }
 
 }
