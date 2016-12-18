@@ -23,9 +23,9 @@ public class Dashboard extends JPanel {
         this.setLayout(new GridLayout(2, 2));
 
         this.add(new DashboardUsersPanel(member));
-        this.add(new JButton("Rechts 1"));
-        this.add(new JButton("Links 2"));
-        this.add(new JButton("Rechts 2"));
+        this.add(new JButton("Diagramme Platzhalter 1"));
+        this.add(new JButton("Event Kalender Platzhalter"));
+        this.add(new JButton("Diagramme Platzhalter 2"));
 
         this.setVisible(true);
 

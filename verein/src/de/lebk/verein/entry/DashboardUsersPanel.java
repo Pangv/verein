@@ -56,7 +56,7 @@ public class DashboardUsersPanel extends JPanel {
                 for (int j = 0; j < 4; j++) {
                     this.add(userProfileImage
                             = new ImageLabel("./resources/profile.png"));
-                    userProfileImage.setToolTipText(member.getUsernam());
+                    userProfileImage.setToolTipText(member.getUsername());
                     userProfileImage.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
                 }
             }

@@ -48,14 +48,14 @@ public class ProfileDialog extends JDialog {
     public void createDialog(/* TODO add Member */) {
 
         try {
-            this.setTitle("Profil von " + member.getUsernam());
+            this.setTitle("Profil von " + member.getUsername().replaceAll("\\d", ""));
             this.setLayout(new GridBagLayout());
             GridBagConstraints grid = new GridBagConstraints();
 //      jLblUserImage = new ImageLabel(ProfileDialog.class.getResource("/profile.png"));
             jLblUserImage = new ImageLabel("./resources/profile.png");
             jLblLastName = new JLabel(member.getLastName());
             jLblFirstName = new JLabel(member.getFirstName());
-            jLblDateJoined = new JLabel("Mitglied seit:" + member.getEntered().get(Calendar.DATE));
+            jLblDateJoined = new JLabel("Mitglied seit: " + member.getDateTimeEntered());
 
             jBtnLeaveClub = new JButton("Austreten");
             jBtnSaveChanges = new JButton("Sichern");
@@ -72,25 +72,28 @@ public class ProfileDialog extends JDialog {
 
             // adding first name
             grid.fill = GridBagConstraints.HORIZONTAL;
-            grid.weightx = 0.5;
+            grid.weightx = 1;
             grid.gridheight = 1;
             grid.gridwidth = 2;
             grid.gridx = 1;
             grid.gridy = 0;
             this.add(jLblFirstName, grid);
             // adding last name
-            grid.weightx = 0.5;
+
+            grid.gridheight = 1;
             grid.gridwidth = 2;
             grid.gridx = 1;
             grid.gridy = 1;
             this.add(jLblLastName, grid);
             // adding date a member joined
-            grid.weightx = 0.5;
+
             grid.gridwidth = 2;
             grid.gridx = 0;
             grid.gridy = 3;
             this.add(jLblDateJoined, grid);
 
+            grid.anchor = GridBagConstraints.EAST;
+            grid.weightx = 0.3;
             // adding leave button
             grid.gridwidth = 1;
             grid.gridx = 3;

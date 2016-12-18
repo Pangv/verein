@@ -31,7 +31,7 @@ import java.util.List;
  *
  * @author sopaetzel
  */
-public class Event {
+public abstract class Event {
 
     //TODO DOA
     private String eventType;

@@ -16,9 +16,9 @@ import javax.swing.UIManager;
 public class MainFrame extends JFrame {
 
     private LookAndFeel yourFeel;
-    private final int initWidth = 600;
-    private final int initHeight = 350;
-    private final int minWidth = 490;
+    private final int initWidth = 1000;
+    private final int initHeight = initWidth / 16*9;
+    private final int minWidth = 600;
     private final int minHeight = 300;
 
     private Dimension initDimension = new Dimension(initWidth, initHeight);
@@ -37,7 +37,7 @@ public class MainFrame extends JFrame {
             this.createAndHideGUI();
         } else if (loggedIn) {
             this.createAndShowGUI();
-            this.setTitle(this.getTitle() + " [" + member.getFirstName() + " " + member.getLastName() + "]");
+            this.setTitle(this.getTitle() + " [" + member.getFullName() + "]");
         }
     }
 

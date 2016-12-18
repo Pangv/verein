@@ -62,7 +62,9 @@ public class Member {
   }
 
   private String generateUsername(String fName, String lName) {
-      // TODO make usernames unique
+      /* TODO make usernames unique prevent same username
+        do this by checking the "data storage"
+      */
       Random uniqueNumber = new Random();
     return fName.toLowerCase().substring(0, 2) + (lName.toLowerCase().contains(" ") ? lName.toLowerCase().substring(0, lName.toLowerCase().indexOf(" ")) : lName.toLowerCase()) + uniqueNumber.nextInt(Integer.MAX_VALUE);
   }
