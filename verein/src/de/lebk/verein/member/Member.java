@@ -38,7 +38,7 @@ public class Member {
     private String firstName;
     private String lastName;
     private String password;
-    private String usernam;
+    private String username;
     private char sex;
     private GregorianCalendar entered;
     private List<Lease> leases;
@@ -48,7 +48,7 @@ public class Member {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.usernam = usernam;
+        this.username = usernam;
         this.sex = sex;
         this.entered = entered;
     }
@@ -77,12 +77,12 @@ public class Member {
         this.password = password;
     }
 
-    public String getUsernam() {
-        return usernam;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsernam(String usernam) {
-        this.usernam = usernam;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public char getSex() {
