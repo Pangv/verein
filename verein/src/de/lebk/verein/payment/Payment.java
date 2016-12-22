@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2016 sopaetzel.
+ * Copyright 2016 Sven-Oliver Pätzel.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.lebk.verein.member;
+package de.lebk.verein.payment;
 
 /**
  *
- * @author sopaetzel
+ * @author Sven-Oliver Pätzel
  */
-public class Profile {
-
+public class Payment {
+    
 }

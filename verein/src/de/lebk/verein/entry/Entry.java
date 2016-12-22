@@ -1,7 +1,9 @@
 package de.lebk.verein.entry;
 
 import de.lebk.verein.login.LoginDialog;
+import de.lebk.verein.member.Member;
 import de.lebk.verein.utilities.MainFrame;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -9,18 +11,19 @@ import de.lebk.verein.utilities.MainFrame;
  */
 public class Entry {
 
-  private static MainFrame mainFrame;
-  private static LoginDialog loginDialog;
+    private static MainFrame mainFrame;
+    private static LoginDialog loginDialog;
 
-  // TODO: Remove later
-  static boolean loggedIn = true;
+    // TODO: Remove later
+    static boolean loggedIn = true;
 
-  public static void main(String[] args) {
-    System.out.println("It is alive!");
+    public static void main(String[] args) {
+        System.out.println("It is alive!");
 
-    mainFrame = new MainFrame(loggedIn, "Steve Biffer");
+        Member test = new Member("John-Ebenezer ", "Scrooge Doe", "start", 'm', new GregorianCalendar());
 
+        mainFrame = new MainFrame(test, loggedIn);
 
-  }
+    }
 
 }

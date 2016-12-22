@@ -28,5 +28,5 @@ package de.lebk.verein.club;
  * @author sopaetzel
  */
 public class Club {
-    
+
 }

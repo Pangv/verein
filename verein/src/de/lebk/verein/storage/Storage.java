@@ -23,10 +23,54 @@
  */
 package de.lebk.verein.storage;
 
+import de.lebk.verein.lease.Lease;
+import de.lebk.verein.member.Member;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import sun.util.calendar.LocalGregorianCalendar.Date;
+
 /**
  *
- * @author sopaetzel
+ * @author ebrinker
  */
 public class Storage {
+    private int amount;
+    private List<Lease> listOfLeases;
+
     
+    public int getAmount() {
+        return amount;
+    }
+    
+    public List<Lease> getListOfLeases() {
+        return listOfLeases;
+    }
+    
+    public void removeLease(Lease lease) {
+        Lease leaseToRemove = null;
+        for(Lease currentLease : listOfLeases) {
+            if(currentLease.equals(lease)) {
+                listOfLeases.remove(lease);
+                //break wird nur so lange benötigt, bis es einen eindeutigen 
+                //Identifier für Lease gibt (vgl. Lease-Klasse id)
+                break;
+            }
+        }
+    }
+    
+    public void addLease(Member member, int amount, Date dueDate) {
+        listOfLeases.add(new Lease(member, amount, dueDate));
+    }
+    
+    public Map<Member, List<Lease>> getAllOverdueLeases() {
+        Map<Member, List<Lease>> overdueLeases = new HashMap<Member, List<Lease>>();
+        return overdueLeases;
+    }
+    
+    public List<Lease> getOverdueLeasesForMember(Member member) {
+        List<Lease> overdueLeases = new ArrayList<Lease>();
+        return overdueLeases;
+    } 
 }

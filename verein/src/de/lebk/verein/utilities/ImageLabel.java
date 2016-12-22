@@ -51,9 +51,9 @@ public class ImageLabel extends JLabel {
         scaledImage.getGraphics().drawImage(image, 0, 0, 100, 86, null);
         this.setIcon(new ImageIcon(scaledImage));
     }
-    
+
     public ImageLabel(URL imageURL) throws IOException {
-        
+
         image = ImageIO.read(new File(imageURL.toString()));
         int ratio = image.getWidth() / image.getHeight();
         scaledImage = new BufferedImage(100, 86, BufferedImage.TYPE_INT_ARGB);

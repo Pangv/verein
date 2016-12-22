@@ -21,55 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.lebk.verein.lease;
+package de.lebk.verein.event;
 
 import de.lebk.verein.member.Member;
-import sun.util.calendar.LocalGregorianCalendar.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  *
- * @author ebrinker
+ * @author sopaetzel
  */
-public class Lease {
-    //id hinzufügen?
-    private Member member;
-    private int amount;
-    private Date dueDate;
+public class EventOfficerElection extends Event{
     
-    public Lease (Member member, int amount, Date dueDate) {
-        this.member = member;
-        this.amount = amount;
-        this.dueDate = dueDate;
-    }
-
-    public Member getMember() {
-        return member;
-    }
-
-    public void setMember(Member member) {
-        this.member = member;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }  
     
-    //Ids verwenden?
-    public boolean equals(Lease lease) {
-        return this.amount == lease.getAmount() 
-                    && this.member == lease.getMember()
-                    && this.dueDate == lease.getDueDate();
+    
+    public EventOfficerElection(String eventType, List<Member> organisator, GregorianCalendar dateTime) {
+        super(eventType, organisator, dateTime);
     }
+    
 }
