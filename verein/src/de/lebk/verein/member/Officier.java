@@ -8,9 +8,9 @@ import java.util.GregorianCalendar;
 public class Officier extends Member {
 	private GregorianCalendar officerSince;
 
-	public Officier(String firstName, String lastName, String password, String usernam, char sex,
+	public Officier(String firstName, String lastName, String password, String username, char sex,
 		GregorianCalendar entered) {
-		super(firstName, lastName, password, usernam, sex, entered);
+		super(firstName, lastName, password, username, sex, entered);
 	}
 
 	public GregorianCalendar getOfficerSince() {

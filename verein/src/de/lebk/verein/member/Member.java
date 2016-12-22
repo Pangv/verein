@@ -42,8 +42,8 @@ public class Member {
   private GregorianCalendar entered;
   private List<Lease> leases;
 
-  public Member(String firstName, String lastName, String password, char sex,
-      GregorianCalendar entered) {
+	public Member(String firstName, String lastName, String password, String username, char sex,
+		GregorianCalendar entered) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.password = password;
@@ -52,8 +52,14 @@ public class Member {
     this.entered = entered;
   }
 
-  public String getFullName() {
-    return firstName + " " + lastName;
+	public Member(String password, String username, char sex) {
+		this.password = password;
+		this.username = username;
+		this.sex = sex;
+	}
+
+	public String getFullName() {
+		return firstName + " " + lastName;
   }
 
   public String getDateTimeEntered() {
