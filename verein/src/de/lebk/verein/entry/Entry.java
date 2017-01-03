@@ -20,7 +20,7 @@ public class Entry {
     public static void main(String[] args) {
         System.out.println("It is alive!");
 
-        Member test = new Member("John-Ebenezer ", "Scrooge Doe", "start", 'm', new GregorianCalendar());
+        Member test = new Member("John-Ebenezer ", "Scrooge Doe", "start", "john", 'm', new GregorianCalendar());
 
         mainFrame = new MainFrame(test, loggedIn);
 

@@ -23,10 +23,59 @@
  */
 package de.lebk.verein.event;
 
+import java.awt.Frame;
+import javax.swing.JDialog;
+
 /**
  *
  * @author sopaetzel
  */
-public enum EventTypes {
-    LAPIDATION, CHILDTOURNAMENT, GENERIC;
+public class EventDialog extends JDialog {
+
+    public EventDialog() {
+    }
+
+    public EventDialog(Frame owner, String title, EventTypes type) {
+        super(owner, title, true);
+        createDialog(type);
+    }
+
+    private void createDialog(EventTypes type) {
+
+        switch (type) {
+
+            case GENERIC:
+                createGenericDialog();
+                break;
+
+            case LAPIDATION:
+                createLapidationDialog();
+                break;
+
+            case CHILDTOURNAMENT:
+                createChildTournamentDialog();
+                break;
+            default:
+                System.err.println("Event choice errornous?");
+                break;
+
+        }
+        
+        this.pack();
+        this.setVisible(true);
+
+    }
+
+    private void createGenericDialog() {
+        this.setTitle("Allgemeine" + this.getTitle());
+    }
+
+    private void createLapidationDialog() {
+        this.setTitle("Steinigungs-" + this.getTitle());
+    }
+
+    private void createChildTournamentDialog() {
+        this.setTitle("Kindertuniers-" + this.getTitle());
+    }
+
 }

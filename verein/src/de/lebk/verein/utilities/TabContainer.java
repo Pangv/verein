@@ -7,6 +7,7 @@ package de.lebk.verein.utilities;
 
 import de.lebk.verein.club.ClubManager;
 import de.lebk.verein.entry.Dashboard;
+import de.lebk.verein.event.EventManager;
 import de.lebk.verein.member.Member;
 import de.lebk.verein.storage.StorageManager;
 import javax.swing.JTabbedPane;
@@ -18,6 +19,7 @@ import javax.swing.JTabbedPane;
 public class TabContainer extends JTabbedPane {
 
     private Dashboard dashboard;
+    private EventManager eventManager;
     private ClubManager clubManager;
     private StorageManager storageManager;
 
@@ -31,6 +33,7 @@ public class TabContainer extends JTabbedPane {
     public void createAndAddTabs() {
 
         dashboard = new Dashboard(member);
+        eventManager = new EventManager();
         clubManager = new ClubManager();
         storageManager = new StorageManager();
 
@@ -38,6 +41,7 @@ public class TabContainer extends JTabbedPane {
         this.setTabLayoutPolicy(WRAP_TAB_LAYOUT);
 
         this.addTab("Dashboard", dashboard);
+        this.addTab("Veranstaltungen", eventManager);
         this.addTab("Vereinsverwaltung", clubManager);
         this.addTab("Lagerverwaltung", storageManager);
 
