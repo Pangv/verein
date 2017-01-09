@@ -45,7 +45,7 @@ public class ProfileDialog extends JDialog {
         createDialog();
     }
 
-    public void createDialog(/* TODO add Member */) {
+    public void createDialog() {
 
         try {
             this.setTitle("Profil von " + member.getUsername().replaceAll("\\d", ""));

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<club xmlns:ns2="de.lebk.verein.member" currency="eur" memberCount="3" officerCount="1">
+    <members>
+        <member>
+            <firstname>Alfred</firstname>
+            <lastname>Hitchcock</lastname>
+            <password>hallo</password>
+            <username>alhitchcock310768906</username>
+            <sex>109</sex>
+            <entered>1992-02-01T00:00:00+01:00</entered>
+        </member>
+        <member>
+            <firstname>Anna</firstname>
+            <lastname>Müller</lastname>
+            <password>start</password>
+            <username>anmüller393988928</username>
+            <sex>102</sex>
+            <entered>2000-04-03T00:00:00+02:00</entered>
+        </member>
+        <member>
+            <firstname>John-Ebenezer</firstname>
+            <lastname>Scrooge Doe</lastname>
+            <password>start</password>
+            <username>joscrooge1095910881</username>
+            <sex>109</sex>
+            <entered>2017-01-08T21:41:57.579+01:00</entered>
+        </member>
+    </members>
+    <officers>
+        <officers>
+            <firstname>Tim</firstname>
+            <lastname>Struppi</lastname>
+            <password>start</password>
+            <username>tistruppi473111708</username>
+            <sex>109</sex>
+            <entered>1992-04-04T00:00:00+02:00</entered>
+        </officers>
+    </officers>
+    <events>
+        <event event-type="Steinigung">
+            <title>Spaß mit Wackersteinen</title>
+            <dateTime>2000-04-03T12:00:00+02:00</dateTime>
+            <organisator>
+                <firstname>Anna</firstname>
+                <lastname>Müller</lastname>
+                <password>start</password>
+                <username>anmüller393988928</username>
+                <sex>102</sex>
+                <entered>2000-04-03T00:00:00+02:00</entered>
+            </organisator>
+        </event>
+        <event event-type="Steinigung">
+            <title>adasd</title>
+            <dateTime>2017-01-01T01:00:00+01:00</dateTime>
+            <organisator>
+                <firstname>John-Ebenezer</firstname>
+                <lastname>Scrooge Doe</lastname>
+                <password>start</password>
+                <username>joscrooge1533312616</username>
+                <sex>109</sex>
+                <entered>2017-01-09T01:32:08.904+01:00</entered>
+            </organisator>
+        </event>
+        <event event-type="Steinigung">
+            <title>123123</title>
+            <dateTime>2017-01-01T01:00:00+01:00</dateTime>
+            <organisator>
+                <firstname>John-Ebenezer</firstname>
+                <lastname>Scrooge Doe</lastname>
+                <password>start</password>
+                <username>joscrooge1533312616</username>
+                <sex>109</sex>
+                <entered>2017-01-09T01:32:08.904+01:00</entered>
+            </organisator>
+        </event>
+        <event event-type="Steinigung">
+            <title>333333</title>
+            <dateTime>2017-01-01T01:00:00+01:00</dateTime>
+            <organisator>
+                <firstname>John-Ebenezer</firstname>
+                <lastname>Scrooge Doe</lastname>
+                <password>start</password>
+                <username>joscrooge1533312616</username>
+                <sex>109</sex>
+                <entered>2017-01-09T01:32:08.904+01:00</entered>
+            </organisator>
+        </event>
+    </events>
+    <money>2000.0</money>
+</club>

@@ -24,86 +24,130 @@
 package de.lebk.verein.club;
 
 import de.lebk.verein.event.Event;
-import de.lebk.verein.event.EventGeneric;
-import de.lebk.verein.event.EventLapidation;
 import de.lebk.verein.member.Member;
-import de.lebk.verein.member.Officier;
+import de.lebk.verein.member.Officer;
 import de.lebk.verein.payment.Payment;
 import de.lebk.verein.payment.PaymentState;
 import de.lebk.verein.vote.Vote;
+import java.util.ArrayList;
 
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
- * @author sopaetzel
+ * @author mraddatz
  */
+@XmlRootElement(name = "club")
+@XmlType(name = "club", propOrder = {"members", "officers", "events", "payments", "money"})
 public class Club {
-	private List<Officier> officiers;
-	private List<Member> members;
-	private double money;
-	private List<Event> events;
-	private Map<Member, List<Payment>> payments;
-	private Vote currentVote;
 
+    private double money = 2000.00;
+    @XmlAttribute(name = "currency")
+    private String currency = "eur";
 
+    private List<Officer> officers = new ArrayList<>();
+    private List<Member> members = new ArrayList<>();
+    private List<Event> events = new ArrayList<>();
+    private Map<Member, ArrayList<Payment>> payments;
+    private Vote currentVote;
 
-	public List<Officier> getOfficierList() {
-		return officiers;
-	}
+    @XmlElementWrapper(name = "members")
+    @XmlElement(name = "member")
+    public List<Member> getMembers() {
+        return members;
+    }
 
-	public void setOfficierList(List<Officier> officierList) {
-		this.officiers = officierList;
-	}
+    public void setMembers(List<Member> members) {
+        this.members = members;
+    }
 
-	public void retireOfficier(Officier officier) {
-		this.officiers.remove(officier);
-	}
+    @XmlAttribute(name = "memberCount")
+    public int getMemberCount() {
+        return this.members.size();
+    }
 
-	public void join(String username, String password, Character sex) {
-		this.members.add(new Member(username, password, sex));
-	}
+    @XmlAttribute(name = "officerCount")
+    public int getOfficerCount() {
+        return this.officers.size();
+    }
 
-	public void leave(Member member) {
-		this.members.remove(member);
-	}
+    @XmlElementWrapper(name = "events")
+    @XmlElement(name = "event")
+    public List<Event> getEvents() {
+        return events;
+    }
 
-	public void initOfficerVote() {
-		if (currentVote != null) {
-			this.currentVote = new Vote();
-		}
-	}
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
 
-	public void endVote() {
-		/*
+    public void addEvent(Event event) {
+        this.events.add(event);
+    }
+
+    @XmlElementWrapper(name = "officers")
+    @XmlElement
+    public List<Officer> getOfficers() {
+        return officers;
+    }
+
+    public void setOfficerList(List<Officer> officerList) {
+        this.officers = officerList;
+    }
+
+    public void retireOfficier(Officer officer) {
+        this.officers.remove(officer);
+    }
+
+    public void join(String username, String password, Character sex) {
+        this.members.add(new Member(username, password, sex));
+    }
+
+    public void leave(Member member) {
+        this.members.remove(member);
+    }
+
+    public void initOfficerVote() {
+        if (currentVote != null) {
+            this.currentVote = new Vote();
+        }
+    }
+
+    public void endVote() {
+        /*
 			TODO implement counting and results
-		 */
-		this.currentVote = null;
-	}
+         */
+        this.currentVote = null;
+    }
 
-	public void createGenericEvent(String eventType, List<Member> orga,
-		GregorianCalendar dateTime) {
-		this.events.add(new EventGeneric(eventType, orga, dateTime));
-	}
+    @XmlElementWrapper(name = "payments")
+    @XmlElement
+    public Map<Member, ArrayList<Payment>> getPayments() {
+        return payments;
+    }
 
-	public void createLapidationEvent(String eventType, List<Member> orga,
-		GregorianCalendar dateTime) {
-		this.events.add(new EventLapidation(eventType, orga, dateTime));
-	}
+    public Vote getCurrentVote() {
+        return currentVote;
+    }
 
-	public void deleteEvent(Event event) {
-		this.events.remove(event);
-	}
+    @XmlElement
+    public double getMoney() {
+        return money;
+    }
 
-	public void requestMoney(Member member, double amount) {
-		this.payments.get(member).add(new Payment(member, amount));
-	}
+    public void requestMoney(Member member, double amount) {
+        this.payments.get(member).add(new Payment(member, amount));
+    }
 
-	public void markAsPaid(Member member, Payment payment) {
-		int index = this.payments.get(member).indexOf(payment);
-		this.payments.get(member).get(index).setState(PaymentState.PAID);
-	}
+    public void markAsPaid(Member member, Payment payment) {
+        int index = this.payments.get(member).indexOf(payment);
+        this.payments.get(member).get(index).setState(PaymentState.PAID);
+    }
 
 }

@@ -1,6 +1,6 @@
 package de.lebk.verein.utilities;
 
-import de.lebk.verein.login.Auth;
+import de.lebk.verein.club.Club;
 import de.lebk.verein.login.LoginDialog;
 import de.lebk.verein.member.Member;
 import java.awt.BorderLayout;
@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
 
     private LookAndFeel yourFeel;
     private final int initWidth = 1000;
-    private final int initHeight = initWidth / 16*9;
+    private final int initHeight = initWidth / 16 * 9;
     private final int minWidth = 600;
     private final int minHeight = 300;
 
@@ -28,8 +28,10 @@ public class MainFrame extends JFrame {
     private LoginDialog loginDialog;
 
     private Member member;
+    private Club club;
 
-    public MainFrame(Member member, boolean loggedIn) throws HeadlessException {
+    public MainFrame(Club club, Member member, boolean loggedIn) throws HeadlessException {
+        this.club = club;
         this.member = member;
 
         if (!loggedIn) {
@@ -54,8 +56,8 @@ public class MainFrame extends JFrame {
         this.setCustomLookAndFeel(yourFeel);
 
         // components
-        this.setJMenuBar(new MainMenu(member));
-        this.getContentPane().add(new TabContainer(member), BorderLayout.CENTER);
+        this.setJMenuBar(new MainMenu(club, member));
+        this.getContentPane().add(new TabContainer(club, member), BorderLayout.CENTER);
         this.getContentPane().add(new SideContainer(member), BorderLayout.EAST);
 
         this.pack();

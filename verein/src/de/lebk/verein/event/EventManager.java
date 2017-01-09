@@ -20,19 +20,22 @@
  */
 package de.lebk.verein.event;
 
+import de.lebk.verein.club.Club;
+import de.lebk.verein.member.Member;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListModel;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -42,6 +45,10 @@ import javax.swing.table.TableModel;
  */
 public class EventManager extends JPanel {
 
+    private Club club;
+
+    private EventDialog eventDialog;
+
     private JTable jTblEvents;
     private TableModel defaultModel;
     private JScrollPane scrollPane;
@@ -50,44 +57,39 @@ public class EventManager extends JPanel {
     private JButton jBtnLeave;
     private JButton jBtnCreate;
     private JButton jBtnInfo;
-    private JComboBox<EventTypes> jCmbEventType;
+    private JComboBox<String> jCmbEventType;
 
-    public EventManager() {
+    private Member loggedMember;
+
+    public EventManager(Club club, Member member) {
         this.createComponent();
+        this.club = club;
         this.defineActions();
-    }
-
-    private TableModel createTableModel() {
-        String[] tableColumns = {"Titel", "Datum"};
-        String[][] tableData = {{"Titel A", "2000-12-12"}, {"Titel A", "2000-12-12"},
-        {"Titel A", "2000-12-12"}, {"Titel A", "2000-12-12"}, {"Titel A", "2000-12-12"}};
-        return defaultModel = new DefaultTableModel(tableData, tableColumns);
+        this.loggedMember = member;
     }
 
     private void createComponent() {
         GridBagConstraints grid = new GridBagConstraints();
         this.setLayout(new GridBagLayout());
 
-        
         jTblEvents = new JTable();
-        jTblEvents.setModel(createTableModel());
+        jTblEvents.setModel(new EventTableModel(this.club));
         scrollPane = new JScrollPane(jTblEvents);
         scrollPane.setPreferredSize(new Dimension(200, 50));
 
         jBtnJoin = new JButton("Anmelden");
-        jBtnLeave = new JButton("Abmelden");        
+        jBtnLeave = new JButton("Abmelden");
         jBtnInfo = new JButton("Info");
-        
-        
+
         jCmbEventType = new JComboBox<>();
-        jCmbEventType.addItem(EventTypes.LAPIDATION);
-        jCmbEventType.addItem(EventTypes.CHILDTOURNAMENT);
-        jCmbEventType.addItem(EventTypes.GENERIC);
+        jCmbEventType.addItem(EventTypes.GENERIC.returnType(EventTypes.LAPIDATION));
+        jCmbEventType.addItem(EventTypes.GENERIC.returnType(EventTypes.CHILDTOURNAMENT));
+        jCmbEventType.addItem(EventTypes.GENERIC.returnType(EventTypes.GENERIC));
         jBtnCreate = new JButton("Erstellen");
-        
+
         grid.anchor = GridBagConstraints.FIRST_LINE_START;
         grid.insets = new Insets(2, 2, 2, 2);
-        
+
         grid.fill = GridBagConstraints.BOTH;
         grid.weightx = 1;
         grid.weighty = 1;
@@ -128,31 +130,58 @@ public class EventManager extends JPanel {
         grid.gridx = 7;
         grid.gridy = 9;
         this.add(jBtnCreate, grid);
-        
 
-        
-         
     }
 
     public void defineActions() {
         /**
-         * 
+         *
          */
         jBtnJoin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Object selectedRow = jTblEvents.getSelectedRow();
             }
         });
-        
+
         jBtnCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Button Clicked");
-                EventDialog eventDialog = new EventDialog(null, "Veranstaltung erstellen", (EventTypes) jCmbEventType.getSelectedItem());
+                eventDialog = new EventDialog(null, "Veranstaltung: " + jCmbEventType.getSelectedItem() + " erstellen", jCmbEventType.getSelectedItem().toString(), club, loggedMember);
             }
         });
 
+    }
+
+}
+
+class EventTableModel extends DefaultTableModel {
+
+    List<Event> events = new ArrayList<>();
+    String[] columns = {"Titel", "Datum", "Leitung"};
+
+    public EventTableModel(Club clubEvents) {
+//        if (clubEvents != null && clubEvents.getEvents().size() > 0) {
+//            for (Event event : clubEvents.getEvents()) {
+//                events.add(event);
+//            }
+//        }
+    }
+
+    @Override
+    public int getRowCount() {
+        return 10;
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 10;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        return new Integer(rowIndex * columnIndex);
     }
 
 }

@@ -20,114 +20,148 @@
  */
 package de.lebk.verein.member;
 
+import de.lebk.verein.event.Event;
 import de.lebk.verein.lease.Lease;
 import java.util.Calendar;
 
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author raddatz
  * @date 15.12.2016
  */
+@XmlType(propOrder = {"firstName", "lastName", "password", "username", "sex", "entered", "leases", "events"})
 public class Member {
 
-  private String firstName;
-  private String lastName;
-  private String password;
-  private String username;
-  private char sex;
-  private GregorianCalendar entered;
-  private List<Lease> leases;
+    private String firstName;
+    private String lastName;
+    private String password;
+    private String username;
+    private char sex;
+    private GregorianCalendar entered;
+    private List<Lease> leases;
+    private List<Event> events;
 
-	public Member(String firstName, String lastName, String password, String username, char sex,
-		GregorianCalendar entered) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.password = password;
-    this.username = generateUsername(firstName, lastName);
-    this.sex = sex;
-    this.entered = entered;
-  }
+    public Member(String firstName, String lastName, String password, String username, char sex,
+            GregorianCalendar entered) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.username = generateUsername(firstName, lastName);
+        this.sex = sex;
+        this.entered = entered;
+    }
 
-	public Member(String password, String username, char sex) {
-		this.password = password;
-		this.username = username;
-		this.sex = sex;
-	}
+    public Member() {
+    }
 
-	public String getFullName() {
-		return firstName + " " + lastName;
-  }
+    public Member(String password, String username, char sex) {
+        this.password = password;
+        this.username = username;
+        this.sex = sex;
+    }
 
-  public String getDateTimeEntered() {
-    return entered.get(Calendar.DATE) + "." + entered.get(Calendar.MONTH) + "."
-        + entered.get(Calendar.YEAR);
-  }
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 
-  private String generateUsername(String fName, String lName) {
-      /* TODO make usernames unique prevent same username
+    public String getDateTimeEntered() {
+        return entered.get(Calendar.DATE) + "." + entered.get(Calendar.MONTH) + "."
+                + entered.get(Calendar.YEAR);
+    }
+
+    private String generateUsername(String fName, String lName) {
+        /* TODO make usernames unique prevent same username
         do this by checking the "data storage"
-      */
-      Random uniqueNumber = new Random();
-    return fName.toLowerCase().substring(0, 2) + (lName.toLowerCase().contains(" ") ? lName.toLowerCase().substring(0, lName.toLowerCase().indexOf(" ")) : lName.toLowerCase()) + uniqueNumber.nextInt(Integer.MAX_VALUE);
-  }
+         */
+        Random uniqueNumber = new Random();
+        return fName.toLowerCase().substring(0, 2) + (lName.toLowerCase().contains(" ") ? lName.toLowerCase().substring(0, lName.toLowerCase().indexOf(" ")) : lName.toLowerCase()) + uniqueNumber.nextInt(Integer.MAX_VALUE);
+    }
 
-  public String getFirstName() {
-    return firstName;
-  }
+    @XmlElement(name = "firstname")
+    public String getFirstName() {
+        return firstName;
+    }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-  public String getLastName() {
-    return lastName;
-  }
+    @XmlElement(name = "lastname")
+    public String getLastName() {
+        return lastName;
+    }
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    @XmlElement(name = "password")
+    public String getPassword() {
+        return password;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  public String getUsername() {
-    return username;
-  }
+    @XmlElement(name = "username")
+    public String getUsername() {
+        return username;
+    }
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-  public char getSex() {
-    return sex;
-  }
+    @XmlElement(name = "sex")
+    public char getSex() {
+        return sex;
+    }
 
-  public void setSex(char sex) {
-    this.sex = sex;
-  }
+    public void setSex(char sex) {
+        this.sex = sex;
+    }
 
-  public GregorianCalendar getEntered() {
-    return entered;
-  }
+    @XmlElement(name = "entered")
+    public GregorianCalendar getEntered() {
+        return entered;
+    }
 
-  public void setEntered(GregorianCalendar entered) {
-    this.entered = entered;
-  }
+    public void setEntered(GregorianCalendar entered) {
+        this.entered = entered;
+    }
 
-  public List<Lease> getLeases() {
-    return leases;
-  }
+    @XmlElement(name = "leases", namespace = "de.lebk.verein.member")
+    public List<Lease> getLeases() {
+        return leases;
+    }
 
-  public void setLeases(List<Lease> leases) {
-    this.leases = leases;
-  }
+    public void setLeases(List<Lease> leases) {
+        this.leases = leases;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public void addEvent(Event event) {
+        this.events.add(event);
+    }
+
+    public void removeEvent(Event event) {
+        this.events.remove(event);
+    }
+
 }

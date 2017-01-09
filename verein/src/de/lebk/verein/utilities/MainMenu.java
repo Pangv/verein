@@ -1,5 +1,7 @@
 package de.lebk.verein.utilities;
 
+import de.lebk.verein.club.Club;
+import de.lebk.verein.data_access.DataAccess;
 import de.lebk.verein.login.LoginDialog;
 import de.lebk.verein.member.Member;
 import de.lebk.verein.member.ProfileDialog;
@@ -8,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -21,12 +24,15 @@ public class MainMenu extends JMenuBar {
     // sub menus
     private final JMenuItem jMenuLogin = new JMenuItem("Zeige Login");
     private final JMenuItem jMenuProfile = new JMenuItem("Zeige Profil");
+    private final JMenuItem jMenuSave = new JMenuItem("Save");
 
     private final JMenuItem jMenuExit = new JMenuItem("Schließen");
 
     private Member member;
+    private Club club;
 
-    public MainMenu(Member member) {
+    public MainMenu(Club club, Member member) {
+        this.club = club;
         this.member = member;
         createComponent();
     }
@@ -35,6 +41,7 @@ public class MainMenu extends JMenuBar {
         // addItems
         jMenuTest.add(jMenuLogin);
         jMenuTest.add(jMenuProfile);
+        jMenuTest.add(jMenuSave);
         jMenuFile.add(jMenuExit);
 
         // TODO: addTestActions REMOVE LATER
@@ -68,6 +75,18 @@ public class MainMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
+            }
+        });
+
+        jMenuSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    DataAccess doa = new DataAccess();
+                    doa.writeXML(club);
+                } catch (JAXBException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
