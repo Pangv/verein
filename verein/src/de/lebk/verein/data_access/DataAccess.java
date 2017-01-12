@@ -27,6 +27,7 @@ import javax.xml.transform.stream.StreamSource;
 public class DataAccess {
 
     // Files
+    private final URL CLUB_XML_URL = ClassLoader.getSystemResource("club.xml");
     private final InputStream CLUB_XML = ClassLoader.getSystemResourceAsStream("club.xml");
 
     private JAXBContext jc;
@@ -49,7 +50,7 @@ public class DataAccess {
      */
     public Club readXML() throws JAXBException {
         System.out.println("Read Club Data...");
-        StreamSource xml = new StreamSource(CLUB_XML.toString());
+        StreamSource xml = new StreamSource(CLUB_XML);
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         JAXBElement<Club> rootElement = unmarshaller.unmarshal(xml, Club.class);
         return rootElement.getValue();
@@ -65,7 +66,8 @@ public class DataAccess {
         System.out.println("Creating output xml...");
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.marshal(element, writeOutput(CLUB_XML));
+        marshaller.marshal(element, new File(CLUB_XML_URL.toURI()));
+        
         //FIXME SystemResource lässt sich nicht beschreiben / ändern
     }
 
@@ -73,12 +75,13 @@ public class DataAccess {
         File output = null;
         OutputStream out = null;
         try {
-            output = new File(CLUB_XML.toString());
+            output = new File(CLUB_XML_URL.toURI());
             out = new FileOutputStream(output);
 
             byte[] buf = new byte[4096];
             int length;
 
+            System.out.println("File: " + output.getCanonicalPath());
             while ((length = inputStream.read(buf)) > 0) {
                 out.write(buf, 0, length);
 
@@ -87,14 +90,16 @@ public class DataAccess {
             inputStream.close();
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+           ex.printStackTrace();
         } catch (IOException ex) {
-            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        } catch (URISyntaxException ex) {
+            ex.printStackTrace();
         } finally {
             try {
                 out.close();
             } catch (IOException ex) {
-                Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+                 ex.printStackTrace();
             }
         }
         return output;
