@@ -5,6 +5,7 @@
  */
 package de.lebk.verein.utilities;
 
+import de.lebk.verein.club.Club;
 import de.lebk.verein.club.ClubManager;
 import de.lebk.verein.entry.Dashboard;
 import de.lebk.verein.event.EventManager;
@@ -25,15 +26,15 @@ public class TabContainer extends JTabbedPane {
 
     Member member;
 
-    public TabContainer(Member member) {
+    public TabContainer(Club club, Member member) {
         this.member = member;
-        createAndAddTabs();
+        createAndAddTabs(club);
     }
 
-    public void createAndAddTabs() {
+    public void createAndAddTabs(Club club) {
 
         dashboard = new Dashboard(member);
-        eventManager = new EventManager();
+        eventManager = new EventManager(club, member);
         clubManager = new ClubManager();
         storageManager = new StorageManager();
 

@@ -24,6 +24,7 @@
 package de.lebk.verein.lease;
 
 import de.lebk.verein.member.Member;
+import java.util.GregorianCalendar;
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
 /**
@@ -31,12 +32,13 @@ import sun.util.calendar.LocalGregorianCalendar.Date;
  * @author ebrinker
  */
 public class Lease {
+
     //id hinzufügen?
     private Member member;
     private int amount;
-    private Date dueDate;
-    
-    public Lease (Member member, int amount, Date dueDate) {
+    private GregorianCalendar dueDate;
+
+    public Lease(Member member, int amount, GregorianCalendar dueDate) {
         this.member = member;
         this.amount = amount;
         this.dueDate = dueDate;
@@ -58,18 +60,18 @@ public class Lease {
         this.amount = amount;
     }
 
-    public Date getDueDate() {
+    public GregorianCalendar getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(GregorianCalendar dueDate) {
         this.dueDate = dueDate;
-    }  
-    
+    }
+
     //Ids verwenden?
     public boolean equals(Lease lease) {
-        return this.amount == lease.getAmount() 
-                    && this.member == lease.getMember()
-                    && this.dueDate == lease.getDueDate();
+        return this.amount == lease.getAmount()
+                && this.member == lease.getMember()
+                && this.dueDate == lease.getDueDate();
     }
 }

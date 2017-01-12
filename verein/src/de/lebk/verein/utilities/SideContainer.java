@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.time.Clock;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -49,7 +50,7 @@ public class SideContainer extends JPanel {
         this.defineActions(member);
     }
 
-    public void createComponent() {
+    private void createComponent() {
         try {
             jLblUserImage
                     = new ImageLabel("./resources/profile.png");
@@ -73,23 +74,24 @@ public class SideContainer extends JPanel {
         }
 
     }
-    
-    private void defineActions(Member member){
-        
+
+    private void defineActions(Member member) {
+
         jBtnConfig.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(jBtnConfig, "Einstellungen für " + member.getFirstName()+ " " + member.getLastName() + ".");
+                JOptionPane.showMessageDialog(jBtnConfig, "Einstellungen für " + member.getFirstName() + " " + member.getLastName() + ".");
             }
         });
-        
+
         jBtnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(jBtnConfig, "Ausgeloggt!");
+                System.exit(0);
             }
         });
-        
+
     }
 
 }

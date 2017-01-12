@@ -23,14 +23,45 @@
  */
 package de.lebk.verein.data_access;
 
+import de.lebk.verein.club.Club;
+import java.io.File;
+import javax.xml.bind.DataBindingException;
+import javax.xml.bind.JAXB;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
+
 /**
  *
  * @author
  */
 public class DataAccess {
 
-    /*
-    XML
-     */
+    // Files
+    private final String CLUB_XML = "./resources/club.xml";
+
+    private JAXBContext jc;
+
+    public DataAccess() throws JAXBException {
+        jc = JAXBContext.newInstance(Club.class);
+    }
+
+    public Club readXML() throws JAXBException {
+        System.out.println("Read Club Data...");
+        StreamSource xml = new StreamSource(CLUB_XML);
+        Unmarshaller unmarshaller = jc.createUnmarshaller();
+        JAXBElement<Club> rootElement = unmarshaller.unmarshal(xml, Club.class);
+        return rootElement.getValue();
+    }
+
+    public void writeXML(Object element) throws JAXBException {
+        System.out.println("Creating output xml...");
+        Marshaller marshaller = jc.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.marshal(element, new File("./resources/" + element.getClass().getSimpleName().toLowerCase() + ".xml"));
+    }
 
 }

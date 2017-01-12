@@ -38,7 +38,6 @@ import javax.swing.JPanel;
  *
  * @author sopaetzel
  */
-//TODO: Change to LABEL
 public class ImageLabel extends JLabel {
 
     private BufferedImage image;
