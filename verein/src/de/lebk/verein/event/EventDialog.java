@@ -229,13 +229,14 @@ public class EventDialog extends JDialog {
                         (int) jCombDay.getSelectedItem(), (int) jCombHour.getSelectedItem(), (int) jCombMinute.getSelectedItem())));
 
                 JOptionPane.showMessageDialog(null, "Veranstaltung hinzugefügt");
+                dispose();
             }
         });
 
         jBtnAbort.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // dispose();
+                dispose();
             }
         });
 

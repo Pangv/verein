@@ -38,7 +38,6 @@ import javax.swing.JPanel;
  */
 public class DashboardUsersPanel extends JPanel {
 
-    private JLabel userProfileImage;
     private Dimension prefDimension
             = new Dimension(this.getPreferredSize().width, this.getPreferredSize().width);
 
@@ -50,19 +49,7 @@ public class DashboardUsersPanel extends JPanel {
     }
 
     public void createComponent() {
-        try {
-            this.setLayout(new GridLayout(2, 4));
-            for (int i = 0; i < 2; i++) {
-                for (int j = 0; j < 4; j++) {
-                    this.add(userProfileImage
-                            = new ImageLabel("./resources/profile.png"));
-                    userProfileImage.setToolTipText(member.getUsername());
-                    userProfileImage.setBorder(BorderFactory.createLineBorder(Color.yellow, 2));
-                }
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(DashboardUsersPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.setLayout(new GridLayout(2, 4));
 
     }
 

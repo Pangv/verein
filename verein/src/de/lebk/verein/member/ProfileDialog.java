@@ -47,12 +47,10 @@ public class ProfileDialog extends JDialog {
 
     public void createDialog() {
 
-        try {
+     
             this.setTitle("Profil von " + member.getUsername().replaceAll("\\d", ""));
             this.setLayout(new GridBagLayout());
             GridBagConstraints grid = new GridBagConstraints();
-//      jLblUserImage = new ImageLabel(ProfileDialog.class.getResource("/profile.png"));
-            jLblUserImage = new ImageLabel("./resources/profile.png");
             jLblLastName = new JLabel(member.getLastName());
             jLblFirstName = new JLabel(member.getFirstName());
             jLblDateJoined = new JLabel("Mitglied seit: " + member.getDateTimeEntered());
@@ -118,9 +116,7 @@ public class ProfileDialog extends JDialog {
             this.setResizable(false);
             this.pack();
             this.setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(ProfileDialog.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
 
         this.defineActions();
     }

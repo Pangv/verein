@@ -7,6 +7,7 @@ import de.lebk.verein.member.Member;
 import de.lebk.verein.member.ProfileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URISyntaxException;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -85,6 +86,8 @@ public class MainMenu extends JMenuBar {
                     DataAccess doa = new DataAccess();
                     doa.writeXML(club);
                 } catch (JAXBException ex) {
+                    ex.printStackTrace();
+                } catch (URISyntaxException ex){
                     ex.printStackTrace();
                 }
             }

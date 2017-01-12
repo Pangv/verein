@@ -6,6 +6,8 @@ import de.lebk.verein.member.Member;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -33,6 +35,8 @@ public class MainFrame extends JFrame {
     public MainFrame(Club club, Member member, boolean loggedIn) throws HeadlessException {
         this.club = club;
         this.member = member;
+        
+        this.setCustomLookAndFeel(LookAndFeel.METAL);
 
         if (!loggedIn) {
             loginDialog = new LoginDialog(this, "Anmeldung");
@@ -53,6 +57,7 @@ public class MainFrame extends JFrame {
         this.setTitle("Vereinsverwaltung");
         this.setPreferredSize(initDimension);
         this.setMinimumSize(minDimension);
+        this.setIconImage(new ImageIcon(ClassLoader.getSystemResource("logo.png")).getImage());
         this.setCustomLookAndFeel(yourFeel);
 
         // components

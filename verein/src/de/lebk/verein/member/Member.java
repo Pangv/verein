@@ -54,7 +54,7 @@ public class Member {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.username = generateUsername(firstName, lastName);
+        this.username = username;
         this.sex = sex;
         this.entered = entered;
     }

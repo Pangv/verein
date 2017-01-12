@@ -7,8 +7,13 @@ import de.lebk.verein.login.LoginDialog;
 import de.lebk.verein.member.Member;
 import de.lebk.verein.member.Officer;
 import de.lebk.verein.utilities.MainFrame;
+import de.lebk.verein.utilities.Warning;
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -18,37 +23,27 @@ public class Entry {
 
     private static MainFrame mainFrame;
     private static LoginDialog loginDialog;
+    private static DataAccess doa;
+    private static Club club;
 
     // TODO: Remove later
     static boolean loggedIn = true;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-        DataAccess doa = new DataAccess();
-        Club club = doa.readXML();
-
-//        Member alfred = new Member("Alfred", "Hitchcock", "hallo", "alfredo", 'm', new GregorianCalendar(1992, 1, 1));
-//        Member anna = new Member("Anna", "Müller", "start", "annam", 'f', new GregorianCalendar(2000, 3, 3));
         Member test = new Member("John-Ebenezer", "Scrooge Doe", "start", "john", 'm', new GregorianCalendar());
-//        Officer tim = new Officer("tim", "Struppi", "start", "a", 'm', new GregorianCalendar(1992, 3, 4));
-//        Event e1 = new Event("Steinigung", "Spaß mit Wackersteinen", anna, new GregorianCalendar(2000, 3, 3, 12, 0));
-//
-//        ArrayList<Member> members = new ArrayList<>();
-//        ArrayList<Officer> officers = new ArrayList<>();
-//        ArrayList<Event> events = new ArrayList<>();
-//
-//        members.add(alfred);
-//        members.add(anna);
-//        members.add(test);
-//
-//        officers.add(tim);
-//        events.add(e1);
-//
-//        club.setOfficerList(officers);
-//        club.setMembers(members);
-//        club.setEvents(events);
-//
-//        doa.writeXML(club);
+
+        try {
+            doa = new DataAccess();
+        } catch (JAXBException ex) {
+           Warning.displayWarning(ex.getMessage(), "Instanz von JAXBContext konnte nicht erstellt werden.");
+        }
+
+        try {
+            club = doa.readXML();
+        } catch (JAXBException e) {
+            Warning.displayWarning(e.getMessage(), "Die XML Datei konnte nicht eingelesen werden.");
+        }
 
         mainFrame = new MainFrame(club, test, loggedIn);
 
@@ -63,9 +58,6 @@ public class Entry {
         club.getEvents().forEach((eventsv) -> {
             System.out.println("Events: " + eventsv.getTitle());
         });
-        
-        
-        
 
     }
 
