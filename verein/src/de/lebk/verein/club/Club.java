@@ -28,6 +28,7 @@ import de.lebk.verein.member.Member;
 import de.lebk.verein.member.Officer;
 import de.lebk.verein.payment.Payment;
 import de.lebk.verein.payment.PaymentState;
+import de.lebk.verein.storage.Storage;
 import de.lebk.verein.vote.Vote;
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author mraddatz
  */
 @XmlRootElement(name = "club")
-@XmlType(name = "club", propOrder = {"members", "officers", "events", "payments", "money"})
+@XmlType(name = "club", propOrder = {"members", "officers", "events", "payments", "money", "storage"})
 public class Club {
 
     private double money = 2000.00;
@@ -56,6 +57,8 @@ public class Club {
     private List<Event> events = new ArrayList<>();
     private Map<Member, ArrayList<Payment>> payments;
     private Vote currentVote;
+    @XmlElement
+    private Storage storage;
 
     @XmlElementWrapper(name = "members")
     @XmlElement(name = "member")
@@ -150,4 +153,14 @@ public class Club {
         this.payments.get(member).get(index).setState(PaymentState.PAID);
     }
 
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
+    
+    
 }
