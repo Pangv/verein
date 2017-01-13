@@ -30,15 +30,23 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import sun.util.calendar.LocalGregorianCalendar.Date;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author ebrinker
  */
+@XmlRootElement(name = "storage")
+@XmlType(name = "storage", propOrder = {"amount", "leases"})
 public class Storage {
 
+    @XmlElement
     private int amount;
+    @XmlElementWrapper(name = "leases")
+    @XmlElement(name = "lease")
     private List<Lease> listOfLeases;
 
     public int getAmount() {
@@ -51,6 +59,7 @@ public class Storage {
 
     public void removeLease(Lease lease) {
         listOfLeases.remove(lease);
+        lease.getMember().getLeases().remove(lease);
     }
 
     public void addLease(Member member, int amount, GregorianCalendar dueDate) {
