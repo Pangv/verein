@@ -67,11 +67,4 @@ public class Lease {
     public void setDueDate(GregorianCalendar dueDate) {
         this.dueDate = dueDate;
     }
-
-    //Ids verwenden?
-    public boolean equals(Lease lease) {
-        return this.amount == lease.getAmount()
-                && this.member == lease.getMember()
-                && this.dueDate == lease.getDueDate();
-    }
 }

@@ -50,15 +50,7 @@ public class Storage {
     }
 
     public void removeLease(Lease lease) {
-        Lease leaseToRemove = null;
-        for (Lease currentLease : listOfLeases) {
-            if (currentLease.equals(lease)) {
-                listOfLeases.remove(lease);
-                //break wird nur so lange benötigt, bis es einen eindeutigen 
-                //Identifier für Lease gibt (vgl. Lease-Klasse id)
-                break;
-            }
-        }
+        listOfLeases.remove(lease);
     }
 
     public void addLease(Member member, int amount, GregorianCalendar dueDate) {
@@ -66,12 +58,31 @@ public class Storage {
     }
 
     public Map<Member, List<Lease>> getAllOverdueLeases() {
-        Map<Member, List<Lease>> overdueLeases = new HashMap<Member, List<Lease>>();
+        GregorianCalendar today = new GregorianCalendar();
+        Map<Member, List<Lease>> overdueLeases = new HashMap<>();
+        for(Lease lease : listOfLeases) {
+            if(lease.getDueDate().before(today)) {
+                List<Lease> overdueLeasesOfLeaseOwner = overdueLeases.get(lease.getMember());
+                if(overdueLeasesOfLeaseOwner != null) {
+                    overdueLeasesOfLeaseOwner.add(lease);
+                } else {
+                    List<Lease> leases = new ArrayList<>();
+                    leases.add(lease);
+                    overdueLeases.put(lease.getMember(), leases);
+                }
+            }
+        }
         return overdueLeases;
     }
 
-    public List<Lease> getOverdueLeasesForMember(Member member) {
-        List<Lease> overdueLeases = new ArrayList<Lease>();
+     public List<Lease> getOverdueLeasesForMember(Member member) {
+        GregorianCalendar today = new GregorianCalendar();
+        List<Lease> overdueLeases = new ArrayList<>();
+        for(Lease lease : listOfLeases) {
+            if(lease.getMember() == member && lease.getDueDate().before(today)) {
+                overdueLeases.add(lease);
+            }
+        }
         return overdueLeases;
-    }
+    } 
 }
