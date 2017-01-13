@@ -36,7 +36,7 @@ import java.util.Random;
  * @date 15.12.2016
  */
 @XmlType(propOrder = {"firstName", "lastName", "password", "username", "sex", "entered", "leases", "events"})
-public class Member implements Loginable {
+public class Member extends User {
 
     private String firstName;
     private String lastName;
