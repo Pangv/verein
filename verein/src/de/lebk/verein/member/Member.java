@@ -22,15 +22,13 @@ package de.lebk.verein.member;
 
 import de.lebk.verein.event.Event;
 import de.lebk.verein.lease.Lease;
-import java.util.Calendar;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import javax.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -38,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  * @date 15.12.2016
  */
 @XmlType(propOrder = {"firstName", "lastName", "password", "username", "sex", "entered", "leases", "events"})
-public class Member {
+public class Member implements Loginable {
 
     private String firstName;
     private String lastName;

@@ -23,10 +23,49 @@
  */
 package de.lebk.verein.login;
 
+import de.lebk.verein.member.Loginable;
+import de.lebk.verein.member.Role;
+
+import java.util.Objects;
+
 /**
  *
- * @author sopaetzel
+ * @author raddatz
  */
 public class Auth {
+	private Role role;
+	private Loginable currentUser = null;
+
+	private static Auth ourInstance = new Auth();
+
+	public static Auth getInstance() {
+		return ourInstance;
+	}
+
+	private Auth() {
+	}
+
+	public void logout() {
+		this.currentUser = null;
+	}
+
+	public Auth login(Loginable user, String password) {
+		if (!Objects.equals(user.getPassword(), password)) {
+			throw new WrongPasswordException();
+		}
+
+		this.currentUser = user;
+		this.role = Role.valueOf(user.getClass().getSimpleName().toUpperCase());
+
+		return this;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public Loginable getCurrentUser() {
+		return currentUser;
+	}
 
 }
