@@ -23,7 +23,7 @@
  */
 package de.lebk.verein.login;
 
-import de.lebk.verein.member.Loginable;
+import de.lebk.verein.member.Member;
 import de.lebk.verein.member.Role;
 
 import java.util.Objects;
@@ -34,7 +34,7 @@ import java.util.Objects;
  */
 public class Auth {
 	private Role role;
-	private Loginable currentUser = null;
+	private Member currentUser = null;
 
 	private static Auth ourInstance = new Auth();
 
@@ -49,7 +49,7 @@ public class Auth {
 		this.currentUser = null;
 	}
 
-	public Auth login(Loginable user, String password) {
+	public Auth login(Member user, String password) {
 		if (!Objects.equals(user.getPassword(), password)) {
 			throw new WrongPasswordException();
 		}
@@ -64,7 +64,7 @@ public class Auth {
 		return role;
 	}
 
-	public Loginable getCurrentUser() {
+	public Member getCurrentUser() {
 		return currentUser;
 	}
 
