@@ -2,6 +2,7 @@ package de.lebk.verein.entry;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.data_access.DataAccess;
+import de.lebk.verein.data_access.FileHandler;
 import de.lebk.verein.event.Event;
 import de.lebk.verein.login.LoginDialog;
 import de.lebk.verein.member.Member;
@@ -31,6 +32,8 @@ public class Entry {
 
     public static void main(String[] args) {
 
+        FileHandler fh = new FileHandler();
+                fh.createFolder();
         Member test = new Member("John-Ebenezer", "Scrooge Doe", "start", "john", 'm', new GregorianCalendar());
 
         try {

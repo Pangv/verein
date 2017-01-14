@@ -55,6 +55,8 @@ public class Event {
         this.title = title;
         this.organisator = organisator;
         this.dateTime = dateTime;
+        System.out.println("Event erstellt: "
+                + this.getTitle() + " ["+this.getEventType() + ","+this.getOrganisator().getFullName()+ ","+this.getDateTime()+ "]");
     }
 
     @XmlAttribute(name = "event-type")

@@ -35,8 +35,8 @@ public class MainFrame extends JFrame {
     public MainFrame(Club club, Member member, boolean loggedIn) throws HeadlessException {
         this.club = club;
         this.member = member;
-        
-        this.setCustomLookAndFeel(LookAndFeel.METAL);
+
+        this.setCustomLookAndFeel(LookAndFeel.SYSTEM);
 
         if (!loggedIn) {
             loginDialog = new LoginDialog(this, "Anmeldung");
@@ -48,7 +48,7 @@ public class MainFrame extends JFrame {
     }
 
     /**
-     * Creates Main Frame (Window) of out Application and sets some initial
+     * Creates Main Frame (Window) of our Application and sets some initial
      * values.
      */
     private void createGUI() {
@@ -63,7 +63,6 @@ public class MainFrame extends JFrame {
         // components
         this.setJMenuBar(new MainMenu(club, member));
         this.getContentPane().add(new TabContainer(club, member), BorderLayout.CENTER);
-        this.getContentPane().add(new SideContainer(member), BorderLayout.EAST);
 
         this.pack();
     }
@@ -89,13 +88,26 @@ public class MainFrame extends JFrame {
     private void setCustomLookAndFeel(LookAndFeel uiStyle) {
         try {
             switch (uiStyle) {
-                case METAL: {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                }
-                break;
                 case SYSTEM: {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 }
+                break;
+                case METAL: {
+                    UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+                }
+                break;
+                case MOTIF: {
+                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+                }
+                break;
+                case GTK: {
+                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+                }
+                break;
+                case NIMBUS: {
+                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+                }
+                break;
             }
         } catch (Exception e) {
         }

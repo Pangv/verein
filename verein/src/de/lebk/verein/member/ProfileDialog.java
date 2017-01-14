@@ -8,6 +8,7 @@ import de.lebk.verein.utilities.ImageLabel;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -51,8 +52,8 @@ public class ProfileDialog extends JDialog {
             this.setTitle("Profil von " + member.getUsername().replaceAll("\\d", ""));
             this.setLayout(new GridBagLayout());
             GridBagConstraints grid = new GridBagConstraints();
-            jLblLastName = new JLabel(member.getLastName());
-            jLblFirstName = new JLabel(member.getFirstName());
+            jLblLastName = new JLabel("Nachname:\t" + member.getLastName());
+            jLblFirstName = new JLabel("Vorname:\t" + member.getFirstName());
             jLblDateJoined = new JLabel("Mitglied seit: " + member.getDateTimeEntered());
 
             jBtnLeaveClub = new JButton("Austreten");
@@ -62,11 +63,11 @@ public class ProfileDialog extends JDialog {
 
             grid.anchor = GridBagConstraints.FIRST_LINE_START;
             grid.fill = GridBagConstraints.VERTICAL;
+            grid.insets = new Insets(5, 10, 2, 10);
             grid.gridheight = 2;
             grid.gridwidth = 1;
             grid.gridx = 0;
             grid.gridy = 0;
-            this.add(jLblUserImage, grid);
 
             // adding first name
             grid.fill = GridBagConstraints.HORIZONTAL;

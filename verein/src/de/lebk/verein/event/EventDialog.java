@@ -73,6 +73,7 @@ public class EventDialog extends JDialog {
         this.club = club;
         this.member = member;
         this.createDialog();
+        
     }
 
     private void createDialog() {
