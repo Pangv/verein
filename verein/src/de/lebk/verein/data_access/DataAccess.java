@@ -9,10 +9,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.bind.DataBindingException;
-import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -67,7 +63,7 @@ public class DataAccess {
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(element, new File(CLUB_XML_URL.toURI()));
-        
+
         //FIXME SystemResource lässt sich nicht beschreiben / ändern
     }
 
@@ -90,7 +86,7 @@ public class DataAccess {
             inputStream.close();
 
         } catch (FileNotFoundException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (URISyntaxException ex) {
@@ -99,7 +95,7 @@ public class DataAccess {
             try {
                 out.close();
             } catch (IOException ex) {
-                 ex.printStackTrace();
+                ex.printStackTrace();
             }
         }
         return output;

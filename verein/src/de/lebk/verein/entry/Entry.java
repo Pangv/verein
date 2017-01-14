@@ -3,17 +3,11 @@ package de.lebk.verein.entry;
 import de.lebk.verein.club.Club;
 import de.lebk.verein.data_access.DataAccess;
 import de.lebk.verein.data_access.FileHandler;
-import de.lebk.verein.event.Event;
 import de.lebk.verein.login.LoginDialog;
 import de.lebk.verein.member.Member;
-import de.lebk.verein.member.Officer;
 import de.lebk.verein.utilities.MainFrame;
 import de.lebk.verein.utilities.Warning;
-import java.lang.invoke.MethodHandles;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 
 /**
@@ -33,13 +27,13 @@ public class Entry {
     public static void main(String[] args) {
 
         FileHandler fh = new FileHandler();
-                fh.createFolder();
+        fh.createFolder();
         Member test = new Member("John-Ebenezer", "Scrooge Doe", "start", "john", 'm', new GregorianCalendar());
 
         try {
             doa = new DataAccess();
         } catch (JAXBException ex) {
-           Warning.displayWarning(ex.getMessage(), "Instanz von JAXBContext konnte nicht erstellt werden.");
+            Warning.displayWarning(ex.getMessage(), "Instanz von JAXBContext konnte nicht erstellt werden.");
         }
 
         try {

@@ -17,10 +17,10 @@ public class Officer extends Member {
         super(firstName, lastName, password, username, sex, entered);
     }
 
-	public Officer(String password, String username, char sex) {
-		super(password, username, sex);
-		this.officerSince = new GregorianCalendar();
-	}
+    public Officer(String password, String username, char sex) {
+        super(password, username, sex);
+        this.officerSince = new GregorianCalendar();
+    }
 
     public Officer() {
     }

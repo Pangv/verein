@@ -25,21 +25,19 @@ public class MainMenu extends JMenuBar {
     // base menus
     private final JMenu jMenuFile = new JMenu("Datei");
     private final JMenu jMenuTest = new JMenu("Test");
-    
+
     // sub menus
     private final JMenuItem jMenuLogin = new JMenuItem("Zeige Login");
     private final JMenuItem jMenuProfile = new JMenuItem("Zeige Profil");
     private final JMenuItem jMenuSave = new JMenuItem("Save");
     private final JButton jMenuConfig = new JButton("Einstellungen");
     private final JButton jMenuLogout = new JButton("Ausloggen");
-    
-
 
     private final JMenuItem jMenuExit = new JMenuItem("Schließen");
 
     private Member member;
     private Club club;
-    
+
     public MainMenu(Club club, Member member) {
         this.club = club;
         this.member = member;
@@ -59,7 +57,7 @@ public class MainMenu extends JMenuBar {
         // addMenu
         this.add(jMenuFile);
         this.add(jMenuTest);
-        
+
         this.add(Box.createHorizontalGlue());
         this.add(jMenuConfig);
         this.add(jMenuLogout);
@@ -99,12 +97,12 @@ public class MainMenu extends JMenuBar {
                     doa.writeXML(club);
                 } catch (JAXBException ex) {
                     ex.printStackTrace();
-                } catch (URISyntaxException ex){
+                } catch (URISyntaxException ex) {
                     ex.printStackTrace();
                 }
             }
         });
-        
+
         jMenuConfig.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
