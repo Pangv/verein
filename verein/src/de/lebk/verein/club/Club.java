@@ -34,7 +34,6 @@ public class Club {
     private List<Event> events = new ArrayList<>();
     private Map<Member, ArrayList<Payment>> payments;
     private Vote currentVote;
-    @XmlElement
     private Storage storage;
 
     @XmlElementWrapper(name = "members")

@@ -93,11 +93,9 @@ public class MainMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    DataAccess doa = new DataAccess();
+                    DataAccess doa = DataAccess.getInstance();
                     doa.writeXML(club);
                 } catch (JAXBException ex) {
-                    ex.printStackTrace();
-                } catch (URISyntaxException ex) {
                     ex.printStackTrace();
                 }
             }

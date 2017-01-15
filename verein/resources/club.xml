@@ -135,4 +135,57 @@
         </event>
     </events>
     <money>2000.0</money>
+    <storage>
+        <amount>0</amount>
+        <leases>
+            <lease>
+                <member>
+                    <firstname>John-Ebenezer</firstname>
+                    <lastname>Scrooge Doe</lastname>
+                    <password>start</password>
+                    <username>john</username>
+                    <sex>109</sex>
+                    <entered>2017-01-16T00:25:07.926+01:00</entered>
+                </member>
+                <amount>5</amount>
+                <dueDate>1993-08-10T00:00:00+02:00</dueDate>
+            </lease>
+            <lease>
+                <member>
+                    <firstname>John-Ebenezer</firstname>
+                    <lastname>Scrooge Doe</lastname>
+                    <password>start</password>
+                    <username>john</username>
+                    <sex>109</sex>
+                    <entered>2017-01-16T00:25:07.926+01:00</entered>
+                </member>
+                <amount>5</amount>
+                <dueDate>1993-08-10T00:00:00+02:00</dueDate>
+            </lease>
+            <lease>
+                <member>
+                    <firstname>John-Ebenezer</firstname>
+                    <lastname>Scrooge Doe</lastname>
+                    <password>start</password>
+                    <username>john</username>
+                    <sex>109</sex>
+                    <entered>2017-01-16T00:25:07.926+01:00</entered>
+                </member>
+                <amount>5</amount>
+                <dueDate>1993-08-10T00:00:00+02:00</dueDate>
+            </lease>
+            <lease>
+                <member>
+                    <firstname>John-Ebenezer</firstname>
+                    <lastname>Scrooge Doe</lastname>
+                    <password>start</password>
+                    <username>john</username>
+                    <sex>109</sex>
+                    <entered>2017-01-16T00:25:07.926+01:00</entered>
+                </member>
+                <amount>5</amount>
+                <dueDate>1993-08-10T00:00:00+02:00</dueDate>
+            </lease>
+        </leases>
+    </storage>
 </club>
