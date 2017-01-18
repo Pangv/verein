@@ -1,5 +1,6 @@
 package de.lebk.verein.login;
 
+import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
 import de.lebk.verein.member.Role;
 
@@ -12,6 +13,7 @@ import java.util.Objects;
 public class Auth {
 
     private Role role;
+    private Club club;
     private Member currentUser = null;
 
     private static Auth ourInstance = new Auth();
@@ -27,7 +29,13 @@ public class Auth {
         this.currentUser = null;
     }
 
-    public Auth login(Member user, String password) {
+    //TODO username aus Memberliste in Club auslesen, falls es ihn gibt.
+    public Auth login(Club club, String username, String password) {
+        
+        ///if (Member member : club.getMembers().){
+        
+    //}
+        
         if (!Objects.equals(user.getPassword(), password)) {
             throw new WrongPasswordException();
         }
