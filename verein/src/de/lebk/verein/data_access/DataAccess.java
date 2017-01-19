@@ -2,17 +2,6 @@ package de.lebk.verein.data_access;
 
 import de.lebk.verein.club.Club;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.bind.DataBindingException;
-import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -25,21 +14,32 @@ import javax.xml.transform.stream.StreamSource;
  * @author sopaetzel
  */
 public class DataAccess {
+    
+    
+    private static DataAccess instance = null;
+    
 
     // Files
-    private final URL CLUB_XML_URL = ClassLoader.getSystemResource("club.xml");
-    private final InputStream CLUB_XML = ClassLoader.getSystemResourceAsStream("club.xml");
-
-    private JAXBContext jc;
+    //private final URL CLUB_XML_URL = ClassLoader.getSystemResource("club.xml");
+    private final String CLUB_XML = "./resources/club.xml";
+    private static JAXBContext jc;
+    
+    private DataAccess(){}
 
     /**
      * Erstellt eine globale Instanz (Singleton) des JAXBContext
      *
-     * @throws JAXBException wird geworfen wenn
+     * @throws JAXBException wird geworfen wenn keine Instanz erstellt werden kann.
      */
-    public DataAccess() throws JAXBException {
-        jc = JAXBContext.newInstance(Club.class);
+    public static DataAccess getInstance() throws JAXBException{
+        if (instance == null) {
+            instance = new DataAccess();
+            jc = JAXBContext.newInstance(Club.class);
+        }
+        return instance;
     }
+    
+  
 
     /**
      * Liest eine vorhandene XML Datei in den Speicher und erstellt anhand der
@@ -62,47 +62,13 @@ public class DataAccess {
      * @param element
      * @throws JAXBException
      */
-    public void writeXML(Object element) throws JAXBException, URISyntaxException {
+    public void writeXML(Object element) throws JAXBException {
         System.out.println("Creating output xml...");
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.marshal(element, new File(CLUB_XML_URL.toURI()));
-        
+        marshaller.marshal(element, new File(CLUB_XML));
+
         //FIXME SystemResource lässt sich nicht beschreiben / ändern
-    }
-
-    private File writeOutput(InputStream inputStream) {
-        File output = null;
-        OutputStream out = null;
-        try {
-            output = new File(CLUB_XML_URL.toURI());
-            out = new FileOutputStream(output);
-
-            byte[] buf = new byte[4096];
-            int length;
-
-            System.out.println("File: " + output.getCanonicalPath());
-            while ((length = inputStream.read(buf)) > 0) {
-                out.write(buf, 0, length);
-
-            }
-            out.close();
-            inputStream.close();
-
-        } catch (FileNotFoundException ex) {
-           ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (URISyntaxException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                out.close();
-            } catch (IOException ex) {
-                 ex.printStackTrace();
-            }
-        }
-        return output;
     }
 
 }

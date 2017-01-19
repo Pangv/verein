@@ -47,14 +47,13 @@ public class Club {
 
     private double money = 2000.00;
     @XmlAttribute(name = "currency")
-    private String currency = "eur";
+    private final String currency = "eur";
 
     private List<Officer> officers = new ArrayList<>();
     private List<Member> members = new ArrayList<>();
     private List<Event> events = new ArrayList<>();
 	private Map<Member, ArrayList<Payment>> payments = new HashMap<>();
 	private Vote currentVote;
-    @XmlElement
     private Storage storage;
 
     @XmlElementWrapper(name = "members")
@@ -177,6 +176,6 @@ public class Club {
         this.storage = storage;
     }
 
-
-
+    
+    
 }

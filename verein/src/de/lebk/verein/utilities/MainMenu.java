@@ -7,10 +7,15 @@ import de.lebk.verein.member.Member;
 import de.lebk.verein.member.ProfileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBException;
 
 /**
@@ -22,17 +27,22 @@ public class MainMenu extends JMenuBar {
     // base menus
     private final JMenu jMenuFile = new JMenu("Datei");
     private final JMenu jMenuTest = new JMenu("Test");
+
     // sub menus
     private final JMenuItem jMenuLogin = new JMenuItem("Zeige Login");
     private final JMenuItem jMenuProfile = new JMenuItem("Zeige Profil");
     private final JMenuItem jMenuSave = new JMenuItem("Save");
+    private final JButton jMenuConfig = new JButton("Einstellungen");
+    private final JButton jMenuLogout = new JButton("Ausloggen");
 
     private final JMenuItem jMenuExit = new JMenuItem("Schließen");
 
+    private JFrame parent;
     private Member member;
     private Club club;
 
-    public MainMenu(Club club, Member member) {
+    public MainMenu(JFrame parent, Club club) {
+        this.parent = parent;
         this.club = club;
         this.member = member;
         createComponent();
@@ -51,6 +61,10 @@ public class MainMenu extends JMenuBar {
         // addMenu
         this.add(jMenuFile);
         this.add(jMenuTest);
+
+        this.add(Box.createHorizontalGlue());
+        this.add(jMenuConfig);
+        this.add(jMenuLogout);
     }
 
     private void defineTestActions() {
@@ -60,7 +74,7 @@ public class MainMenu extends JMenuBar {
         jMenuLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginDialog l = new LoginDialog(null, "Test Login");
+                LoginDialog l = new LoginDialog(null, club,"Test Login");
 
             }
         });
@@ -83,12 +97,31 @@ public class MainMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    DataAccess doa = new DataAccess();
+                    DataAccess doa = DataAccess.getInstance();
                     doa.writeXML(club);
                 } catch (JAXBException ex) {
                     ex.printStackTrace();
-                } catch (URISyntaxException ex){
-                    ex.printStackTrace();
+                }
+            }
+        });
+
+        jMenuConfig.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(jMenuConfig, "Einstellungen für " + member.getFirstName() + " " + member.getLastName() + ".");
+            }
+        });
+
+        jMenuLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    JOptionPane.showMessageDialog(jMenuConfig, "Ausgeloggt!");
+                    DataAccess.getInstance().writeXML(club);
+                    LoginDialog login = new LoginDialog(null, club, "Neu anmelden");
+                    parent.dispose();
+                } catch (JAXBException ex) {
+                    Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
