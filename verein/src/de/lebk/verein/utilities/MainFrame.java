@@ -1,14 +1,15 @@
 package de.lebk.verein.utilities;
 
 import de.lebk.verein.club.Club;
+import de.lebk.verein.login.Auth;
 import de.lebk.verein.login.LoginDialog;
-import de.lebk.verein.member.Member;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -16,34 +17,34 @@ import javax.swing.UIManager;
  */
 public class MainFrame extends JFrame {
 
-    private LookAndFeel yourFeel;
     private final int initWidth = 1000;
     private final int initHeight = initWidth / 16 * 9;
     private final int minWidth = 600;
     private final int minHeight = 300;
 
-    private Dimension initDimension = new Dimension(initWidth, initHeight);
-    private Dimension minDimension = new Dimension(minWidth, minHeight);
+    private final Dimension initDimension = new Dimension(initWidth, initHeight);
+    private final Dimension minDimension = new Dimension(minWidth, minHeight);
 
     private MainMenu mainMenu;
     private LoginDialog loginDialog;
+    private final Club club;
 
-    private Member member;
-    private Club club;
-
-    public MainFrame(Club club, Member member, boolean loggedIn) throws HeadlessException {
+    public MainFrame(Club club) throws HeadlessException {
         this.club = club;
-        this.member = member;
-
         this.setCustomLookAndFeel(LookAndFeel.SYSTEM);
-
-        if (!loggedIn) {
-            loginDialog = new LoginDialog(this, "Anmeldung");
-            this.createAndHideGUI();
-        } else if (loggedIn) {
-            this.createAndShowGUI();
-            this.setTitle(this.getTitle() + " [" + member.getFullName() + "]");
-        }
+        this.createAndHideGUI();           
+        
+        
+        do {            
+            
+        } while (Auth.getInstance().getCurrentUser() == null);
+            loginDialog = new LoginDialog(this, club, "Anmeldung");
+        if (Auth.getInstance().getCurrentUser() == null) {
+              
+        } 
+        this.createAndShowGUI();
+        this.setTitle(this.getTitle() + " [" + Auth.getInstance().getCurrentUser().getFullName()+ "]");
+        
     }
 
     /**
@@ -57,11 +58,10 @@ public class MainFrame extends JFrame {
         this.setPreferredSize(initDimension);
         this.setMinimumSize(minDimension);
         this.setIconImage(new ImageIcon(ClassLoader.getSystemResource("logo.png")).getImage());
-        this.setCustomLookAndFeel(yourFeel);
 
         // components
-        this.setJMenuBar(new MainMenu(club, member));
-        this.getContentPane().add(new TabContainer(club, member), BorderLayout.CENTER);
+        this.setJMenuBar(new MainMenu(this,club));
+        this.getContentPane().add(new TabContainer(club), BorderLayout.CENTER);
 
         this.pack();
     }
@@ -108,7 +108,9 @@ public class MainFrame extends JFrame {
                 }
                 break;
             }
-        } catch (Exception e) {
+        } 
+         catch (InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException | ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
     }
 

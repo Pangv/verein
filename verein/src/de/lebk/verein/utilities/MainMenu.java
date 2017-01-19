@@ -7,9 +7,11 @@ import de.lebk.verein.member.Member;
 import de.lebk.verein.member.ProfileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -35,10 +37,12 @@ public class MainMenu extends JMenuBar {
 
     private final JMenuItem jMenuExit = new JMenuItem("Schließen");
 
+    private JFrame parent;
     private Member member;
     private Club club;
 
-    public MainMenu(Club club, Member member) {
+    public MainMenu(JFrame parent, Club club) {
+        this.parent = parent;
         this.club = club;
         this.member = member;
         createComponent();
@@ -70,7 +74,7 @@ public class MainMenu extends JMenuBar {
         jMenuLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginDialog l = new LoginDialog(null, "Test Login");
+                LoginDialog l = new LoginDialog(null, club,"Test Login");
 
             }
         });
@@ -111,8 +115,14 @@ public class MainMenu extends JMenuBar {
         jMenuLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(jMenuConfig, "Ausgeloggt!");
-                System.exit(0);
+                try {
+                    JOptionPane.showMessageDialog(jMenuConfig, "Ausgeloggt!");
+                    DataAccess.getInstance().writeXML(club);
+                    LoginDialog login = new LoginDialog(null, club, "Neu anmelden");
+                    parent.dispose();
+                } catch (JAXBException ex) {
+                    Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 

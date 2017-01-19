@@ -1,7 +1,11 @@
 package de.lebk.verein.login;
 
-import java.awt.Dimension;
+import de.lebk.verein.club.Club;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -32,9 +36,12 @@ public class LoginDialog extends JDialog {
 
     private JButton jBtnLogin;
     private JButton jBtnRegister;
+    
+    private Club club;
 
-    public LoginDialog(JFrame owner, String dialogTitle) {
+    public LoginDialog(JFrame owner, Club club, String dialogTitle) {
         super(owner);
+        this.club = club;
         this.dialogTitle = dialogTitle;
         createDialog();
     }
@@ -73,6 +80,20 @@ public class LoginDialog extends JDialog {
 
         this.pack();
         this.setVisible(true);
+    }
+    
+    
+    private void initActionListeners(){
+        jBtnLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    Auth.getInstance().login(club, jTFLoginname.getText(), jPFPassword.getText());
+                } catch (UserNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
 }

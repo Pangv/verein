@@ -30,11 +30,7 @@ public class Entry {
         FileHandler fh = new FileHandler();
         fh.createFolder();
         Member test = new Member("John-Ebenezer", "Scrooge Doe", "start", "john", 'm', new GregorianCalendar());
-        Storage s = new Storage();
-        s.addLease(test, 5, new GregorianCalendar(1992, 19, 10));
-        s.addLease(test, 5, new GregorianCalendar(1992, 19, 10));
-        s.addLease(test, 5, new GregorianCalendar(1992, 19, 10));
-        s.addLease(test, 5, new GregorianCalendar(1992, 19, 10));
+
         
 
         try {
@@ -51,8 +47,7 @@ public class Entry {
             e.printStackTrace();
         }
 
-        mainFrame = new MainFrame(club, test, loggedIn);
-        club.setStorage(s);
+        mainFrame = new MainFrame(club);
 
         club.getMembers().forEach((member) -> {
             System.out.println("Members: " + member.getFullName());
