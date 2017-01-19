@@ -63,7 +63,9 @@ public class Storage {
     }
 
     public void addLease(Member member, int amount, GregorianCalendar dueDate) {
-        listOfLeases.add(new Lease(member, amount, dueDate));
+        Lease leaseToAdd = new Lease(member, amount, dueDate);
+        listOfLeases.add(leaseToAdd);
+        member.getLeases().add(leaseToAdd);
     }
 
     public Map<Member, List<Lease>> getAllOverdueLeases() {
