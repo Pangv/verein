@@ -64,4 +64,12 @@ public class Payment {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public boolean isOpen() {
+        return this.state.equals(PaymentState.OPEN);
+    }
+
+    public boolean isPaid() {
+        return this.state.equals(PaymentState.PAID);
+    }
 }

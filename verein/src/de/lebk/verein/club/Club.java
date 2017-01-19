@@ -30,15 +30,12 @@ import de.lebk.verein.payment.Payment;
 import de.lebk.verein.payment.PaymentState;
 import de.lebk.verein.storage.Storage;
 import de.lebk.verein.vote.Vote;
-import java.util.ArrayList;
 
+import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -55,8 +52,8 @@ public class Club {
     private List<Officer> officers = new ArrayList<>();
     private List<Member> members = new ArrayList<>();
     private List<Event> events = new ArrayList<>();
-    private Map<Member, ArrayList<Payment>> payments;
-    private Vote currentVote;
+	private Map<Member, ArrayList<Payment>> payments = new HashMap<>();
+	private Vote currentVote;
     @XmlElement
     private Storage storage;
 
@@ -145,13 +142,32 @@ public class Club {
     }
 
     public void requestMoney(Member member, double amount) {
-        this.payments.get(member).add(new Payment(member, amount));
-    }
+		if (this.payments.containsKey(member)) {
+			this.payments.get(member).add(new Payment(member, amount));
+		} else {
+			ArrayList<Payment> newPayments = new ArrayList<>();
+			newPayments.add(new Payment(member, amount));
+			this.payments.put(member, newPayments);
+		}
+	}
 
     public void markAsPaid(Member member, Payment payment) {
         int index = this.payments.get(member).indexOf(payment);
         this.payments.get(member).get(index).setState(PaymentState.PAID);
     }
+
+	public Map<Member, ArrayList<Payment>> getOpenPayments() {
+		Map<Member, ArrayList<Payment>> openPayments = new HashMap<>();
+		for (Member member : this.payments.keySet()) {
+			ArrayList<Payment> payments = this.payments.get(member);
+
+			payments.removeIf(Payment::isPaid);
+
+			openPayments.put(member, payments);
+		}
+
+		return openPayments;
+	}
 
     public Storage getStorage() {
         return storage;
@@ -161,6 +177,6 @@ public class Club {
         this.storage = storage;
     }
 
-    
-    
+
+
 }
