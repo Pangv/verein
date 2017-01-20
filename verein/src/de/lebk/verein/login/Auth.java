@@ -1,5 +1,6 @@
 package de.lebk.verein.login;
 
+import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
 import de.lebk.verein.member.Officer;
 import de.lebk.verein.member.Role;
@@ -11,9 +12,6 @@ import java.util.Objects;
  * @author raddatz
  */
 public class Auth {
-	private Role role;
-	private Member currentUser = null;
-
     private Role role;
     private Club club;
     private Member user = null;
@@ -25,12 +23,6 @@ public class Auth {
     public static Auth getInstance() {
         return ourInstance;
     }
-  
-	private static Auth ourInstance = new Auth();
-
-	public static Auth getInstance() {
-		return ourInstance;
-	}
 
 	private Auth() {
 	}
