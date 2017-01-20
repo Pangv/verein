@@ -4,7 +4,7 @@ import de.lebk.verein.club.Club;
 import de.lebk.verein.club.ClubManager;
 import de.lebk.verein.entry.Dashboard;
 import de.lebk.verein.event.EventManager;
-import de.lebk.verein.login.Auth;
+import de.lebk.verein.member.Member;
 import de.lebk.verein.storage.StorageManager;
 import javax.swing.JTabbedPane;
 
@@ -30,6 +30,7 @@ public class TabContainer extends JTabbedPane {
 
         dashboard = new Dashboard(club);
         eventManager = new EventManager(club, Auth.getInstance().getCurrentUser());
+
         clubManager = new ClubManager();
         storageManager = new StorageManager();
 

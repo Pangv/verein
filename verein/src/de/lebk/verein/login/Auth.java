@@ -1,6 +1,5 @@
 package de.lebk.verein.login;
 
-import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
 import de.lebk.verein.member.Officer;
 import de.lebk.verein.member.Role;
@@ -12,6 +11,8 @@ import java.util.Objects;
  * @author raddatz
  */
 public class Auth {
+	private Role role;
+	private Member currentUser = null;
 
     private Role role;
     private Club club;
@@ -24,13 +25,15 @@ public class Auth {
     public static Auth getInstance() {
         return ourInstance;
     }
+  
+	private static Auth ourInstance = new Auth();
 
-    private Auth() {
-    }
+	public static Auth getInstance() {
+		return ourInstance;
+	}
 
-    public void logout() {
-        this.currentUser = null;
-    }
+	private Auth() {
+	}
 
     //TODO username aus Memberliste in Club auslesen, falls es ihn gibt.
     public boolean login(Club club, String username, String password) throws UserNotFoundException, WrongPasswordException {
@@ -46,10 +49,13 @@ public class Auth {
            throw new UserNotFoundException();
        }
     }
+	public void logout() {
+		this.currentUser = null;
+	}
 
-    public Role getRole() {
-        return role;
-    }
+	public Role getRole() {
+		return role;
+	}
 
     public Member getCurrentUser() {
         return currentUser;
@@ -73,5 +79,4 @@ public class Auth {
         }             
         return userExists;
     }
-
 }

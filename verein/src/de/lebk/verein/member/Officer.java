@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by marcel on 15.12.16.
  */
+@XmlRootElement(name = "officer")
 public class Officer extends Member {
 
     private GregorianCalendar officerSince;
@@ -16,10 +17,10 @@ public class Officer extends Member {
         super(firstName, lastName, password, username, sex, entered);
     }
 
-    public Officer(String password, String username, char sex) {
-        super(password, username, sex);
-        this.officerSince = new GregorianCalendar();
-    }
+	public Officer(String password, String username, char sex) {
+		super(password, username, sex);
+		this.officerSince = new GregorianCalendar();
+	}
 
     public Officer() {
     }

@@ -8,15 +8,10 @@ import de.lebk.verein.member.Member;
 import de.lebk.verein.member.ProfileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import java.net.URISyntaxException;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBException;
 
 /**
@@ -28,13 +23,10 @@ public class MainMenu extends JMenuBar {
     // base menus
     private final JMenu jMenuFile = new JMenu("Datei");
     private final JMenu jMenuTest = new JMenu("Test");
-
     // sub menus
     private final JMenuItem jMenuLogin = new JMenuItem("Zeige Login");
     private final JMenuItem jMenuProfile = new JMenuItem("Zeige Profil");
     private final JMenuItem jMenuSave = new JMenuItem("Save");
-    private final JButton jMenuConfig = new JButton("Einstellungen");
-    private final JButton jMenuLogout = new JButton("Ausloggen");
 
     private final JMenuItem jMenuExit = new JMenuItem("Schließen");
 
@@ -61,10 +53,6 @@ public class MainMenu extends JMenuBar {
         // addMenu
         this.add(jMenuFile);
         this.add(jMenuTest);
-
-        this.add(Box.createHorizontalGlue());
-        this.add(jMenuConfig);
-        this.add(jMenuLogout);
     }
 
     private void defineTestActions() {
@@ -74,7 +62,7 @@ public class MainMenu extends JMenuBar {
         jMenuLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginDialog l = new LoginDialog(null, club,"Test Login");
+                LoginDialog l = new LoginDialog(null, "Test Login");
 
             }
         });
@@ -97,7 +85,7 @@ public class MainMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    DataAccess doa = DataAccess.getInstance();
+                    DataAccess doa = new DataAccess();
                     doa.writeXML(club);
                 } catch (JAXBException ex) {
                     ex.printStackTrace();

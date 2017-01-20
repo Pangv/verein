@@ -2,6 +2,8 @@ package de.lebk.verein.entry;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
+import de.lebk.verein.utilities.ImageLabel;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;

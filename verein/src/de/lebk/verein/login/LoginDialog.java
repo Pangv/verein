@@ -1,4 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package de.lebk.verein.login;
+
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.utilities.MainFrame;
@@ -43,7 +49,7 @@ public class LoginDialog extends JDialog {
 
     private JButton jBtnLogin;
     private JButton jBtnRegister;
-    
+
     private Club club;
     private boolean logged = false;
 
@@ -152,9 +158,6 @@ public class LoginDialog extends JDialog {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
-        });
-        
-       
+        }); 
     }
-
 }

@@ -85,6 +85,54 @@
                 <entered>2017-01-09T01:32:08.904+01:00</entered>
             </organisator>
         </event>
+        <event event-type="Steinigung">
+            <title>Apfelkuchen ist das Beste</title>
+            <dateTime>2017-01-01T01:00:00+01:00</dateTime>
+            <organisator>
+                <firstname>John-Ebenezer</firstname>
+                <lastname>Scrooge Doe</lastname>
+                <password>start</password>
+                <username>joscrooge385859470</username>
+                <sex>109</sex>
+                <entered>2017-01-09T01:50:22.002+01:00</entered>
+            </organisator>
+        </event>
+        <event event-type="Allgemein">
+            <title>Ich mag Züge</title>
+            <dateTime>2023-06-04T05:30:00+02:00</dateTime>
+            <organisator>
+                <firstname>John-Ebenezer</firstname>
+                <lastname>Scrooge Doe</lastname>
+                <password>start</password>
+                <username>joscrooge554791522</username>
+                <sex>109</sex>
+                <entered>2017-01-09T01:54:13.971+01:00</entered>
+            </organisator>
+        </event>
+        <event event-type="Kindertunier">
+            <title>This is my Event</title>
+            <dateTime>2017-03-05T16:30:00+01:00</dateTime>
+            <organisator>
+                <firstname>John-Ebenezer</firstname>
+                <lastname>Scrooge Doe</lastname>
+                <password>start</password>
+                <username>joscrooge1996319457</username>
+                <sex>109</sex>
+                <entered>2017-01-12T00:40:31.501+01:00</entered>
+            </organisator>
+        </event>
+        <event event-type="Kindertunier">
+            <title>Robbenreiten</title>
+            <dateTime>2019-04-01T06:45:00+02:00</dateTime>
+            <organisator>
+                <firstname>John-Ebenezer</firstname>
+                <lastname>Scrooge Doe</lastname>
+                <password>start</password>
+                <username>john</username>
+                <sex>109</sex>
+                <entered>2017-01-12T00:43:24.028+01:00</entered>
+            </organisator>
+        </event>
     </events>
     <money>2000.0</money>
 </club>

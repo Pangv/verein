@@ -1,12 +1,19 @@
+/*
+ * To change this license header, choose License Headers in Project Properties. To change this
+ * template file, choose Tools | Templates and open the template in the editor.
+ */
 package de.lebk.verein.member;
 
 import de.lebk.verein.login.Auth;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -39,74 +46,76 @@ public class ProfileDialog extends JDialog {
 
     public void createDialog() {
 
-        this.setTitle("Profil von " + member.getUsername().replaceAll("\\d", ""));
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints grid = new GridBagConstraints();
-        jLblLastName = new JLabel("Nachname:\t" + member.getLastName());
-        jLblFirstName = new JLabel("Vorname:\t" + member.getFirstName());
-        jLblDateJoined = new JLabel("Mitglied seit: " + member.getDateTimeEntered());
+     
+            this.setTitle("Profil von " + member.getUsername().replaceAll("\\d", ""));
+            this.setLayout(new GridBagLayout());
+            GridBagConstraints grid = new GridBagConstraints();
+            jLblLastName = new JLabel(member.getLastName());
+            jLblFirstName = new JLabel(member.getFirstName());
+            jLblDateJoined = new JLabel("Mitglied seit: " + member.getDateTimeEntered());
 
-        jBtnLeaveClub = new JButton("Austreten");
-        jBtnSaveChanges = new JButton("Sichern");
-        jBtnResignation = new JButton("Rücktritt");
-        jBtnChangePassword = new JButton("Passwort ändern");
+            jBtnLeaveClub = new JButton("Austreten");
+            jBtnSaveChanges = new JButton("Sichern");
+            jBtnResignation = new JButton("Rücktritt");
+            jBtnChangePassword = new JButton("Passwort ändern");
 
-        grid.anchor = GridBagConstraints.FIRST_LINE_START;
-        grid.fill = GridBagConstraints.VERTICAL;
-        grid.insets = new Insets(5, 10, 2, 10);
-        grid.gridheight = 2;
-        grid.gridwidth = 1;
-        grid.gridx = 0;
-        grid.gridy = 0;
+            grid.anchor = GridBagConstraints.FIRST_LINE_START;
+            grid.fill = GridBagConstraints.VERTICAL;
+            grid.gridheight = 2;
+            grid.gridwidth = 1;
+            grid.gridx = 0;
+            grid.gridy = 0;
+            this.add(jLblUserImage, grid);
 
-        // adding first name
-        grid.fill = GridBagConstraints.HORIZONTAL;
-        grid.weightx = 1;
-        grid.gridheight = 1;
-        grid.gridwidth = 2;
-        grid.gridx = 1;
-        grid.gridy = 0;
-        this.add(jLblFirstName, grid);
-        // adding last name
+            // adding first name
+            grid.fill = GridBagConstraints.HORIZONTAL;
+            grid.weightx = 1;
+            grid.gridheight = 1;
+            grid.gridwidth = 2;
+            grid.gridx = 1;
+            grid.gridy = 0;
+            this.add(jLblFirstName, grid);
+            // adding last name
 
-        grid.gridheight = 1;
-        grid.gridwidth = 2;
-        grid.gridx = 1;
-        grid.gridy = 1;
-        this.add(jLblLastName, grid);
-        // adding date a member joined
+            grid.gridheight = 1;
+            grid.gridwidth = 2;
+            grid.gridx = 1;
+            grid.gridy = 1;
+            this.add(jLblLastName, grid);
+            // adding date a member joined
 
-        grid.gridwidth = 2;
-        grid.gridx = 0;
-        grid.gridy = 3;
-        this.add(jLblDateJoined, grid);
+            grid.gridwidth = 2;
+            grid.gridx = 0;
+            grid.gridy = 3;
+            this.add(jLblDateJoined, grid);
 
-        grid.anchor = GridBagConstraints.EAST;
-        grid.weightx = 0.3;
-        // adding leave button
-        grid.gridwidth = 1;
-        grid.gridx = 3;
-        grid.gridy = 0;
-        this.add(jBtnLeaveClub, grid);
-        // adding resignation button
-        grid.gridwidth = 1;
-        grid.gridx = 3;
-        grid.gridy = 1;
-        this.add(jBtnResignation, grid);
-        // adding changePassword button
-        grid.gridwidth = 1;
-        grid.gridx = 3;
-        grid.gridy = 2;
-        this.add(jBtnChangePassword, grid);
-        // adding saveChanges button
-        grid.gridwidth = 1;
-        grid.gridx = 3;
-        grid.gridy = 3;
-        this.add(jBtnSaveChanges, grid);
+            grid.anchor = GridBagConstraints.EAST;
+            grid.weightx = 0.3;
+            // adding leave button
+            grid.gridwidth = 1;
+            grid.gridx = 3;
+            grid.gridy = 0;
+            this.add(jBtnLeaveClub, grid);
+            // adding resignation button
+            grid.gridwidth = 1;
+            grid.gridx = 3;
+            grid.gridy = 1;
+            this.add(jBtnResignation, grid);
+            // adding changePassword button
+            grid.gridwidth = 1;
+            grid.gridx = 3;
+            grid.gridy = 2;
+            this.add(jBtnChangePassword, grid);
+            // adding saveChanges button
+            grid.gridwidth = 1;
+            grid.gridx = 3;
+            grid.gridy = 3;
+            this.add(jBtnSaveChanges, grid);
 
-        this.setResizable(false);
-        this.pack();
-        this.setVisible(true);
+            this.setResizable(false);
+            this.pack();
+            this.setVisible(true);
+        
 
         this.defineActions();
     }

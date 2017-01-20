@@ -21,25 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package de.lebk.verein.event;
+package de.lebk.verein.member;
 
 /**
  *
  * @author sopaetzel
  */
-public enum EventTypes {
-    LAPIDATION, CHILDTOURNAMENT, GENERIC;
-
-    public String returnType(EventTypes type) {
-        switch (type) {
-            case LAPIDATION:
-                return "Steinigung";
-            case CHILDTOURNAMENT:
-                return "Kindertunier";
-            case GENERIC:
-                return "Allgemein";
-        }
-        return "Error";
-    }
+public class Profile {
 
 }
