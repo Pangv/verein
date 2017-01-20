@@ -14,18 +14,21 @@ import javax.swing.JTabbedPane;
  */
 public class TabContainer extends JTabbedPane {
 
+    private Club club;
+    
     private Dashboard dashboard;
     private EventManager eventManager;
     private ClubManager clubManager;
     private StorageManager storageManager;
 
     public TabContainer(Club club) {
-        createAndAddTabs(club);
+        this.club = club;
+        this.createAndAddTabs();
     }
 
-    private void createAndAddTabs(Club club) {
+    private void createAndAddTabs() {
 
-        dashboard = new Dashboard(Auth.getInstance().getCurrentUser());
+        dashboard = new Dashboard(club);
         eventManager = new EventManager(club, Auth.getInstance().getCurrentUser());
         clubManager = new ClubManager();
         storageManager = new StorageManager();

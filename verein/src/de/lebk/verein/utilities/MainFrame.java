@@ -6,6 +6,8 @@ import de.lebk.verein.login.LoginDialog;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -27,24 +29,22 @@ public class MainFrame extends JFrame {
 
     private MainMenu mainMenu;
     private LoginDialog loginDialog;
-    private final Club club;
+    private Club club;
 
     public MainFrame(Club club) throws HeadlessException {
         this.club = club;
         this.setCustomLookAndFeel(LookAndFeel.SYSTEM);
-        this.createAndHideGUI();           
-        
-        
-        do {            
-            
-        } while (Auth.getInstance().getCurrentUser() == null);
-            loginDialog = new LoginDialog(this, club, "Anmeldung");
+        this.createAndHideGUI();
+
         if (Auth.getInstance().getCurrentUser() == null) {
-              
-        } 
+            loginDialog = new LoginDialog(this, club, "Anmeldung");
+            if (loginDialog.isLogged()) {
+                this.createAndShowGUI();
+            }
+        }
+
+        this.setTitle(this.getTitle() + " [" + Auth.getInstance().getCurrentUser().getFullName() + "]");
         this.createAndShowGUI();
-        this.setTitle(this.getTitle() + " [" + Auth.getInstance().getCurrentUser().getFullName()+ "]");
-        
     }
 
     /**
@@ -60,7 +60,7 @@ public class MainFrame extends JFrame {
         this.setIconImage(new ImageIcon(ClassLoader.getSystemResource("logo.png")).getImage());
 
         // components
-        this.setJMenuBar(new MainMenu(this,club));
+        this.setJMenuBar(new MainMenu(this, club));
         this.getContentPane().add(new TabContainer(club), BorderLayout.CENTER);
 
         this.pack();
@@ -76,11 +76,11 @@ public class MainFrame extends JFrame {
         this.hideGUI();
     }
 
-    private void hideGUI() {
+    public void hideGUI() {
         this.setVisible(false);
     }
 
-    private void showGUI() {
+    public void showGUI() {
         this.setVisible(true);
     }
 
@@ -108,10 +108,13 @@ public class MainFrame extends JFrame {
                 }
                 break;
             }
-        } 
-         catch (InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException | ClassNotFoundException ex) {
+        } catch (InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void initActionListener() {
+
     }
 
 }

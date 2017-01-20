@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -45,7 +46,7 @@ public class Member {
         this.username = username;
         this.sex = sex;
     }
-
+    
     public String getFullName() {
         return firstName + " " + lastName;
     }
@@ -53,14 +54,6 @@ public class Member {
     public String getDateTimeEntered() {
         return entered.get(Calendar.DATE) + "." + entered.get(Calendar.MONTH) + "."
                 + entered.get(Calendar.YEAR);
-    }
-
-    private String generateUsername(String fName, String lName) {
-        /* TODO make usernames unique prevent same username
-        do this by checking the "data storage"
-         */
-        Random uniqueNumber = new Random();
-        return fName.toLowerCase().substring(0, 2) + (lName.toLowerCase().contains(" ") ? lName.toLowerCase().substring(0, lName.toLowerCase().indexOf(" ")) : lName.toLowerCase()) + uniqueNumber.nextInt(Integer.MAX_VALUE);
     }
 
     @XmlElement(name = "firstname")

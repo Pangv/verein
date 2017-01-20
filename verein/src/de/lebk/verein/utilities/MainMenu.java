@@ -2,6 +2,7 @@ package de.lebk.verein.utilities;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.data_access.DataAccess;
+import de.lebk.verein.login.Auth;
 import de.lebk.verein.login.LoginDialog;
 import de.lebk.verein.member.Member;
 import de.lebk.verein.member.ProfileDialog;
@@ -38,13 +39,12 @@ public class MainMenu extends JMenuBar {
     private final JMenuItem jMenuExit = new JMenuItem("Schließen");
 
     private JFrame parent;
-    private Member member;
+    private Member member = Auth.getInstance().getCurrentUser();
     private Club club;
 
-    public MainMenu(JFrame parent, Club club) {
+    public MainMenu(MainFrame parent, Club club) {
         this.parent = parent;
         this.club = club;
-        this.member = member;
         createComponent();
     }
 
@@ -82,7 +82,7 @@ public class MainMenu extends JMenuBar {
         jMenuProfile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProfileDialog d = new ProfileDialog(null, member);
+                ProfileDialog d = new ProfileDialog(null);
             }
         });
 
@@ -117,9 +117,8 @@ public class MainMenu extends JMenuBar {
             public void actionPerformed(ActionEvent e) {
                 try {
                     JOptionPane.showMessageDialog(jMenuConfig, "Ausgeloggt!");
-                    DataAccess.getInstance().writeXML(club);
+                    DataAccess.getInstance().writeXML(club);          
                     LoginDialog login = new LoginDialog(null, club, "Neu anmelden");
-                    parent.dispose();
                 } catch (JAXBException ex) {
                     Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }

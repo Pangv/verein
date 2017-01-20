@@ -21,10 +21,6 @@ public class Entry {
     private static LoginDialog loginDialog;
     private static DataAccess doa;
     private static Club club;
-
-    // TODO: Remove later
-    static boolean loggedIn = true;
-
     public static void main(String[] args) {
 
         FileHandler fh = new FileHandler();
@@ -39,6 +35,10 @@ public class Entry {
             Warning.displayWarning(e.getMessage(), "Instanz von JAXBContext konnte nicht erstellt werden.");
             e.printStackTrace();
         }
+        
+        
+        
+            
 
         try {
             club = doa.readXML();

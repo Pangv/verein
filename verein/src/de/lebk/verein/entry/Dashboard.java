@@ -1,7 +1,8 @@
 package de.lebk.verein.entry;
 
-import de.lebk.verein.member.Member;
+import de.lebk.verein.club.Club;
 import java.awt.GridLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -11,21 +12,18 @@ import javax.swing.JPanel;
  */
 public class Dashboard extends JPanel {
 
-    private Member member;
+    private Club club;
 
-    public Dashboard(Member member) {
-        this.member = member;
+    public Dashboard(Club club) {
+        this.club = club;
         createComponent();
     }
 
     public void createComponent() {
+        this.setLayout(new GridLayout(1, 2));
 
-        this.setLayout(new GridLayout(2, 2));
-
-        this.add(new DashboardUsersPanel(member));
-        this.add(new JButton("Diagramme Platzhalter 1"));
+        this.add(new DashboardUsersPanel(club));
         this.add(new JButton("Event Kalender Platzhalter"));
-        this.add(new JButton("Diagramme Platzhalter 2"));
 
         this.setVisible(true);
 

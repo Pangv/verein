@@ -1,8 +1,10 @@
 package de.lebk.verein.entry;
 
+import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -14,16 +16,20 @@ public class DashboardUsersPanel extends JPanel {
     private Dimension prefDimension
             = new Dimension(this.getPreferredSize().width, this.getPreferredSize().width);
 
-    private final Member member;
+    private Club club;
 
-    public DashboardUsersPanel(Member member) {
-        this.member = member;
+    public DashboardUsersPanel(Club club) {
+        this.club = club;
         this.createComponent();
     }
 
     public void createComponent() {
-        this.setLayout(new GridLayout(2, 4));
-
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        for (Member member : club.getMembers()) {
+            
+           this.add(new JLabel(member.getFullName() + " ist: " + member.getUsername()));
+            
+        }
     }
 
 }
