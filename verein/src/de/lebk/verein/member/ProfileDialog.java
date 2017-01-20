@@ -4,7 +4,7 @@
  */
 package de.lebk.verein.member;
 
-import de.lebk.verein.utilities.ImageLabel;
+import de.lebk.verein.login.Auth;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -37,11 +37,10 @@ public class ProfileDialog extends JDialog {
     private JButton jBtnResignation;
     private JButton jBtnChangePassword;
 
-    private Member member;
+    private Member member = Auth.getInstance().getCurrentUser();
 
-    public ProfileDialog(Frame owner, Member member) {
+    public ProfileDialog(Frame owner) {
         super(owner);
-        this.member = member;
         createDialog();
     }
 
@@ -126,7 +125,10 @@ public class ProfileDialog extends JDialog {
         jBtnLeaveClub.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showConfirmDialog(null, "Sind Sie sicher, dass Sie austreten wollen?");
+               if( JOptionPane.showConfirmDialog(null, "Sind Sie sicher, dass Sie austreten wollen?") == JOptionPane.OK_OPTION){
+                  JOptionPane.showMessageDialog(null, "Och nö");
+                  System.exit(-99);
+               }
             }
         });
 
@@ -154,28 +156,4 @@ public class ProfileDialog extends JDialog {
         });
 
     }
-
-    // private boolean checkPasswordPolicy(String newPassword, String passwordPolicy) {
-    // if (newPassword != null) {
-    // if (newPassword.matches(passwordPolicy)) {
-    // return true;
-    // } else {
-    // JOptionPane.showMessageDialog(null,
-    // "Das Passwort entspricht nicht unseren Passwort Kriterien", "Passwort ist nicht sicher",
-    // JOptionPane.WARNING_MESSAGE);
-    // return false;
-    // }
-    //
-    // }
-    // return true; // abort
-    // }
-    //
-    // private boolean checkPasswordEquality(String newPassword, String confirmPassword) {
-    // if (newPassword.equals(confirmPassword)) {
-    // return true;
-    // } else {
-    // JOptionPane.showMessageDialog(null, "Die Wiederholung entspricht nicht Ihrerm neuen Passwort",
-    // "Passwörter nicht identisch", JOptionPane.WARNING_MESSAGE);
-    // return false;
-    // }
 }

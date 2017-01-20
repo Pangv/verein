@@ -25,10 +25,6 @@ public class Entry {
     private static LoginDialog loginDialog;
     private static DataAccess doa;
     private static Club club;
-
-    // TODO: Remove later
-    static boolean loggedIn = true;
-
     public static void main(String[] args) {
 
         Member test = new Member("John-Ebenezer", "Scrooge Doe", "start", "john", 'm', new GregorianCalendar());
@@ -38,6 +34,10 @@ public class Entry {
         } catch (JAXBException ex) {
            Warning.displayWarning(ex.getMessage(), "Instanz von JAXBContext konnte nicht erstellt werden.");
         }
+        
+        
+        
+            
 
         try {
             club = doa.readXML();

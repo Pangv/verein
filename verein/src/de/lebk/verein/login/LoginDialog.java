@@ -5,8 +5,20 @@
  */
 package de.lebk.verein.login;
 
-import java.awt.Dimension;
+
+import de.lebk.verein.club.Club;
+import de.lebk.verein.utilities.MainFrame;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -38,14 +50,28 @@ public class LoginDialog extends JDialog {
     private JButton jBtnLogin;
     private JButton jBtnRegister;
 
-    public LoginDialog(JFrame owner, String dialogTitle) {
-        super(owner);
+    private Club club;
+    private boolean logged = false;
+
+    public void setLogged(boolean logged) {
+        this.logged = logged;
+    }
+
+    public boolean isLogged() {
+        return logged;
+    }
+
+    public LoginDialog(MainFrame owner, Club club, String dialogTitle) {
+        super(owner, true);
+        this.club = club;
         this.dialogTitle = dialogTitle;
         createDialog();
     }
 
     private void createDialog() {
 
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
         jPanel = new JPanel(new GridLayout(4, 2, horizontalGap, verticalGap));
 
         jLblPlaceholder = new JLabel(" ");
@@ -76,8 +102,62 @@ public class LoginDialog extends JDialog {
 
         this.setResizable(false);
 
+        this.initActionListeners();
         this.pack();
         this.setVisible(true);
     }
+    
+    
+    private void initActionListeners(){
+        jBtnLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try {
+                    logged = Auth.getInstance().login(club, jTFLoginname.getText(), jPFPassword.getText());
+                    dispose();
+                } catch (UserNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        
+        
+        this.addWindowListener(new WindowListener() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
 
+            @Override
+            public void windowClosed(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+        }); 
+    }
 }
