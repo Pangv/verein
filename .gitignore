@@ -92,3 +92,5 @@ hs_err_pid*
 /verein/nbproject/private/
 /JAXBTest/nbproject/private/
 /verein/src/test/
+.idea/
+verein/verein.iml

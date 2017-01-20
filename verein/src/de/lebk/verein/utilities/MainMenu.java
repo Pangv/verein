@@ -33,7 +33,7 @@ public class MainMenu extends JMenuBar {
     private final JMenuItem jMenuLogin = new JMenuItem("Zeige Login");
     private final JMenuItem jMenuProfile = new JMenuItem("Zeige Profil");
     private final JMenuItem jMenuSave = new JMenuItem("Save");
-    private final JButton jMenuConfig = new JButton("Einstellungen");
+    private final JButton jMenuConfig = new JButton("Profil");
     private final JButton jMenuLogout = new JButton("Ausloggen");
 
     private final JMenuItem jMenuExit = new JMenuItem("Schließen");
@@ -108,7 +108,7 @@ public class MainMenu extends JMenuBar {
         jMenuConfig.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(jMenuConfig, "Einstellungen für " + member.getFirstName() + " " + member.getLastName() + ".");
+              ProfileDialog d = new ProfileDialog(null);
             }
         });
 

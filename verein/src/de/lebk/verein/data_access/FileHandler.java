@@ -11,6 +11,8 @@ public class FileHandler {
     private final String PATH_UNIX = "";
     private final String PATH_WINDOWS = "";
 
+
+
     public void createFolder() {
 
         if (OS_NAME.startsWith("Windows")) {
@@ -19,6 +21,9 @@ public class FileHandler {
         if (OS_NAME.startsWith("Mac") || OS_NAME.startsWith("Linux")) {
             System.out.println("UNIX detected! Version: " + OS_NAME);
         }
+
+
+
 
     }
 
