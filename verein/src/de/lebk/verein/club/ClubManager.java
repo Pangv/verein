@@ -10,6 +10,8 @@ import javax.swing.JPanel;
  */
 public class ClubManager extends JPanel {
 
+
+
     public ClubManager() {
         this.createComponent();
     }

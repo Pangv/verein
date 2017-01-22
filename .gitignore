@@ -94,3 +94,5 @@ hs_err_pid*
 /verein/src/test/
 .idea/
 verein/verein.iml
+out/
+/verein/nbproject/

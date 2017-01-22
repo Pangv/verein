@@ -13,13 +13,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  *
@@ -64,9 +58,11 @@ public class LoginDialog extends JDialog {
 
     private void createDialog() {
 
+
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         jPanel = new JPanel(new GridLayout(4, 2, horizontalGap, verticalGap));
+        jPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         jLblPlaceholder = new JLabel(" ");
         jLblMessage = new JLabel("Bitte melden Sie sich an");
@@ -114,6 +110,11 @@ public class LoginDialog extends JDialog {
                 }
             }
         });
+
+
+
     }
+
+
 
 }

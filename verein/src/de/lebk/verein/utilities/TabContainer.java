@@ -31,7 +31,7 @@ public class TabContainer extends JTabbedPane {
         dashboard = new Dashboard(club);
         eventManager = new EventManager(club, Auth.getInstance().getCurrentUser());
         clubManager = new ClubManager();
-        storageManager = new StorageManager();
+        storageManager = new StorageManager(club);
 
         this.setTabPlacement(TOP);
         this.setTabLayoutPolicy(WRAP_TAB_LAYOUT);

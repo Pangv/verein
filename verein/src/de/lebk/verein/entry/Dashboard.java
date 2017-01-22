@@ -23,7 +23,7 @@ public class Dashboard extends JPanel {
         this.setLayout(new GridLayout(1, 2));
 
         this.add(new DashboardUsersPanel(club));
-        this.add(new JButton("Event Kalender Platzhalter"));
+       // this.add(new JButton("Event Kalender Platzhalter"));
 
         this.setVisible(true);
 

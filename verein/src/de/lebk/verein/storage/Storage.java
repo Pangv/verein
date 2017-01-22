@@ -24,10 +24,9 @@ import javax.xml.bind.annotation.XmlType;
 public class Storage {
 
     
-    private int amount;
+    private int amount = 2000;
     private static List<Lease> leases = new ArrayList<>();
 
-    
     public int getAmount() {
         return amount;
     }
@@ -36,6 +35,10 @@ public class Storage {
     @XmlElement(name = "lease")
     public List<Lease> getLeases() {
         return leases;
+    }
+
+    public void setAmount(int amount){
+        this.amount = amount;
     }
 
     public void removeLease(Lease lease) {
@@ -64,6 +67,17 @@ public class Storage {
         }
         return overdueLeases;
     }
+
+    public List<Lease> getLeasesForMember(Member member){
+        List<Lease> membersLeases = new ArrayList<>();
+        for (Lease lease : leases){
+            if (lease.getMember() == member){
+                membersLeases.add(lease);
+            }
+        }
+        return membersLeases;
+    }
+
 
     public List<Lease> getOverdueLeasesForMember(Member member) {
         GregorianCalendar today = new GregorianCalendar();

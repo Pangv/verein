@@ -3,6 +3,7 @@ package de.lebk.verein.utilities;
 import de.lebk.verein.club.Club;
 import de.lebk.verein.login.Auth;
 import de.lebk.verein.login.LoginDialog;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
@@ -14,10 +15,11 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- *
  * @author sopaetzel
  */
 public class MainFrame extends JFrame {
+
+    private boolean DEBUG = true;
 
     private final int initWidth = 1000;
     private final int initHeight = initWidth / 16 * 9;
@@ -36,15 +38,19 @@ public class MainFrame extends JFrame {
         this.setCustomLookAndFeel(LookAndFeel.SYSTEM);
         this.createAndHideGUI();
 
-        if (Auth.getInstance().getCurrentUser() == null) {
-            loginDialog = new LoginDialog(this, club, "Anmeldung");
-            if (loginDialog.isLogged()) {
-                this.createAndShowGUI();
+        if (DEBUG) {
+            this.showGUI();
+        } else {
+            if (Auth.getInstance().getCurrentUser() == null) {
+                loginDialog = new LoginDialog(this, club, "Anmeldung");
+                if (loginDialog.isLogged()) {
+                    this.showGUI();
+                }
             }
         }
 
+
         this.setTitle(this.getTitle() + " [" + Auth.getInstance().getCurrentUser().getFullName() + "]");
-        this.createAndShowGUI();
     }
 
     /**
@@ -57,7 +63,7 @@ public class MainFrame extends JFrame {
         this.setTitle("Vereinsverwaltung");
         this.setPreferredSize(initDimension);
         this.setMinimumSize(minDimension);
-        this.setIconImage(new ImageIcon(ClassLoader.getSystemResource("logo.png")).getImage());
+        this.setIconImage(new ImageIcon(ClassLoader.getSystemResource("./logo.png")).getImage());
 
         // components
         this.setJMenuBar(new MainMenu(this, club));

@@ -86,5 +86,23 @@
             </organisator>
         </event>
     </events>
+    <payments/>
     <money>2000.0</money>
+    <storage>
+        <amount>2000</amount>
+        <leases>
+            <lease>
+                <member>
+                    <firstname>John-Ebenezer</firstname>
+                    <lastname>Scrooge Doe</lastname>
+                    <password>start</password>
+                    <username>john</username>
+                    <sex>109</sex>
+                    <entered>2017-01-22T01:22:09.678+01:00</entered>
+                </member>
+                <amount>12</amount>
+                <dueDate>1992-06-02T00:00:00+02:00</dueDate>
+            </lease>
+        </leases>
+    </storage>
 </club>

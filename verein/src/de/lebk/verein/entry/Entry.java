@@ -26,7 +26,8 @@ public class Entry {
         FileHandler fh = new FileHandler();
         fh.createFolder();
         Member test = new Member("John-Ebenezer", "Scrooge Doe", "start", "john", 'm', new GregorianCalendar());
-
+        Storage storage = new Storage();
+        storage.addLease(test, 12, new GregorianCalendar(1992, 5, 2));
         
 
         try {
@@ -47,6 +48,7 @@ public class Entry {
             e.printStackTrace();
         }
 
+        club.setStorage(storage);
         mainFrame = new MainFrame(club);
 
         club.getMembers().forEach((member) -> {
