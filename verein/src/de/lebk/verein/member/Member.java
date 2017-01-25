@@ -1,15 +1,13 @@
 package de.lebk.verein.member;
 
 import de.lebk.verein.event.Event;
-import de.lebk.verein.lease.Lease;
+import de.lebk.verein.storage.Lease;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Objects;
-import java.util.Random;
 
 /**
  *

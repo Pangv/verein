@@ -1,8 +1,9 @@
-package de.lebk.verein.lease;
+package de.lebk.verein.storage;
 
 import de.lebk.verein.member.Member;
-import java.util.GregorianCalendar;
+
 import javax.xml.bind.annotation.XmlType;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -50,4 +51,6 @@ public class Lease {
     public void setDueDate(GregorianCalendar dueDate) {
         this.dueDate = dueDate;
     }
+
+
 }

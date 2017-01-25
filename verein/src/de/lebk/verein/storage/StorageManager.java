@@ -1,7 +1,6 @@
 package de.lebk.verein.storage;
 
 import de.lebk.verein.club.Club;
-import de.lebk.verein.lease.Lease;
 import de.lebk.verein.login.Auth;
 import de.lebk.verein.utilities.Warning;
 
@@ -10,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * @author sopaetzel
@@ -33,7 +33,8 @@ public class StorageManager extends JPanel {
     private JButton btnLease;
     private JButton btnReturn;
 
-    private JList<String> myLeases;
+
+    private JList<Lease> myLeases;
     private JScrollPane myLeasesScrollPane;
 
     public StorageManager(Club club) {
@@ -69,19 +70,21 @@ public class StorageManager extends JPanel {
     private JPanel initBottomLeft() {
         bottomLeft = new JPanel();
         bottomLeft.setLayout(new BoxLayout(bottomLeft, BoxLayout.Y_AXIS));
-
-
-
         myLeasesScrollPane = new JScrollPane();
-        myLeases = new JList<>(this.createArrayFromList());
-        lblMyList = new JLabel("Meine Liste");
+        myLeases = new JList<Lease>();
 
+        List<Lease> leasesForMember = club.getStorage().getLeasesForMember(Auth.getInstance().getCurrentUser());
+        Lease[] leasesArr = leasesForMember.toArray(new Lease[0]);
+
+
+        myLeases.setModel(new DefaultComboBoxModel<>(leasesArr));
+        myLeases.setCellRenderer(new LeaseListCellRenderer());
+        lblMyList = new JLabel("Meine Liste");
 
 
         myLeasesScrollPane.add(myLeases);
         bottomLeft.add(lblMyList);
         bottomLeft.add(myLeasesScrollPane);
-
 
 
         return bottomLeft;
@@ -94,9 +97,9 @@ public class StorageManager extends JPanel {
         txtAmount = new JTextField();
         btnLease = new JButton("Steine Ausleihen");
 
-        topRight.add(lblAmount);
-        topRight.add(txtAmount);
-        topRight.add(btnLease);
+        topRight.add(lblAmount, BorderLayout.WEST);
+        topRight.add(txtAmount, BorderLayout.CENTER);
+        topRight.add(btnLease, BorderLayout.EAST);
 
         return topRight;
     }
@@ -117,8 +120,8 @@ public class StorageManager extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     club.getStorage().addLease(Auth.getInstance().getCurrentUser(), Integer.parseInt(txtAmount.getText()), new GregorianCalendar());
-                    lblStoneAmount.setText(club.getStorage().getAmount()+"");
-                }catch (NumberFormatException ex){
+                    lblStoneAmount.setText(club.getStorage().getAmount() + "");
+                } catch (NumberFormatException ex) {
                     Warning.displayWarning(ex.getMessage(), "Bitte nur ganzahlige Zahlen verwenden.");
                 }
             }
@@ -129,10 +132,10 @@ public class StorageManager extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                   // club.getStorage().removeLease();
-                    club.getStorage().setAmount(club.getStorage().getAmount()-1);
+                    club.getStorage().removeLease(myLeases.getSelectedValue());
+                    club.getStorage().setAmount(club.getStorage().getAmount() - 1);
 
-                }catch (NullPointerException ex){
+                } catch (NullPointerException ex) {
                     Warning.displayWarning(ex.getMessage(), "Kein Element ausgewählt");
                 }
             }
@@ -140,15 +143,5 @@ public class StorageManager extends JPanel {
 
     }
 
-    private String[] createArrayFromList(){
-        String[] array = new String[100];
-
-        int i = 0;
-        for(Lease lease : club.getStorage().getLeasesForMember(Auth.getInstance().getCurrentUser())){
-                array[i++] = lease.getMember() + " " + lease.getAmount() + " bis: " + lease.getDueDate();
-        }
-
-        return array;
-    }
 
 }

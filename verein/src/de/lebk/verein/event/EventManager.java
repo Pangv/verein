@@ -2,21 +2,12 @@ package de.lebk.verein.event;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+
+import javax.swing.*;
+import javax.swing.table.TableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -135,32 +126,3 @@ public class EventManager extends JPanel {
 
 }
 
-class EventTableModel extends DefaultTableModel {
-
-    List<Event> events = new ArrayList<>();
-    String[] columns = {"Titel", "Datum", "Leitung"};
-
-    public EventTableModel(Club clubEvents) {
-//        if (clubEvents != null && clubEvents.getEvents().size() > 0) {
-//            for (Event event : clubEvents.getEvents()) {
-//                events.add(event);
-//            }
-//        }
-    }
-
-    @Override
-    public int getRowCount() {
-        return 10;
-    }
-
-    @Override
-    public int getColumnCount() {
-        return 10;
-    }
-
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        return new Integer(rowIndex * columnIndex);
-    }
-
-}

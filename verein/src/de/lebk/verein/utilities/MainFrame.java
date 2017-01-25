@@ -1,18 +1,16 @@
 package de.lebk.verein.utilities;
 
 import de.lebk.verein.club.Club;
+import de.lebk.verein.data_access.DataAccess;
 import de.lebk.verein.login.Auth;
 import de.lebk.verein.login.LoginDialog;
+import de.lebk.verein.member.Member;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.HeadlessException;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
+import javax.xml.bind.JAXBException;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * @author sopaetzel
@@ -29,20 +27,25 @@ public class MainFrame extends JFrame {
     private final Dimension initDimension = new Dimension(initWidth, initHeight);
     private final Dimension minDimension = new Dimension(minWidth, minHeight);
 
-    private MainMenu mainMenu;
-    private LoginDialog loginDialog;
     private Club club;
+    private Member member;
 
-    public MainFrame(Club club) throws HeadlessException {
+    public MainFrame(Club club) {
         this.club = club;
         this.setCustomLookAndFeel(LookAndFeel.SYSTEM);
         this.createAndHideGUI();
 
         if (DEBUG) {
             this.showGUI();
+            try {
+                Auth.getInstance().login(club, "john", "start");
+                member = Auth.getInstance().getCurrentUser();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             if (Auth.getInstance().getCurrentUser() == null) {
-                loginDialog = new LoginDialog(this, club, "Anmeldung");
+                LoginDialog loginDialog = new LoginDialog(this, club, "Anmeldung");
                 if (loginDialog.isLogged()) {
                     this.showGUI();
                 }
@@ -50,7 +53,7 @@ public class MainFrame extends JFrame {
         }
 
 
-        this.setTitle(this.getTitle() + " [" + Auth.getInstance().getCurrentUser().getFullName() + "]");
+        this.setTitle(this.getTitle() + " [" + member.getFullName() + "]");
     }
 
     /**
@@ -58,8 +61,15 @@ public class MainFrame extends JFrame {
      * values.
      */
     private void createGUI() {
+        JFrame frame = this;
         // this properties
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                onCloseOperation(frame);
+            }
+        });
         this.setTitle("Vereinsverwaltung");
         this.setPreferredSize(initDimension);
         this.setMinimumSize(minDimension);
@@ -82,11 +92,11 @@ public class MainFrame extends JFrame {
         this.hideGUI();
     }
 
-    public void hideGUI() {
+    private void hideGUI() {
         this.setVisible(false);
     }
 
-    public void showGUI() {
+    private void showGUI() {
         this.setVisible(true);
     }
 
@@ -119,8 +129,20 @@ public class MainFrame extends JFrame {
         }
     }
 
-    private void initActionListener() {
 
+    private void onCloseOperation(JFrame frame) {
+        try {
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(frame, "Wollen Sie Ihre Änderungen vor dem Schließen speichern?", "Ungespeicherte Änderungen", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE)) {
+                DataAccess.getInstance().writeXML(club);
+                System.out.println("Schließen mit Speichern");
+            } else {
+                System.out.println("Schließen ohne Speichern");
+            }
+        } catch (JAXBException e1) {
+            e1.printStackTrace();
+            Warning.displayWarning(e1.getMessage(), "Die Änderungen konnten nicht gespeichert werden.");
+        }
+        frame.dispose();
+        System.exit(0);
     }
-
 }

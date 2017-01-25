@@ -4,20 +4,14 @@ import de.lebk.verein.club.Club;
 import de.lebk.verein.data_access.DataAccess;
 import de.lebk.verein.login.Auth;
 import de.lebk.verein.login.LoginDialog;
-import de.lebk.verein.member.Member;
 import de.lebk.verein.member.ProfileDialog;
+
+import javax.swing.*;
+import javax.xml.bind.JAXBException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -25,22 +19,19 @@ import javax.xml.bind.JAXBException;
  */
 public class MainMenu extends JMenuBar {
 
-    // base menus
+    // base menu
     private final JMenu jMenuFile = new JMenu("Datei");
-    private final JMenu jMenuTest = new JMenu("Test");
 
-    // sub menus
-    private final JMenuItem jMenuLogin = new JMenuItem("Zeige Login");
-    private final JMenuItem jMenuProfile = new JMenuItem("Zeige Profil");
-    private final JMenuItem jMenuSave = new JMenuItem("Save");
+    // sub menu items
+    private final JMenuItem jMenuOpen = new JMenuItem("Öffnen");
+    private final JMenuItem jMenuSave = new JMenuItem("Sichern");
+
+    // sub menu buttons
     private final JButton jMenuConfig = new JButton("Profil");
     private final JButton jMenuLogout = new JButton("Ausloggen");
 
-    private final JMenuItem jMenuExit = new JMenuItem("Schließen");
-
-    private JFrame parent;
-    private Member member = Auth.getInstance().getCurrentUser();
     private Club club;
+    private JFrame parent;
 
     public MainMenu(MainFrame parent, Club club) {
         this.parent = parent;
@@ -50,52 +41,34 @@ public class MainMenu extends JMenuBar {
 
     private void createComponent() {
         // addItems
-        jMenuTest.add(jMenuLogin);
-        jMenuTest.add(jMenuProfile);
-        jMenuTest.add(jMenuSave);
-        jMenuFile.add(jMenuExit);
+        jMenuFile.add(jMenuOpen);
+        jMenuFile.add(jMenuSave);
 
-        // TODO: addTestActions REMOVE LATER
-        this.defineTestActions();
+        this.initActionsListeners();
 
         // addMenu
         this.add(jMenuFile);
-        this.add(jMenuTest);
-
         this.add(Box.createHorizontalGlue());
         this.add(jMenuConfig);
         this.add(jMenuLogout);
     }
 
-    private void defineTestActions() {
-        /**
-         * Shows the Login dialog
-         */
-        jMenuLogin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LoginDialog l = new LoginDialog(null, club,"Test Login");
+    private void initActionsListeners() {
 
-            }
-        });
-
-        jMenuProfile.addActionListener(new ActionListener() {
+        jMenuOpen.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                ProfileDialog d = new ProfileDialog(null);
-            }
-        });
-
-        jMenuExit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    DataAccess.getInstance().readXML();
+                } catch (JAXBException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         jMenuSave.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
                 try {
                     DataAccess doa = DataAccess.getInstance();
                     doa.writeXML(club);
@@ -107,18 +80,24 @@ public class MainMenu extends JMenuBar {
 
         jMenuConfig.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
               ProfileDialog d = new ProfileDialog(null);
             }
         });
 
         jMenuLogout.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
                 try {
                     JOptionPane.showMessageDialog(jMenuConfig, "Ausgeloggt!");
-                    DataAccess.getInstance().writeXML(club);          
+                    DataAccess.getInstance().writeXML(club);
+                    parent.setVisible(false);
+                    Auth.getInstance().logout();
                     LoginDialog login = new LoginDialog(null, club, "Neu anmelden");
+                    if (login.isLogged()) {
+                        parent.setVisible(true);
+                    }
+
                 } catch (JAXBException ex) {
                     Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }

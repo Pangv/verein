@@ -3,24 +3,19 @@ package de.lebk.verein.entry;
 import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
 
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.util.Collection;
+import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import java.awt.*;
 import java.util.Collections;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.CompoundBorder;
 
 /**
  *
  * @author sopaetzel
  */
-public class DashboardUsersPanel extends JPanel {
+class DashboardUsersPanel extends JPanel {
 
     private Club club;
-    private JPanel userPanel;
 
     public DashboardUsersPanel(Club club) {
         this.club = club;
@@ -36,7 +31,7 @@ public class DashboardUsersPanel extends JPanel {
         Collections.reverse(reversedMember);
 
         for (Member member : reversedMember) {
-            this.userPanel = new JPanel();
+            JPanel userPanel = new JPanel();
 
             userPanel.add(new JLabel(member.getFullName()));
             userPanel.add(new JLabel("alias: " + member.getUsername()));

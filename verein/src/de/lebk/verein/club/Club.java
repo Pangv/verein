@@ -7,16 +7,12 @@ import de.lebk.verein.payment.Payment;
 import de.lebk.verein.payment.PaymentState;
 import de.lebk.verein.storage.Storage;
 import de.lebk.verein.vote.Vote;
-import java.util.ArrayList;
 
+import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -140,12 +136,9 @@ public class Club {
 		Map<Member, ArrayList<Payment>> openPayments = new HashMap<>();
 		for (Member member : this.payments.keySet()) {
 			ArrayList<Payment> payments = this.payments.get(member);
-
 			payments.removeIf(Payment::isPaid);
-
 			openPayments.put(member, payments);
 		}
-
 		return openPayments;
 	}
 

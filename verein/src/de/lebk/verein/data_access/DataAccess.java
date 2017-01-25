@@ -1,13 +1,10 @@
 package de.lebk.verein.data_access;
 
 import de.lebk.verein.club.Club;
-import java.io.File;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+
+import javax.xml.bind.*;
 import javax.xml.transform.stream.StreamSource;
+import java.io.File;
 
 /**
  *
@@ -49,7 +46,7 @@ public class DataAccess {
      * @throws JAXBException wird geworfen, wenn die Datei ungültig ist
      */
     public Club readXML() throws JAXBException {
-        System.out.println("Read Club Data...");
+        System.out.println("Creating objects from xml input...");
         StreamSource xml = new StreamSource(CLUB_XML);
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         JAXBElement<Club> rootElement = unmarshaller.unmarshal(xml, Club.class);
@@ -63,7 +60,7 @@ public class DataAccess {
      * @throws JAXBException
      */
     public void writeXML(Object element) throws JAXBException {
-        System.out.println("Creating output xml...");
+        System.out.println("Creating xml output from objects...");
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(element, new File(CLUB_XML));
