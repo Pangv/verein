@@ -17,7 +17,7 @@ import java.awt.event.WindowEvent;
  */
 public class MainFrame extends JFrame {
 
-    private boolean DEBUG = true;
+    private boolean DEBUG = false;
 
     private final int initWidth = 1000;
     private final int initHeight = initWidth / 16 * 9;
@@ -38,7 +38,7 @@ public class MainFrame extends JFrame {
         if (DEBUG) {
             this.showGUI();
             try {
-                Auth.getInstance().login(club, "tim", "tim");
+                Auth.getInstance().login(club, "admin", "admin");
                 member = Auth.getInstance().getCurrentUser();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -46,6 +46,7 @@ public class MainFrame extends JFrame {
         } else {
             if (Auth.getInstance().getCurrentUser() == null) {
                 LoginDialog loginDialog = new LoginDialog(this, club, "Anmeldung");
+                member = Auth.getInstance().getCurrentUser();
                 if (loginDialog.isLogged()) {
                     this.showGUI();
                 }
@@ -133,7 +134,7 @@ public class MainFrame extends JFrame {
     private void onCloseOperation(JFrame frame) {
         try {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(frame, "Wollen Sie Ihre Änderungen vor dem Schließen speichern?", "Ungespeicherte Änderungen", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE)) {
-                DataAccess.getInstance().writeXML(club);
+                DataAccess.getInstance().writeXML(club, "./verein/resources");
                 System.out.println("Schließen mit Speichern");
             } else {
                 System.out.println("Schließen ohne Speichern");

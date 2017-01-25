@@ -4,7 +4,6 @@ import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +34,7 @@ class DashboardUsersPanel extends JPanel {
         for (Member member : reversedMember) {
             JPanel userPanel = new JPanel();
             userPanel.setLayout(new BoxLayout(userPanel, BoxLayout.Y_AXIS));
-            userPanel.setBorder(new CompoundBorder(BorderFactory.createLineBorder(Color.lightGray, 2), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
+            //userPanel.setBorder(new CompoundBorder(BorderFactory.createLineBorder(Color.lightGray, 2), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
 
 
             userPanel.add(new JLabel(member.getFullName()));

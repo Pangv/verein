@@ -1,5 +1,6 @@
 package de.lebk.verein.club;
 
+import de.lebk.verein.member.Member;
 import de.lebk.verein.utilities.Warning;
 
 import javax.swing.*;
@@ -8,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
  * @author sopaetzel
  */
 public class ClubManager extends JPanel {
@@ -27,16 +27,34 @@ public class ClubManager extends JPanel {
         this.add(createPaymentsPanel(), BorderLayout.NORTH);
     }
 
+    private JPanel createFunctionsPanel() {
+        JPanel pnlFunctions = new JPanel();
+        JList<Member> lstMember = new JList<>();
+
+        JButton btnShowMember = new JButton("Mitglieder anzeigen");
+
+        btnShowMember.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog memberDialog = new JDialog();
+                Member[] members = new Member[club.getMembers().size()];
+                int i = 0;
+                for (Member member : club.getMembers()) {
+                    members[i] = member;
+                    i++;
+                }
+
+            }
+        });
+        return pnlFunctions;
+    }
+
     private JPanel createPaymentsPanel() {
         JPanel pnlPayments = new JPanel();
         pnlPayments.setLayout(new GridLayout(2, 5));
 
 
-        JTextField txtPaymentAmount = new JTextField();
         JButton btnExecutePayment = new JButton("Beitragszahlung durchführen");
-
-
-        this.add(txtPaymentAmount);
         this.add(btnExecutePayment);
 
         return pnlPayments;
@@ -57,7 +75,6 @@ public class ClubManager extends JPanel {
         JLabel lblLastName = new JLabel("Nachname");
         JLabel lblPassword = new JLabel("Passwort");
         JLabel lblSex = new JLabel("Geschlecht");
-        JLabel lblPlaceholder = new JLabel("");
 
         ButtonGroup btnGrpSex = new ButtonGroup();
         JRadioButton rbtnMale = new JRadioButton("Männlich");
@@ -73,9 +90,9 @@ public class ClubManager extends JPanel {
         pnlCreateUser.add(lblLastName);
         pnlCreateUser.add(lblPassword);
         pnlCreateUser.add(lblSex);
-        pnlCreateUser.add(lblPlaceholder);
-        pnlCreateUser.add(lblPlaceholder);
-        pnlCreateUser.add(lblPlaceholder);
+        pnlCreateUser.add(new JLabel());
+        pnlCreateUser.add(new JLabel());
+
 
         pnlCreateUser.add(txtUsername);
         pnlCreateUser.add(txtFirstName);
@@ -99,12 +116,8 @@ public class ClubManager extends JPanel {
                 }
             }
         });
-
         return pnlCreateUser;
-
-
     }
-
 
 
 }

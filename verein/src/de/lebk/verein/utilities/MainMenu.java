@@ -2,6 +2,7 @@ package de.lebk.verein.utilities;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.data_access.DataAccess;
+import de.lebk.verein.data_access.FileHandler;
 import de.lebk.verein.login.Auth;
 import de.lebk.verein.login.LoginDialog;
 import de.lebk.verein.member.ProfileDialog;
@@ -18,6 +19,8 @@ import java.util.logging.Logger;
  * @author sopaetzel
  */
 class MainMenu extends JMenuBar {
+
+    FileHandler fileHandler = new FileHandler();
 
     // base menu
     private final JMenu jMenuFile = new JMenu("Datei");
@@ -41,7 +44,6 @@ class MainMenu extends JMenuBar {
 
     private void createComponent() {
         // addItems
-        jMenuFile.add(jMenuOpen);
         jMenuFile.add(jMenuSave);
 
         this.initActionsListeners();
@@ -55,23 +57,12 @@ class MainMenu extends JMenuBar {
 
     private void initActionsListeners() {
 
-        jMenuOpen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    DataAccess.getInstance().readXML();
-                } catch (JAXBException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
         jMenuSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
                     DataAccess doa = DataAccess.getInstance();
-                    doa.writeXML(club);
+                    doa.writeXML(club, "./resources");
                 } catch (JAXBException ex) {
                     ex.printStackTrace();
                 }
@@ -90,7 +81,7 @@ class MainMenu extends JMenuBar {
             public void actionPerformed(ActionEvent evt) {
                 try {
                     JOptionPane.showMessageDialog(jMenuProfile, "Ausgeloggt!");
-                    DataAccess.getInstance().writeXML(club);
+                    DataAccess.getInstance().writeXML(club, "./verein/resources");
                     parent.setVisible(false);
                     Auth.getInstance().logout();
                     LoginDialog login = new LoginDialog(null, club, "Neu anmelden");

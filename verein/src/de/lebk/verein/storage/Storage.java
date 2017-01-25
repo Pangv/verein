@@ -1,6 +1,7 @@
 package de.lebk.verein.storage;
 
 import de.lebk.verein.member.Member;
+import de.lebk.verein.utilities.Warning;
 
 import javax.xml.bind.annotation.*;
 import java.util.*;
@@ -38,6 +39,11 @@ public class Storage {
 
     public void addLease(Member member, int amount, GregorianCalendar dueDate) {
         leases.add(new Lease(member, amount, dueDate));
+        if ((getAmount() - amount) < 0) {
+            Warning.displayWarning("kleiner Null", "Es können nicht mehr Steine ausgeliehen werden als vorhanden sind.");
+        } else {
+            setAmount(getAmount() - amount);
+        }
     }
 
     public Map<Member, List<Lease>> getAllOverdueLeases() {

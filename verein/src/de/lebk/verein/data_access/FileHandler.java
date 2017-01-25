@@ -2,21 +2,22 @@ package de.lebk.verein.data_access;
 
 import de.lebk.verein.utilities.Warning;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 
 /**
- *
  * @author sopaetzel
  */
 public class FileHandler {
 
     private final String OS_NAME = System.getProperty("os.name");
 
-    private final String PATH_UNIX = "/tmp/verein";
-    private final String PATH_WINDOWS = "C:/verein";
+    private final String PATH_UNIX = "/tmp/";
+    private final String PATH_WINDOWS = "C:/";
 
 
-    public String checkOperatingSystem() {
+    private String checkOperatingSystem() {
         String os = "";
         if (OS_NAME.startsWith("Windows")) {
             System.out.println("Windows detected! Version: " + OS_NAME);
@@ -30,8 +31,7 @@ public class FileHandler {
         return os;
     }
 
-    public void createFolder() throws NullPointerException {
-
+    public File openFile() throws NullPointerException {
         File directory = null;
 
         if (checkOperatingSystem().equals("unix")) {
@@ -41,16 +41,12 @@ public class FileHandler {
         } else {
             Warning.displayWarning("", "Dieses Betriebssystem ist noch nicht untersützt.");
         }
+        System.out.println("jfc");
+        JFileChooser jFileChooser = new JFileChooser(directory);
+        jFileChooser.setFileFilter(new FileNameExtensionFilter("Vereinsdatei", "xml"));
+        jFileChooser.showOpenDialog(null);
 
-        if (!directory.exists()) {
-            System.out.println("Der Ordner existiert nicht.");
-            if (directory.mkdir()) {
-                System.out.println("Der Ordner wurde erstellt.");
-            }
-        } else {
-            System.out.println("Der Ordner existiert.");
-        }
-
+        return jFileChooser.getSelectedFile();
 
     }
 

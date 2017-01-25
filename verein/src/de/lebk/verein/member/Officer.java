@@ -10,9 +10,9 @@ public class Officer extends Member {
 
     private GregorianCalendar officerSince;
 
-    public Officer(String firstName, String lastName, String password, String username, char sex,
-            GregorianCalendar entered) {
-        super(firstName, lastName, password, username, sex, entered);
+    public Officer(String firstName, String lastName, String username, String password, char sex,
+                   GregorianCalendar entered) {
+        super(firstName, lastName, username, password, sex, entered);
     }
 
     public Officer(String firstName, String lastName, String username, String password, char sex) {

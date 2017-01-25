@@ -28,7 +28,7 @@ public class Club {
     private List<Event> events = new ArrayList<>();
 	private Map<Member, ArrayList<Payment>> payments = new HashMap<>();
 	private Vote currentVote;
-    private Storage storage;
+    private Storage storage = new Storage();
 
     @XmlElementWrapper(name = "members")
     @XmlElement(name = "member")
@@ -153,7 +153,8 @@ public class Club {
         this.payments.get(member).get(index).setState(PaymentState.PAID);
     }
 
-	public Map<Member, ArrayList<Payment>> getOpenPayments() {
+
+    public Map<Member, ArrayList<Payment>> getOpenPayments() {
 		Map<Member, ArrayList<Payment>> openPayments = new HashMap<>();
 		for (Member member : this.payments.keySet()) {
 			ArrayList<Payment> payments = this.payments.get(member);

@@ -1,148 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns3:club xmlns:ns3="lebk.verein" currency="eur" memberCount="8" officerCount="1">
+<ns3:club xmlns:ns3="lebk.verein" currency="eur" memberCount="1" officerCount="0">
     <members>
-        <member>
-            <firstname>babara</firstname>
-            <lastname>cook</lastname>
-            <password>start</password>
-            <username>babara</username>
-            <sex>119</sex>
-            <entered>2017-01-25T16:13:46.922+01:00</entered>
-        </member>
-        <member>
-            <firstname>tim</firstname>
-            <lastname>tim</lastname>
-            <password>tim</password>
-            <username>tim</username>
+        <member xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="officer">
+            <firstname>John</firstname>
+            <lastname>Lassiter</lastname>
+            <password>admin</password>
+            <username>admin</username>
             <sex>109</sex>
-            <entered>2017-01-25T15:53:23.237+01:00</entered>
-        </member>
-        <member>
-            <firstname>tim</firstname>
-            <lastname>tim</lastname>
-            <password>tim</password>
-            <username>tim</username>
-            <sex>109</sex>
-            <entered>2017-01-25T15:53:18.481+01:00</entered>
-        </member>
-        <member>
-            <firstname>John-Ebenezer</firstname>
-            <lastname>Scrooge Doe</lastname>
-            <password>start</password>
-            <username>john</username>
-            <sex>109</sex>
-            <entered>2017-01-08T21:41:57.579+01:00</entered>
-        </member>
-        <member>
-            <firstname>Anna</firstname>
-            <lastname>Müller</lastname>
-            <password>start</password>
-            <username>anmüller393988928</username>
-            <sex>102</sex>
-            <entered>2000-04-03T00:00:00+02:00</entered>
-        </member>
-        <member>
-            <firstname>Alfred</firstname>
-            <lastname>Hitchcock</lastname>
-            <password>hallo</password>
-            <username>alhitchcock310768906</username>
-            <sex>109</sex>
-            <entered>1992-02-01T00:00:00+01:00</entered>
-        </member>
-        <member>
-            <firstname>qwe</firstname>
-            <lastname>qwe</lastname>
-            <password>qwe</password>
-            <username>asd</username>
-            <sex>102</sex>
-            <entered>2017-01-25T16:15:05.682+01:00</entered>
-        </member>
-        <member>
-            <firstname>a</firstname>
-            <lastname>a</lastname>
-            <password>a</password>
-            <username>a</username>
-            <sex>109</sex>
-            <entered>2017-01-25T17:22:44+01:00</entered>
+            <entered>2017-01-25T23:21:14.703+01:00</entered>
         </member>
     </members>
-    <officers>
-        <officers>
-            <firstname>Tim</firstname>
-            <lastname>Struppi</lastname>
-            <password>start</password>
-            <username>tistruppi473111708</username>
-            <sex>109</sex>
-            <entered>1992-04-04T00:00:00+02:00</entered>
-        </officers>
-    </officers>
-    <events>
-        <event event-type="Steinigung">
-            <title>Spaß mit Wackersteinen</title>
-            <dateTime>2000-04-03T12:00:00+02:00</dateTime>
-            <organisator>
-                <firstname>Anna</firstname>
-                <lastname>Müller</lastname>
-                <password>start</password>
-                <username>anmüller393988928</username>
-                <sex>102</sex>
-                <entered>2000-04-03T00:00:00+02:00</entered>
-            </organisator>
-        </event>
-        <event event-type="Steinigung">
-            <title>adasd</title>
-            <dateTime>2017-01-01T01:00:00+01:00</dateTime>
-            <organisator>
-                <firstname>John-Ebenezer</firstname>
-                <lastname>Scrooge Doe</lastname>
-                <password>start</password>
-                <username>joscrooge1533312616</username>
-                <sex>109</sex>
-                <entered>2017-01-09T01:32:08.904+01:00</entered>
-            </organisator>
-        </event>
-        <event event-type="Steinigung">
-            <title>123123</title>
-            <dateTime>2017-01-01T01:00:00+01:00</dateTime>
-            <organisator>
-                <firstname>John-Ebenezer</firstname>
-                <lastname>Scrooge Doe</lastname>
-                <password>start</password>
-                <username>joscrooge1533312616</username>
-                <sex>109</sex>
-                <entered>2017-01-09T01:32:08.904+01:00</entered>
-            </organisator>
-        </event>
-        <event event-type="Steinigung">
-            <title>333333</title>
-            <dateTime>2017-01-01T01:00:00+01:00</dateTime>
-            <organisator>
-                <firstname>John-Ebenezer</firstname>
-                <lastname>Scrooge Doe</lastname>
-                <password>start</password>
-                <username>joscrooge1533312616</username>
-                <sex>109</sex>
-                <entered>2017-01-09T01:32:08.904+01:00</entered>
-            </organisator>
-        </event>
-    </events>
+    <officers/>
+    <events/>
     <payments/>
     <money>2000.0</money>
     <storage>
         <amount>2000</amount>
-        <leases>
-            <lease>
-                <member>
-                    <firstname>John-Ebenezer</firstname>
-                    <lastname>Scrooge Doe</lastname>
-                    <password>start</password>
-                    <username>john</username>
-                    <sex>109</sex>
-                    <entered>2017-01-22T01:22:09.678+01:00</entered>
-                </member>
-                <amount>12</amount>
-                <dueDate>1992-06-02T00:00:00+02:00</dueDate>
-            </lease>
-        </leases>
+        <leases/>
     </storage>
 </ns3:club>

@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 /**
  * @author sopaetzel
@@ -23,6 +22,7 @@ public class StorageManager extends JPanel {
     private Club club;
 
     private JLabel lblStoneAmount;
+    private JLabel lblStones;
 
     private JTextField txtAmount;
 
@@ -31,7 +31,7 @@ public class StorageManager extends JPanel {
     private JButton btnReturn;
 
 
-    private JList<Lease> myLeases;
+
 
     public StorageManager(Club club) {
         this.club = club;
@@ -55,7 +55,7 @@ public class StorageManager extends JPanel {
         topLeft.setLayout(new BoxLayout(topLeft, BoxLayout.Y_AXIS));
 
         lblStoneAmount = new JLabel(club.getStorage().getAmount() + "");
-        JLabel lblStones = new JLabel("Steine");
+        lblStones = new JLabel("Steine");
 
         lblStoneAmount.setFont(BIG_FONT);
         lblStones.setFont(BIG_FONT);
@@ -69,19 +69,19 @@ public class StorageManager extends JPanel {
     private JPanel initBottomLeft() {
         JPanel bottomLeft = new JPanel();
         bottomLeft.setLayout(new BoxLayout(bottomLeft, BoxLayout.Y_AXIS));
-        JScrollPane myLeasesScrollPane = new JScrollPane();
-        myLeases = new JList<Lease>();
+        JList<Lease> myLeases = new JList<>();
+        String[] data = {"Eins", "Zwei", "Drei"};
+        JList<String> myString = new JList<>(data);
+        JScrollPane myLeasesScrollPane = new JScrollPane(myString);
 
-        List<Lease> leasesForMember = club.getStorage().getLeasesForMember(Auth.getInstance().getCurrentUser());
-        Lease[] leasesArr = leasesForMember.toArray(new Lease[0]);
-
-
-        myLeases.setModel(new DefaultComboBoxModel<>(leasesArr));
-        myLeases.setCellRenderer(new LeaseListCellRenderer());
+//        List<Lease> leasesForMember = club.getStorage().getLeasesForMember(Auth.getInstance().getCurrentUser());
+//        Lease[] leasesArr = leasesForMember.toArray(new Lease[0]);
+//        myLeases.setModel(new DefaultListModel<>(leasesArr));
+//        myLeases.setCellRenderer(new LeaseListCellRenderer());
         JLabel lblMyList = new JLabel("Meine Liste");
 
 
-        myLeasesScrollPane.add(myLeases);
+        myLeasesScrollPane.setViewportView(myString);
         bottomLeft.add(lblMyList);
         bottomLeft.add(myLeasesScrollPane);
 
@@ -98,7 +98,7 @@ public class StorageManager extends JPanel {
         btnLease = new JButton("Steine Ausleihen");
 
         JScrollPane scrlTxtAmount = new JScrollPane();
-        scrlTxtAmount.add(txtAmount);
+        scrlTxtAmount.setViewportView(txtAmount);
 
         txtAmount.setHorizontalAlignment(SwingConstants.CENTER);
         txtAmount.setFont(BIG_FONT);
@@ -126,6 +126,11 @@ public class StorageManager extends JPanel {
                 try {
                     club.getStorage().addLease(Auth.getInstance().getCurrentUser(), Integer.parseInt(txtAmount.getText()), new GregorianCalendar());
                     lblStoneAmount.setText(club.getStorage().getAmount() + "");
+                    if (lblStoneAmount.getText().equals("1")) {
+                        lblStones.setText("Stein");
+                    } else {
+                        lblStones.setText("Steine");
+                    }
                 } catch (NumberFormatException ex) {
                     Warning.displayWarning(ex.getMessage(), "Bitte nur ganzahlige Zahlen verwenden.");
                 }
@@ -137,7 +142,7 @@ public class StorageManager extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    club.getStorage().removeLease(myLeases.getSelectedValue());
+                    //club.getStorage().removeLease(myLeases.getSelectedValue());
                     club.getStorage().setAmount(club.getStorage().getAmount() - 1);
 
                 } catch (NullPointerException ex) {

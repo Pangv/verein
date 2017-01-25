@@ -2,21 +2,16 @@ package de.lebk.verein.login;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.utilities.MainFrame;
-import java.awt.GridLayout;
+import de.lebk.verein.utilities.Warning;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
- *
  * @author sopaetzel
  */
 public class LoginDialog extends JDialog {
@@ -37,7 +32,7 @@ public class LoginDialog extends JDialog {
 
     private JButton jBtnLogin;
     private JButton jBtnRegister;
-    
+
     private Club club;
     private boolean logged = false;
 
@@ -60,7 +55,7 @@ public class LoginDialog extends JDialog {
 
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
+
         jPanel = new JPanel(new GridLayout(4, 2, horizontalGap, verticalGap));
         jPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -96,25 +91,60 @@ public class LoginDialog extends JDialog {
         this.pack();
         this.setVisible(true);
     }
-    
-    
-    private void initActionListeners(){
+
+
+    private void initActionListeners() {
         jBtnLogin.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 try {
-                    logged = Auth.getInstance().login(club, jTFLoginname.getText(), jPFPassword.getText());
-                    dispose();
+                    tryLogin();
                 } catch (UserNotFoundException ex) {
                     ex.printStackTrace();
+                    Warning.displayWarning(ex.getMessage(), "Nutzer oder Passwort nicht gefunden");
                 }
             }
         });
 
 
+        jPFPassword.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    try {
+                        tryLogin();
+                    } catch (UserNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                try {
+                    tryLogin();
+                } catch (UserNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    tryLogin();
+                } catch (UserNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
 
     }
 
+    private void tryLogin() throws UserNotFoundException {
+        logged = Auth.getInstance().login(club, jTFLoginname.getText(), jPFPassword.getText());
+        dispose();
+    }
 
 
 }
