@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -16,26 +18,20 @@ import java.util.List;
  */
 public class StorageManager extends JPanel {
 
+    private final Font BIG_FONT = new Font(Font.MONOSPACED, Font.PLAIN, 100);
+
     private Club club;
 
-    private JPanel topLeft;
-    private JPanel bottomLeft;
-    private JPanel topRight;
-    private JPanel bottomRight;
-
     private JLabel lblStoneAmount;
-    private JLabel lblAmount;
-    private JLabel lblStones;
-    private JLabel lblMyList;
 
     private JTextField txtAmount;
+
 
     private JButton btnLease;
     private JButton btnReturn;
 
 
     private JList<Lease> myLeases;
-    private JScrollPane myLeasesScrollPane;
 
     public StorageManager(Club club) {
         this.club = club;
@@ -55,11 +51,14 @@ public class StorageManager extends JPanel {
 
 
     private JPanel initTopLeft() {
-        topLeft = new JPanel();
-        lblStoneAmount = new JLabel(club.getStorage().getAmount() + "");
-        lblStones = new JLabel("Steine");
+        JPanel topLeft = new JPanel();
+        topLeft.setLayout(new BoxLayout(topLeft, BoxLayout.Y_AXIS));
 
-        lblStoneAmount.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 100));
+        lblStoneAmount = new JLabel(club.getStorage().getAmount() + "");
+        JLabel lblStones = new JLabel("Steine");
+
+        lblStoneAmount.setFont(BIG_FONT);
+        lblStones.setFont(BIG_FONT);
 
         topLeft.add(lblStoneAmount, BorderLayout.NORTH);
         topLeft.add(lblStones, BorderLayout.SOUTH);
@@ -68,9 +67,9 @@ public class StorageManager extends JPanel {
     }
 
     private JPanel initBottomLeft() {
-        bottomLeft = new JPanel();
+        JPanel bottomLeft = new JPanel();
         bottomLeft.setLayout(new BoxLayout(bottomLeft, BoxLayout.Y_AXIS));
-        myLeasesScrollPane = new JScrollPane();
+        JScrollPane myLeasesScrollPane = new JScrollPane();
         myLeases = new JList<Lease>();
 
         List<Lease> leasesForMember = club.getStorage().getLeasesForMember(Auth.getInstance().getCurrentUser());
@@ -79,7 +78,7 @@ public class StorageManager extends JPanel {
 
         myLeases.setModel(new DefaultComboBoxModel<>(leasesArr));
         myLeases.setCellRenderer(new LeaseListCellRenderer());
-        lblMyList = new JLabel("Meine Liste");
+        JLabel lblMyList = new JLabel("Meine Liste");
 
 
         myLeasesScrollPane.add(myLeases);
@@ -91,23 +90,29 @@ public class StorageManager extends JPanel {
     }
 
     private JPanel initTopRight() {
-        topRight = new JPanel();
+        JPanel topRight = new JPanel();
+        topRight.setLayout(new GridLayout(1, 2));
 
-        lblAmount = new JLabel("Anzahl");
-        txtAmount = new JTextField();
+
+        txtAmount = new JTextField("0");
         btnLease = new JButton("Steine Ausleihen");
 
-        topRight.add(lblAmount, BorderLayout.WEST);
-        topRight.add(txtAmount, BorderLayout.CENTER);
-        topRight.add(btnLease, BorderLayout.EAST);
+        JScrollPane scrlTxtAmount = new JScrollPane();
+        scrlTxtAmount.add(txtAmount);
+
+        txtAmount.setHorizontalAlignment(SwingConstants.CENTER);
+        txtAmount.setFont(BIG_FONT);
+
+        topRight.add(scrlTxtAmount);
+        topRight.add(btnLease);
 
         return topRight;
     }
 
     private JPanel initBottomRight() {
-        bottomRight = new JPanel();
+        JPanel bottomRight = new JPanel();
         btnReturn = new JButton("Steine zurückgeben");
-
+        btnReturn.setVerticalAlignment(SwingConstants.BOTTOM);
         bottomRight.add(btnReturn);
         return bottomRight;
     }
@@ -138,6 +143,19 @@ public class StorageManager extends JPanel {
                 } catch (NullPointerException ex) {
                     Warning.displayWarning(ex.getMessage(), "Kein Element ausgewählt");
                 }
+            }
+        });
+
+
+        txtAmount.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                txtAmount.selectAll();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
             }
         });
 

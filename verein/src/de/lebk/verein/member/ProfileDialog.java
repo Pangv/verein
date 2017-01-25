@@ -1,5 +1,6 @@
 package de.lebk.verein.member;
 
+import de.lebk.verein.club.Club;
 import de.lebk.verein.login.Auth;
 
 import javax.swing.*;
@@ -25,9 +26,11 @@ public class ProfileDialog extends JDialog {
     private JButton jBtnChangePassword;
 
     private Member member = Auth.getInstance().getCurrentUser();
+    private Club club;
 
-    public ProfileDialog(Frame owner) {
+    public ProfileDialog(JFrame owner, Club club) {
         super(owner);
+        this.club = club;
         createDialog();
     }
 
@@ -112,6 +115,7 @@ public class ProfileDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                if( JOptionPane.showConfirmDialog(null, "Sind Sie sicher, dass Sie austreten wollen?") == JOptionPane.OK_OPTION){
                   JOptionPane.showMessageDialog(null, "Och nö");
+                   club.leave(member);
                   System.exit(-99);
                }
             }
@@ -134,7 +138,6 @@ public class ProfileDialog extends JDialog {
             String securePasswordPolicy = "^(?=.*[A-Z])(?=.*\\d)(?!.*(.)\\1\\1)[a-zA-Z0-9@]{6,12}$";
 
             @Override
-
             public void actionPerformed(ActionEvent e) {
 
             }

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author sopaetzel
  */
-public class MainMenu extends JMenuBar {
+class MainMenu extends JMenuBar {
 
     // base menu
     private final JMenu jMenuFile = new JMenu("Datei");
@@ -27,7 +27,7 @@ public class MainMenu extends JMenuBar {
     private final JMenuItem jMenuSave = new JMenuItem("Sichern");
 
     // sub menu buttons
-    private final JButton jMenuConfig = new JButton("Profil");
+    private final JButton jMenuProfile = new JButton("Profil");
     private final JButton jMenuLogout = new JButton("Ausloggen");
 
     private Club club;
@@ -49,7 +49,7 @@ public class MainMenu extends JMenuBar {
         // addMenu
         this.add(jMenuFile);
         this.add(Box.createHorizontalGlue());
-        this.add(jMenuConfig);
+        this.add(jMenuProfile);
         this.add(jMenuLogout);
     }
 
@@ -78,10 +78,10 @@ public class MainMenu extends JMenuBar {
             }
         });
 
-        jMenuConfig.addActionListener(new ActionListener() {
+        jMenuProfile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-              ProfileDialog d = new ProfileDialog(null);
+                new ProfileDialog(parent, club);
             }
         });
 
@@ -89,7 +89,7 @@ public class MainMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
-                    JOptionPane.showMessageDialog(jMenuConfig, "Ausgeloggt!");
+                    JOptionPane.showMessageDialog(jMenuProfile, "Ausgeloggt!");
                     DataAccess.getInstance().writeXML(club);
                     parent.setVisible(false);
                     Auth.getInstance().logout();

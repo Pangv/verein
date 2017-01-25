@@ -17,13 +17,13 @@ class DashboardUsersPanel extends JPanel {
 
     private Club club;
 
-    public DashboardUsersPanel(Club club) {
+    DashboardUsersPanel(Club club) {
         this.club = club;
         this.createComponent();
     }
 
-    public void createComponent() {
-        this.setLayout(new GridLayout(5, 4));
+    private void createComponent() {
+        this.setLayout(new GridLayout(0, 3));
 
         this.add(new JLabel("Neue Mitglieder"));
         this.add(new JLabel());
@@ -34,12 +34,14 @@ class DashboardUsersPanel extends JPanel {
 
         for (Member member : reversedMember) {
             JPanel userPanel = new JPanel();
+            userPanel.setLayout(new BoxLayout(userPanel, BoxLayout.Y_AXIS));
+            userPanel.setBorder(new CompoundBorder(BorderFactory.createLineBorder(Color.lightGray, 2), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
+
 
             userPanel.add(new JLabel(member.getFullName()));
-            userPanel.add(new JLabel("alias: " + member.getUsername()));
-            userPanel.add(new JLabel("anno:" + member.getDateTimeEntered()));
+            userPanel.add(new JLabel("Bekannt als: " + member.getUsername()));
+            userPanel.add(new JLabel("Mitglied seit:" + member.getDateTimeEntered()));
 
-            userPanel.setBorder(new CompoundBorder(BorderFactory.createLineBorder(Color.lightGray, 2), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
 
             this.add(userPanel);
 

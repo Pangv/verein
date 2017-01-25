@@ -1,5 +1,7 @@
 package de.lebk.verein.club;
 
+import de.lebk.verein.utilities.Warning;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -27,10 +29,10 @@ public class ClubManager extends JPanel {
 
     private JPanel createPaymentsPanel() {
         JPanel pnlPayments = new JPanel();
+        pnlPayments.setLayout(new GridLayout(2, 5));
 
 
         JTextField txtPaymentAmount = new JTextField();
-
         JButton btnExecutePayment = new JButton("Beitragszahlung durchführen");
 
 
@@ -42,11 +44,9 @@ public class ClubManager extends JPanel {
 
 
     private JPanel createUserPanel() {
-        String[] data = {"Mitglied", "Vorstand"};
         JPanel pnlCreateUser = new JPanel();
         pnlCreateUser.setLayout(new GridLayout(2, 6));
 
-        JComboBox<String> cbxUserType = new JComboBox<>(data);
         JTextField txtUsername = new JTextField();
         JTextField txtFirstName = new JTextField();
         JTextField txtLastName = new JTextField();
@@ -57,7 +57,7 @@ public class ClubManager extends JPanel {
         JLabel lblLastName = new JLabel("Nachname");
         JLabel lblPassword = new JLabel("Passwort");
         JLabel lblSex = new JLabel("Geschlecht");
-        JLabel lblPlayholder = new JLabel("");
+        JLabel lblPlaceholder = new JLabel("");
 
         ButtonGroup btnGrpSex = new ButtonGroup();
         JRadioButton rbtnMale = new JRadioButton("Männlich");
@@ -73,23 +73,30 @@ public class ClubManager extends JPanel {
         pnlCreateUser.add(lblLastName);
         pnlCreateUser.add(lblPassword);
         pnlCreateUser.add(lblSex);
-        pnlCreateUser.add(lblPlayholder);
+        pnlCreateUser.add(lblPlaceholder);
+        pnlCreateUser.add(lblPlaceholder);
+        pnlCreateUser.add(lblPlaceholder);
 
-        pnlCreateUser.add(cbxUserType);
         pnlCreateUser.add(txtUsername);
         pnlCreateUser.add(txtFirstName);
         pnlCreateUser.add(txtLastName);
         pnlCreateUser.add(pwfPassword);
         pnlCreateUser.add(rbtnMale);
         pnlCreateUser.add(rbtnFemale);
-
         pnlCreateUser.add(btnCreateUser);
+
+        rbtnMale.setSelected(true);
 
 
         btnCreateUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                club.join(txtFirstName.getText(), txtLastName.getText(), txtUsername.getText(), pwfPassword.getText(), rbtnMale.isSelected() ? 'm' : 'f');
+                if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtUsername.getText().equals("") && !pwfPassword.getText().equals("")) {
+                    club.join(txtFirstName.getText(), txtLastName.getText(), txtUsername.getText(), pwfPassword.getText(), rbtnMale.isSelected() ? 'm' : 'f');
+                    JOptionPane.showMessageDialog(null, "");
+                } else {
+                    Warning.displayWarning("Fields are empty", "Alle Felder müssen gefüllt sein.");
+                }
             }
         });
 

@@ -1,45 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns3:club xmlns:ns3="lebk.verein" currency="eur" memberCount="7" officerCount="1">
+<ns3:club xmlns:ns3="lebk.verein" currency="eur" memberCount="8" officerCount="1">
     <members>
         <member>
-            <firstname>qwe</firstname>
-            <lastname>qwe</lastname>
-            <password>qwe</password>
-            <username>asd</username>
-            <sex>102</sex>
-            <entered>2017-01-25T16:15:05.682+01:00</entered>
-        </member>
-        <member>
-            <firstname>Alfred</firstname>
-            <lastname>Hitchcock</lastname>
-            <password>hallo</password>
-            <username>alhitchcock310768906</username>
-            <sex>109</sex>
-            <entered>1992-02-01T00:00:00+01:00</entered>
-        </member>
-        <member>
-            <firstname>Anna</firstname>
-            <lastname>Müller</lastname>
+            <firstname>babara</firstname>
+            <lastname>cook</lastname>
             <password>start</password>
-            <username>anmüller393988928</username>
-            <sex>102</sex>
-            <entered>2000-04-03T00:00:00+02:00</entered>
-        </member>
-        <member>
-            <firstname>John-Ebenezer</firstname>
-            <lastname>Scrooge Doe</lastname>
-            <password>start</password>
-            <username>john</username>
-            <sex>109</sex>
-            <entered>2017-01-08T21:41:57.579+01:00</entered>
-        </member>
-        <member>
-            <firstname>tim</firstname>
-            <lastname>tim</lastname>
-            <password>tim</password>
-            <username>tim</username>
-            <sex>109</sex>
-            <entered>2017-01-25T15:53:18.481+01:00</entered>
+            <username>babara</username>
+            <sex>119</sex>
+            <entered>2017-01-25T16:13:46.922+01:00</entered>
         </member>
         <member>
             <firstname>tim</firstname>
@@ -50,12 +18,52 @@
             <entered>2017-01-25T15:53:23.237+01:00</entered>
         </member>
         <member>
-            <firstname>babara</firstname>
-            <lastname>cook</lastname>
+            <firstname>tim</firstname>
+            <lastname>tim</lastname>
+            <password>tim</password>
+            <username>tim</username>
+            <sex>109</sex>
+            <entered>2017-01-25T15:53:18.481+01:00</entered>
+        </member>
+        <member>
+            <firstname>John-Ebenezer</firstname>
+            <lastname>Scrooge Doe</lastname>
             <password>start</password>
-            <username>babara</username>
-            <sex>119</sex>
-            <entered>2017-01-25T16:13:46.922+01:00</entered>
+            <username>john</username>
+            <sex>109</sex>
+            <entered>2017-01-08T21:41:57.579+01:00</entered>
+        </member>
+        <member>
+            <firstname>Anna</firstname>
+            <lastname>Müller</lastname>
+            <password>start</password>
+            <username>anmüller393988928</username>
+            <sex>102</sex>
+            <entered>2000-04-03T00:00:00+02:00</entered>
+        </member>
+        <member>
+            <firstname>Alfred</firstname>
+            <lastname>Hitchcock</lastname>
+            <password>hallo</password>
+            <username>alhitchcock310768906</username>
+            <sex>109</sex>
+            <entered>1992-02-01T00:00:00+01:00</entered>
+        </member>
+        <member>
+            <firstname>qwe</firstname>
+            <lastname>qwe</lastname>
+            <password>qwe</password>
+            <username>asd</username>
+            <sex>102</sex>
+            <entered>2017-01-25T16:15:05.682+01:00</entered>
+        </member>
+        <member>
+            <firstname>a</firstname>
+            <lastname>a</lastname>
+            <password>a</password>
+            <username>a</username>
+            <sex>109</sex>
+            <entered>2017-01-25T17:22:44+01:00</entered>
         </member>
     </members>
     <officers>

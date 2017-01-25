@@ -2,7 +2,7 @@ package de.lebk.verein.vote;
 
 /**
  *
- * @author sopaetzel
+ * @author jrehkopp
  */
 public class Vote {
 
