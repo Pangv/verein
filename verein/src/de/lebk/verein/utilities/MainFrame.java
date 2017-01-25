@@ -38,7 +38,7 @@ public class MainFrame extends JFrame {
         if (DEBUG) {
             this.showGUI();
             try {
-                Auth.getInstance().login(club, "john", "start");
+                Auth.getInstance().login(club, "tim", "tim");
                 member = Auth.getInstance().getCurrentUser();
             } catch (Exception e) {
                 e.printStackTrace();

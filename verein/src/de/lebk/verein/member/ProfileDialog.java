@@ -1,16 +1,11 @@
 package de.lebk.verein.member;
 
 import de.lebk.verein.login.Auth;
-import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +14,6 @@ import javax.swing.JOptionPane;
 public class ProfileDialog extends JDialog {
 
     // Components
-    private JLabel jLblUserImage;
 
     private JLabel jLblLastName;
     private JLabel jLblFirstName;

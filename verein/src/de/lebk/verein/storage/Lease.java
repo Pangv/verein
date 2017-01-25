@@ -19,10 +19,8 @@ public class Lease {
 
     public Lease() {
     }
-    
-    
 
-    public Lease(Member member, int amount, GregorianCalendar dueDate) {
+    Lease(Member member, int amount, GregorianCalendar dueDate) {
         this.member = member;
         this.amount = amount;
         this.dueDate = dueDate;

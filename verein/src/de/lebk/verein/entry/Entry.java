@@ -2,13 +2,9 @@ package de.lebk.verein.entry;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.data_access.DataAccess;
-import de.lebk.verein.data_access.FileHandler;
-import de.lebk.verein.login.LoginDialog;
-import de.lebk.verein.member.Member;
-import de.lebk.verein.storage.Storage;
 import de.lebk.verein.utilities.MainFrame;
 import de.lebk.verein.utilities.Warning;
-import java.util.GregorianCalendar;
+
 import javax.xml.bind.JAXBException;
 
 /**
@@ -17,18 +13,9 @@ import javax.xml.bind.JAXBException;
  */
 public class Entry {
 
-    private static MainFrame mainFrame;
-    private static LoginDialog loginDialog;
     private static DataAccess doa;
     private static Club club;
     public static void main(String[] args) {
-
-        FileHandler fh = new FileHandler();
-        fh.createFolder();
-        Member test = new Member("John-Ebenezer", "Scrooge Doe", "start", "john", 'm', new GregorianCalendar());
-        Storage storage = new Storage();
-        storage.addLease(test, 12, new GregorianCalendar(1992, 5, 2));
-        
 
         try {
             doa = DataAccess.getInstance();
@@ -36,11 +23,6 @@ public class Entry {
             Warning.displayWarning(e.getMessage(), "Instanz von JAXBContext konnte nicht erstellt werden.");
             e.printStackTrace();
         }
-        
-        
-        
-            
-
         try {
             club = doa.readXML();
         } catch (JAXBException e) {
@@ -48,26 +30,7 @@ public class Entry {
             e.printStackTrace();
         }
 
-        club.setStorage(storage);
-        mainFrame = new MainFrame(club);
-
-        club.getMembers().forEach((member) -> {
-            System.out.println("Members: " + member.getFullName());
-        });
-
-        club.getOfficers().forEach((officer) -> {
-            System.out.println("Officers: " + officer.getFullName());
-        });
-
-        club.getEvents().forEach((eventsv) -> {
-            System.out.println("Events: " + eventsv.getTitle());
-        });
-
-        if (club.getStorage() != null) {
-            club.getStorage().getLeases().forEach((lease) -> {
-                System.out.println("Lease: " + lease.getMember().getFullName() + " " + lease.getDueDate().getTime());
-            });
-        }
+        new MainFrame(club);
 
     }
 

@@ -10,41 +10,40 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
- *
- * @author raddatz
- * @date 15.12.2016
+ * @author mraddatz
  */
 @XmlType(propOrder = {"firstName", "lastName", "password", "username", "sex", "entered", "leases", "events"})
 public class Member {
 
     private String firstName;
     private String lastName;
-    private String password;
     private String username;
+    private String password;
     private char sex;
     private GregorianCalendar entered;
     private List<Lease> leases;
     private List<Event> events;
 
-    public Member(String firstName, String lastName, String password, String username, char sex,
-            GregorianCalendar entered) {
+    public Member() {
+    }
+
+    public Member(String firstName, String lastName, String username, String password, char sex, GregorianCalendar entered) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
         this.username = username;
+        this.password = password;
         this.sex = sex;
         this.entered = entered;
     }
 
-    public Member() {
-    }
-
-    public Member(String password, String username, char sex) {
-        this.password = password;
+    public Member(String firstName, String lastName, String username, String password, char sex) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
+        this.password = password;
         this.sex = sex;
     }
-    
+
     public String getFullName() {
         return firstName + " " + lastName;
     }

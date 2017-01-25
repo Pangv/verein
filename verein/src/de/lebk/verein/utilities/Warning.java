@@ -1,6 +1,6 @@
 package de.lebk.verein.utilities;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -14,7 +14,7 @@ public class Warning extends JOptionPane {
 
     public static void displayWarning(Object error_message, String message) {
         Warning warning = new Warning(message, WARNING_MESSAGE);
-        System.err.println((Object) error_message);
+        System.err.println(error_message);
         showMessageDialog(null, warning.message);
     }
 

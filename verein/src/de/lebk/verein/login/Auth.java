@@ -5,8 +5,6 @@ import de.lebk.verein.member.Member;
 import de.lebk.verein.member.Officer;
 import de.lebk.verein.member.Role;
 
-import java.util.Objects;
-
 /**
  *
  * @author raddatz
@@ -57,8 +55,6 @@ public class Auth {
     
     
     private boolean userExists(Club club, String username){
-        boolean userExists = false;
-        
         for (Member member : club.getMembers()) {
             if (member.getUsername().equals(username)){
                this.possibleUser = member;
@@ -70,8 +66,8 @@ public class Auth {
                this.possibleUser = officer;
                return true;
             }
-        }             
-        return userExists;
+        }
+        return false;
     }
 
 }

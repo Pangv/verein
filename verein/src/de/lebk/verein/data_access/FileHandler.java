@@ -12,7 +12,7 @@ public class FileHandler {
 
     private final String OS_NAME = System.getProperty("os.name");
 
-    private final String PATH_UNIX = "/usr/tmp/verein";
+    private final String PATH_UNIX = "/tmp/verein";
     private final String PATH_WINDOWS = "C:/verein";
 
 
@@ -30,7 +30,7 @@ public class FileHandler {
         return os;
     }
 
-    public void createFolder() {
+    public void createFolder() throws NullPointerException {
 
         File directory = null;
 
@@ -44,7 +44,9 @@ public class FileHandler {
 
         if (!directory.exists()) {
             System.out.println("Der Ordner existiert nicht.");
-            directory.mkdir();
+            if (directory.mkdir()) {
+                System.out.println("Der Ordner wurde erstellt.");
+            }
         } else {
             System.out.println("Der Ordner existiert.");
         }

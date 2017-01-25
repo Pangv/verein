@@ -6,32 +6,26 @@ import de.lebk.verein.entry.Dashboard;
 import de.lebk.verein.event.EventManager;
 import de.lebk.verein.login.Auth;
 import de.lebk.verein.storage.StorageManager;
-import javax.swing.JTabbedPane;
+
+import javax.swing.*;
 
 /**
  *
  * @author sopaetzel
  */
-public class TabContainer extends JTabbedPane {
-
+class TabContainer extends JTabbedPane {
     private Club club;
-    
-    private Dashboard dashboard;
-    private EventManager eventManager;
-    private ClubManager clubManager;
-    private StorageManager storageManager;
 
-    public TabContainer(Club club) {
+    TabContainer(Club club) {
         this.club = club;
         this.createAndAddTabs();
     }
 
     private void createAndAddTabs() {
-
-        dashboard = new Dashboard(club);
-        eventManager = new EventManager(club, Auth.getInstance().getCurrentUser());
-        clubManager = new ClubManager();
-        storageManager = new StorageManager(club);
+        Dashboard dashboard = new Dashboard(club);
+        EventManager eventManager = new EventManager(club, Auth.getInstance().getCurrentUser());
+        ClubManager clubManager = new ClubManager(club);
+        StorageManager storageManager = new StorageManager(club);
 
         this.setTabPlacement(TOP);
         this.setTabLayoutPolicy(WRAP_TAB_LAYOUT);

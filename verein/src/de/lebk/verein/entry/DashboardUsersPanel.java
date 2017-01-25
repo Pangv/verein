@@ -23,9 +23,11 @@ class DashboardUsersPanel extends JPanel {
     }
 
     public void createComponent() {
-        this.setLayout(new GridLayout(3, 2));
+        this.setLayout(new GridLayout(5, 4));
+
         this.add(new JLabel("Neue Mitglieder"));
-        this.add(new JLabel(""));
+        this.add(new JLabel());
+        this.add(new JLabel());
 
         List<Member> reversedMember = club.getMembers();
         Collections.reverse(reversedMember);
@@ -37,12 +39,11 @@ class DashboardUsersPanel extends JPanel {
             userPanel.add(new JLabel("alias: " + member.getUsername()));
             userPanel.add(new JLabel("anno:" + member.getDateTimeEntered()));
 
+            userPanel.setBorder(new CompoundBorder(BorderFactory.createLineBorder(Color.lightGray, 2), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
 
             this.add(userPanel);
 
 
-
-           userPanel.setBorder(new CompoundBorder(BorderFactory.createLineBorder(Color.lightGray, 2), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
         }
     }
 

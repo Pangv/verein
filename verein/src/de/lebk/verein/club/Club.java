@@ -9,16 +9,13 @@ import de.lebk.verein.storage.Storage;
 import de.lebk.verein.vote.Vote;
 
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
  * @author mraddatz
  */
-@XmlRootElement(name = "club")
+@XmlRootElement(name = "club", namespace = "lebk.verein")
 @XmlType(name = "club", propOrder = {"members", "officers", "events", "payments", "money", "storage"})
 public class Club {
 
@@ -67,27 +64,51 @@ public class Club {
         this.events.add(event);
     }
 
+    /**
+     * @return Eine Liste aller Vorstände
+     */
     @XmlElementWrapper(name = "officers")
     @XmlElement
     public List<Officer> getOfficers() {
         return officers;
     }
 
+    /**
+     * Legt eine Liste aller Vorstände für diese Verein fest
+     * @param officerList
+     */
     public void setOfficerList(List<Officer> officerList) {
         this.officers = officerList;
     }
 
+    /**
+     * Entfernt einen Vorstand aus der Liste der Vorstände dieses Vereins
+     * @param officer
+     */
     public void retireOfficier(Officer officer) {
         this.officers.remove(officer);
     }
 
-    public void join(String username, String password, Character sex) {
-        this.members.add(new Member(username, password, sex));
+    /**
+     * Legt ein neues Mitglied für den Verein an
+     * @param firstName Der Vorname des Mitglieds
+     * @param lastName Der Nachname des Mitglieds
+     * @param username Der Username des Mitglieds
+     * @param password Das Passwort des Mitglieds
+     * @param sex Das Geschlecht des Mitglieds
+     */
+    public void join(String firstName, String lastName, String username, String password, char sex) {
+        this.members.add(new Member(firstName, lastName, username, password, sex, new GregorianCalendar(Locale.getDefault())));
     }
 
+    /**
+     * Entfernt ein Mitglied aus dem Verein
+     * @param member
+     */
     public void leave(Member member) {
         this.members.remove(member);
     }
+
 
     public void initOfficerVote() {
         if (currentVote != null) {
@@ -142,6 +163,10 @@ public class Club {
 		return openPayments;
 	}
 
+    /**
+     *
+     * @return Das Lager des Vereins
+     */
     public Storage getStorage() {
         return storage;
     }

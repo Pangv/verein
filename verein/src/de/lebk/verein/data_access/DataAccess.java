@@ -11,10 +11,7 @@ import java.io.File;
  * @author sopaetzel
  */
 public class DataAccess {
-    
-    
     private static DataAccess instance = null;
-    
 
     // Files
     //private final URL CLUB_XML_URL = ClassLoader.getSystemResource("club.xml");
@@ -25,7 +22,6 @@ public class DataAccess {
 
     /**
      * Erstellt eine globale Instanz (Singleton) des JAXBContext
-     *
      * @throws JAXBException wird geworfen wenn keine Instanz erstellt werden kann.
      */
     public static DataAccess getInstance() throws JAXBException{
@@ -35,8 +31,6 @@ public class DataAccess {
         }
         return instance;
     }
-    
-  
 
     /**
      * Liest eine vorhandene XML Datei in den Speicher und erstellt anhand der

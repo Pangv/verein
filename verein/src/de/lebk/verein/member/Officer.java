@@ -1,11 +1,10 @@
 package de.lebk.verein.member;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.GregorianCalendar;
 
 /**
- * Created by marcel on 15.12.16.
+ * @author mraddatz
  */
 public class Officer extends Member {
 
@@ -16,8 +15,8 @@ public class Officer extends Member {
         super(firstName, lastName, password, username, sex, entered);
     }
 
-    public Officer(String password, String username, char sex) {
-        super(password, username, sex);
+    public Officer(String firstName, String lastName, String username, String password, char sex) {
+        super(firstName, lastName, username, password, sex);
         this.officerSince = new GregorianCalendar();
     }
 

@@ -2,6 +2,8 @@ package de.lebk.verein.club;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -10,8 +12,10 @@ import java.awt.*;
 public class ClubManager extends JPanel {
 
 
+    private Club club;
 
-    public ClubManager() {
+    public ClubManager(Club club) {
+        this.club = club;
         this.createComponent();
     }
 
@@ -46,10 +50,12 @@ public class ClubManager extends JPanel {
         JTextField txtUsername = new JTextField();
         JTextField txtFirstName = new JTextField();
         JTextField txtLastName = new JTextField();
+        JPasswordField pwfPassword = new JPasswordField();
 
         JLabel lblUsername = new JLabel("Username");
         JLabel lblFirstName = new JLabel("Vorname");
         JLabel lblLastName = new JLabel("Nachname");
+        JLabel lblPassword = new JLabel("Passwort");
         JLabel lblSex = new JLabel("Geschlecht");
         JLabel lblPlayholder = new JLabel("");
 
@@ -65,20 +71,31 @@ public class ClubManager extends JPanel {
         pnlCreateUser.add(lblUsername);
         pnlCreateUser.add(lblFirstName);
         pnlCreateUser.add(lblLastName);
+        pnlCreateUser.add(lblPassword);
         pnlCreateUser.add(lblSex);
-        pnlCreateUser.add(lblPlayholder);
         pnlCreateUser.add(lblPlayholder);
 
         pnlCreateUser.add(cbxUserType);
         pnlCreateUser.add(txtUsername);
         pnlCreateUser.add(txtFirstName);
         pnlCreateUser.add(txtLastName);
+        pnlCreateUser.add(pwfPassword);
         pnlCreateUser.add(rbtnMale);
         pnlCreateUser.add(rbtnFemale);
 
         pnlCreateUser.add(btnCreateUser);
 
+
+        btnCreateUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                club.join(txtFirstName.getText(), txtLastName.getText(), txtUsername.getText(), pwfPassword.getText(), rbtnMale.isSelected() ? 'm' : 'f');
+            }
+        });
+
         return pnlCreateUser;
+
+
     }
 
 
