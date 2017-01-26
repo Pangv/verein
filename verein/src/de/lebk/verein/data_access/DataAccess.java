@@ -15,7 +15,7 @@ public class DataAccess {
 
     // Files
     //private final URL CLUB_XML_URL = ClassLoader.getSystemResource("club.xml");
-    private final String CLUB_XML = "./verein/resources/club.xml";
+    private final String CLUB_XML = "./resources/club.xml";
     private static JAXBContext jc;
     
     private DataAccess(){}
