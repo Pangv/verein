@@ -21,8 +21,8 @@ public class LoginDialog extends JDialog {
     private JPasswordField jPFPassword;
 
     private JButton jBtnLogin;
+    private JButton jBtnRegister;
 
-    private Club club;
     private boolean logged = false;
 
     public void setLogged(boolean logged) {
@@ -33,9 +33,8 @@ public class LoginDialog extends JDialog {
         return logged;
     }
 
-    public LoginDialog(MainFrame owner, Club club, String dialogTitle) {
-        super(owner, true);
-        this.club = club;
+	public LoginDialog(MainFrame owner, String dialogTitle) {
+		super(owner, true);
         this.dialogTitle = dialogTitle;
         createDialog();
     }
@@ -90,9 +89,10 @@ public class LoginDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 try {
                     tryLogin();
-                } catch (UserNotFoundException ex) {
-                    ex.printStackTrace();
-                    Warning.displayWarning(ex.getMessage(), "Nutzer oder Passwort nicht gefunden");
+                } catch (UserNotFoundException | WrongPasswordException ex) {
+                    JOptionPane.showMessageDialog(null, "Username oder Password nicht korrekt.",
+                            "Nicht gefunden", JOptionPane.ERROR_MESSAGE);
+                    System.err.println(ex.getMessage());
                 }
             }
         });
@@ -124,7 +124,7 @@ public class LoginDialog extends JDialog {
     }
 
     private void tryLogin() throws UserNotFoundException {
-        logged = Auth.getInstance().login(club, jTFLoginname.getText(), jPFPassword.getText());
+        logged = Auth.getInstance().login(jTFLoginname.getText(), jPFPassword.getText());
         dispose();
     }
 

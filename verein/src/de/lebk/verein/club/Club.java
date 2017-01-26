@@ -1,6 +1,8 @@
 package de.lebk.verein.club;
 
 import de.lebk.verein.event.Event;
+import de.lebk.verein.login.Auth;
+import de.lebk.verein.login.UserNotFoundException;
 import de.lebk.verein.member.Member;
 import de.lebk.verein.member.Officer;
 import de.lebk.verein.payment.Payment;
@@ -27,6 +29,12 @@ public class Club {
 	private Map<Member, ArrayList<Payment>> payments = new HashMap<>();
 	private Vote currentVote;
     private Storage storage = new Storage();
+    private Storage storage;
+	private Auth auth = Auth.getInstance();
+
+	public Club() {
+		auth.setClub(this);
+	}
 
     @XmlElementWrapper(name = "members")
     @XmlElement(name = "member")
@@ -37,6 +45,22 @@ public class Club {
     public void setMembers(List<Member> members) {
         this.members = members;
     }
+
+	public Member getUser(String username) throws UserNotFoundException {
+		for (Member member : this.members) {
+			if (member.getUsername().equals(username)) {
+				return member;
+			}
+		}
+		for (Member member : this.officers) {
+			if (member.getUsername().equals(username)) {
+				return member;
+			}
+		}
+
+		throw new UserNotFoundException(username);
+
+	}
 
     @XmlAttribute(name = "memberCount")
     public int getMemberCount() {
