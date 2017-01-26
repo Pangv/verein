@@ -105,9 +105,11 @@ public class LoginDialog extends JDialog {
 						Auth.getInstance().login(jTFLoginname.getText(), jPFPassword.getText());
 					dispose();
                 } catch (UserNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-            }
+					System.err.println("User " + jTFLoginname.getText() + " not found");
+				} catch (WrongPasswordException ex) {
+					System.err.println("Wrong password!");
+				}
+			}
         });
 
 
