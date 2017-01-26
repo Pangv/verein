@@ -38,15 +38,15 @@ public class MainFrame extends JFrame {
         if (DEBUG) {
             this.showGUI();
             try {
-                Auth.getInstance().login(club, "tim", "tim");
-                member = Auth.getInstance().getCurrentUser();
+				Auth.getInstance().login("tim", "tim");
+				member = Auth.getInstance().getCurrentUser();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
             if (Auth.getInstance().getCurrentUser() == null) {
-                LoginDialog loginDialog = new LoginDialog(this, club, "Anmeldung");
-                if (loginDialog.isLogged()) {
+				LoginDialog loginDialog = new LoginDialog(this, "Anmeldung");
+				if (loginDialog.isLogged()) {
                     this.showGUI();
                 }
             }
@@ -73,7 +73,7 @@ public class MainFrame extends JFrame {
         this.setTitle("Vereinsverwaltung");
         this.setPreferredSize(initDimension);
         this.setMinimumSize(minDimension);
-        this.setIconImage(new ImageIcon(ClassLoader.getSystemResource("./logo.png")).getImage());
+		//this.setIconImage(new ImageIcon(ClassLoader.getSystemResource("./logo.png")).getImage());
 
         // components
         this.setJMenuBar(new MainMenu(this, club));

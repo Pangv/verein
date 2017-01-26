@@ -38,7 +38,6 @@ public class LoginDialog extends JDialog {
     private JButton jBtnLogin;
     private JButton jBtnRegister;
     
-    private Club club;
     private boolean logged = false;
 
     public void setLogged(boolean logged) {
@@ -49,9 +48,8 @@ public class LoginDialog extends JDialog {
         return logged;
     }
 
-    public LoginDialog(MainFrame owner, Club club, String dialogTitle) {
-        super(owner, true);
-        this.club = club;
+	public LoginDialog(MainFrame owner, String dialogTitle) {
+		super(owner, true);
         this.dialogTitle = dialogTitle;
         createDialog();
     }
@@ -103,8 +101,9 @@ public class LoginDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e){
                 try {
-                    logged = Auth.getInstance().login(club, jTFLoginname.getText(), jPFPassword.getText());
-                    dispose();
+					logged =
+						Auth.getInstance().login(jTFLoginname.getText(), jPFPassword.getText());
+					dispose();
                 } catch (UserNotFoundException ex) {
                     ex.printStackTrace();
                 }

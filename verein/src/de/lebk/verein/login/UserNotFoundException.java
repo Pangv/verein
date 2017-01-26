@@ -6,10 +6,10 @@ import javax.swing.JOptionPane;
  *
  * @author Sven-Oliver Pätzel
  */
-class UserNotFoundException extends Exception {
+public class UserNotFoundException extends Exception {
 
-    UserNotFoundException() {
-        JOptionPane.showMessageDialog(null, "Username oder Password nicht korrekt.", "Nicht gefunden", JOptionPane.ERROR_MESSAGE);
+	public UserNotFoundException() {
+		JOptionPane.showMessageDialog(null, "Username oder Password nicht korrekt.", "Nicht gefunden", JOptionPane.ERROR_MESSAGE);
     }
     
 }

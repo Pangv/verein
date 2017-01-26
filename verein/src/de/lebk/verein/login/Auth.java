@@ -15,7 +15,6 @@ public class Auth {
     private Club club;
     private Member user = null;
     private Member currentUser = null;
-    private Member possibleUser = null;
 
     private static Auth ourInstance = new Auth();
 
@@ -31,9 +30,11 @@ public class Auth {
     }
 
     //TODO username aus Memberliste in Club auslesen, falls es ihn gibt.
-    public boolean login(Club club, String username, String password) throws UserNotFoundException, WrongPasswordException {
-       if (userExists(club, username)){
-           if (possibleUser.getPassword().equals(password)) {
+	public boolean login(String username, String password)
+		throws UserNotFoundException, WrongPasswordException {
+		Member possibleUser = club.getUser(username);
+		if (possibleUser != null) {
+			if (possibleUser.getPassword().equals(password)) {
                this.currentUser = possibleUser;
                this.role = Role.valueOf(currentUser.getClass().getSimpleName().toUpperCase());
                return true;
@@ -52,22 +53,8 @@ public class Auth {
     public Member getCurrentUser() {
         return currentUser;
     }
-    
-    
-    private boolean userExists(Club club, String username){
-        for (Member member : club.getMembers()) {
-            if (member.getUsername().equals(username)){
-               this.possibleUser = member;
-               return true;
-            }
-        }  
-        for (Officer officer : club.getOfficers()) {
-            if (officer.getUsername().equals(username)){
-               this.possibleUser = officer;
-               return true;
-            }
-        }
-        return false;
-    }
 
+	public void setClub(Club club) {
+		this.club = club;
+	}
 }
