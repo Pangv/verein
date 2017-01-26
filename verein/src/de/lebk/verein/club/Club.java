@@ -59,7 +59,7 @@ public class Club {
 			}
 		}
 
-		throw new UserNotFoundException();
+		throw new UserNotFoundException(username);
 
 	}
 
