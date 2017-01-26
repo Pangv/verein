@@ -29,7 +29,6 @@ public class Auth {
         this.currentUser = null;
     }
 
-    //TODO username aus Memberliste in Club auslesen, falls es ihn gibt.
 	public boolean login(String username, String password)
 		throws UserNotFoundException, WrongPasswordException {
 		Member possibleUser = club.getUser(username);
