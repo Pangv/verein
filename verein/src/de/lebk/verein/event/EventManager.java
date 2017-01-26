@@ -104,9 +104,6 @@ public class EventManager extends JPanel {
     }
 
     public void defineActions() {
-        /**
-         *
-         */
         jBtnJoin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

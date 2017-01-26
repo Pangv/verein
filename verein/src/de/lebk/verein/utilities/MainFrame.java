@@ -83,11 +83,6 @@ public class MainFrame extends JFrame {
         this.pack();
     }
 
-    private void createAndShowGUI() {
-        this.createGUI();
-        this.showGUI();
-    }
-
     private void createAndHideGUI() {
         this.createGUI();
         this.hideGUI();
@@ -134,7 +129,7 @@ public class MainFrame extends JFrame {
     private void onCloseOperation(JFrame frame) {
         try {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(frame, "Wollen Sie Ihre Änderungen vor dem Schließen speichern?", "Ungespeicherte Änderungen", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE)) {
-                DataAccess.getInstance().writeXML(club, "./verein/resources");
+                DataAccess.getInstance().writeXML(club);
                 System.out.println("Schließen mit Speichern");
             } else {
                 System.out.println("Schließen ohne Speichern");

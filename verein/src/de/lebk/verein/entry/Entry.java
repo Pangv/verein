@@ -2,7 +2,6 @@ package de.lebk.verein.entry;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.data_access.DataAccess;
-import de.lebk.verein.data_access.FileHandler;
 import de.lebk.verein.member.Officer;
 import de.lebk.verein.utilities.MainFrame;
 import de.lebk.verein.utilities.Warning;
@@ -24,7 +23,6 @@ public class Entry {
 
 
         JOptionPane.showMessageDialog(null, "Wählen Sie den Speicherpunkt Ihrer club.xml");
-        FileHandler fileHandler = new FileHandler();
 
 
         try {
@@ -34,7 +32,7 @@ public class Entry {
             e.printStackTrace();
         }
         try {
-            club = doa.readXML(fileHandler.openFile());
+            club = doa.readXML();
         } catch (JAXBException e) {
             Warning.displayWarning(e.getMessage(), "Die XML Datei konnte nicht eingelesen werden.");
             e.printStackTrace();
@@ -43,10 +41,29 @@ public class Entry {
         Officer admin = new Officer("John", "Lassiter", "admin", "admin", 'm', new GregorianCalendar(
                 Locale.getDefault()
         ));
-        club.getMembers().add(admin);
+
+        if (!initialAdminExists()) {
+            club.getOfficers().add(admin);
+        }
+
 
         new MainFrame(club);
 
+    }
+
+    private static boolean initialAdminExists() {
+        int i = 0;
+        boolean adminExists = false;
+        for (Officer officer : club.getOfficers()) {
+            if (officer.getUsername().contains(club.getOfficers().get(i++).getUsername())) {
+                System.out.println("admin vorhanden");
+                adminExists = true;
+            } else {
+                System.out.println("admin nicht vorhanden");
+                adminExists = false;
+            }
+        }
+        return adminExists;
     }
 
 }

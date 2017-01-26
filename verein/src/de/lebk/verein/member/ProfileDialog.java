@@ -16,13 +16,7 @@ public class ProfileDialog extends JDialog {
 
     // Components
 
-    private JLabel jLblLastName;
-    private JLabel jLblFirstName;
-    private JLabel jLblDateJoined;
-
     private JButton jBtnLeaveClub;
-    private JButton jBtnSaveChanges;
-    private JButton jBtnResignation;
     private JButton jBtnChangePassword;
 
     private Member member = Auth.getInstance().getCurrentUser();
@@ -39,13 +33,13 @@ public class ProfileDialog extends JDialog {
         this.setTitle("Profil von " + member.getUsername().replaceAll("\\d", ""));
         this.setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
-        jLblLastName = new JLabel("Nachname:\t" + member.getLastName());
-        jLblFirstName = new JLabel("Vorname:\t" + member.getFirstName());
-        jLblDateJoined = new JLabel("Mitglied seit: " + member.getDateTimeEntered());
+        JLabel jLblLastName = new JLabel("Nachname:\t" + member.getLastName());
+        JLabel jLblFirstName = new JLabel("Vorname:\t" + member.getFirstName());
+        JLabel jLblDateJoined = new JLabel("Mitglied seit: " + member.getDateTimeEntered());
 
         jBtnLeaveClub = new JButton("Austreten");
-        jBtnSaveChanges = new JButton("Sichern");
-        jBtnResignation = new JButton("Rücktritt");
+        JButton jBtnSaveChanges = new JButton("Sichern");
+        JButton jBtnResignation = new JButton("Rücktritt");
         jBtnChangePassword = new JButton("Passwort ändern");
 
         grid.anchor = GridBagConstraints.FIRST_LINE_START;
@@ -121,7 +115,7 @@ public class ProfileDialog extends JDialog {
             }
         });
 
-        /**
+        /*
          * Special Characters - Not Allowed Spaces - Not Allowed Minimum and
          * Maximum Length of field - 6 to 12 Characters Met by
          * [a-zA-Z0-9@]{6,12} Numeric Character - At least one character Met by

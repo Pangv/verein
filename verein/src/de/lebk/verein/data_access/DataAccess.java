@@ -13,9 +13,11 @@ import java.io.File;
 public class DataAccess {
     private static DataAccess instance = null;
 
+    private static FileHandler fileHandler = new FileHandler();
+
     // Files
     //private final URL CLUB_XML_URL = ClassLoader.getSystemResource("club.xml");
-    private final String CLUB_XML = "./verein/resources/club.xml";
+    private final File CLUB_XML = fileHandler.openFile();
     private static JAXBContext jc;
     
     private DataAccess(){}
@@ -39,9 +41,9 @@ public class DataAccess {
      * @return das object welches an der spezifizierenten URL verpackt ist
      * @throws JAXBException wird geworfen, wenn die Datei ungültig ist
      */
-    public Club readXML(File file) throws JAXBException {
+    public Club readXML() throws JAXBException {
         System.out.println("Creating objects from xml input...");
-        StreamSource xml = new StreamSource(file);
+        StreamSource xml = new StreamSource(CLUB_XML);
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         JAXBElement<Club> rootElement = unmarshaller.unmarshal(xml, Club.class);
         return rootElement.getValue();
@@ -53,11 +55,11 @@ public class DataAccess {
      * @param element Objekt das als XML gepackt werden soll
      * @throws JAXBException Wenn das Objekt oder eines der abhängigen Objekte nicht gepackt werden kann
      */
-    public void writeXML(Object element, String path) throws JAXBException {
+    public void writeXML(Object element) throws JAXBException {
         System.out.println("Creating xml output from objects...");
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.marshal(element, new File(path + File.pathSeparator + "club.xml"));
+        marshaller.marshal(element, CLUB_XML);
 
         //FIXME SystemResource lässt sich nicht beschreiben / ändern
     }

@@ -10,9 +10,7 @@ import de.lebk.verein.vote.Vote;
 
 import javax.xml.bind.annotation.*;
 import java.util.*;
-
 /**
- *
  * @author mraddatz
  */
 @XmlRootElement(name = "club", namespace = "lebk.verein")
@@ -75,7 +73,7 @@ public class Club {
 
     /**
      * Legt eine Liste aller Vorstände für diese Verein fest
-     * @param officerList
+     * @param officerList Die Liste aller Vorstände
      */
     public void setOfficerList(List<Officer> officerList) {
         this.officers = officerList;
@@ -83,7 +81,7 @@ public class Club {
 
     /**
      * Entfernt einen Vorstand aus der Liste der Vorstände dieses Vereins
-     * @param officer
+     * @param officer Der Vorstand der zurücktritt.
      */
     public void retireOfficier(Officer officer) {
         this.officers.remove(officer);
@@ -103,7 +101,7 @@ public class Club {
 
     /**
      * Entfernt ein Mitglied aus dem Verein
-     * @param member
+     * @param member Das Mitglied das den Verein verlässt
      */
     public void leave(Member member) {
         this.members.remove(member);
@@ -123,12 +121,6 @@ public class Club {
         this.currentVote = null;
     }
 
-    @XmlElementWrapper(name = "payments")
-    @XmlElement
-    public Map<Member, ArrayList<Payment>> getPayments() {
-        return payments;
-    }
-
     public Vote getCurrentVote() {
         return currentVote;
     }
@@ -139,14 +131,21 @@ public class Club {
     }
 
     public void requestMoney(Member member, double amount) {
-		if (this.payments.containsKey(member)) {
-			this.payments.get(member).add(new Payment(member, amount));
-		} else {
-			ArrayList<Payment> newPayments = new ArrayList<>();
-			newPayments.add(new Payment(member, amount));
-			this.payments.put(member, newPayments);
-		}
-	}
+        if (this.payments.containsKey(member)) {
+            this.payments.get(member).add(new Payment(member, amount));
+        } else {
+            ArrayList<Payment> newPayments = new ArrayList<>();
+            newPayments.add(new Payment(member, amount));
+            this.payments.put(member, newPayments);
+        }
+    }
+
+    @XmlElementWrapper(name = "payments")
+    @XmlElement
+    public Map<Member, ArrayList<Payment>> getPayments() {
+        return payments;
+    }
+
 
     public void markAsPaid(Member member, Payment payment) {
         int index = this.payments.get(member).indexOf(payment);

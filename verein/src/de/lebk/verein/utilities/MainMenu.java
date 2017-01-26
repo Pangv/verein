@@ -2,7 +2,6 @@ package de.lebk.verein.utilities;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.data_access.DataAccess;
-import de.lebk.verein.data_access.FileHandler;
 import de.lebk.verein.login.Auth;
 import de.lebk.verein.login.LoginDialog;
 import de.lebk.verein.member.ProfileDialog;
@@ -11,8 +10,6 @@ import javax.swing.*;
 import javax.xml.bind.JAXBException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,13 +17,10 @@ import java.util.logging.Logger;
  */
 class MainMenu extends JMenuBar {
 
-    FileHandler fileHandler = new FileHandler();
-
     // base menu
     private final JMenu jMenuFile = new JMenu("Datei");
 
     // sub menu items
-    private final JMenuItem jMenuOpen = new JMenuItem("Öffnen");
     private final JMenuItem jMenuSave = new JMenuItem("Sichern");
 
     // sub menu buttons
@@ -36,7 +30,7 @@ class MainMenu extends JMenuBar {
     private Club club;
     private JFrame parent;
 
-    public MainMenu(MainFrame parent, Club club) {
+    MainMenu(MainFrame parent, Club club) {
         this.parent = parent;
         this.club = club;
         createComponent();
@@ -62,7 +56,7 @@ class MainMenu extends JMenuBar {
             public void actionPerformed(ActionEvent evt) {
                 try {
                     DataAccess doa = DataAccess.getInstance();
-                    doa.writeXML(club, "./resources");
+                    doa.writeXML(club);
                 } catch (JAXBException ex) {
                     ex.printStackTrace();
                 }
@@ -81,7 +75,7 @@ class MainMenu extends JMenuBar {
             public void actionPerformed(ActionEvent evt) {
                 try {
                     JOptionPane.showMessageDialog(jMenuProfile, "Ausgeloggt!");
-                    DataAccess.getInstance().writeXML(club, "./verein/resources");
+                    DataAccess.getInstance().writeXML(club);
                     parent.setVisible(false);
                     Auth.getInstance().logout();
                     LoginDialog login = new LoginDialog(null, club, "Neu anmelden");
@@ -90,7 +84,7 @@ class MainMenu extends JMenuBar {
                     }
 
                 } catch (JAXBException ex) {
-                    Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }
         });

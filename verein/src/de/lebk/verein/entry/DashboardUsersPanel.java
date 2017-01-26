@@ -2,6 +2,7 @@ package de.lebk.verein.entry;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
+import de.lebk.verein.member.Officer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,12 +30,13 @@ class DashboardUsersPanel extends JPanel {
         this.add(new JLabel());
 
         List<Member> reversedMember = club.getMembers();
+        List<Officer> reversedOfficer = club.getOfficers();
+        Collections.reverse(reversedOfficer);
         Collections.reverse(reversedMember);
 
         for (Member member : reversedMember) {
             JPanel userPanel = new JPanel();
             userPanel.setLayout(new BoxLayout(userPanel, BoxLayout.Y_AXIS));
-            //userPanel.setBorder(new CompoundBorder(BorderFactory.createLineBorder(Color.lightGray, 2), BorderFactory.createEmptyBorder(2, 2, 2, 2)));
 
 
             userPanel.add(new JLabel(member.getFullName()));
@@ -43,6 +45,25 @@ class DashboardUsersPanel extends JPanel {
 
 
             this.add(userPanel);
+
+
+        }
+
+        this.add(new JLabel("Neue Vorstände"));
+        this.add(new JLabel());
+        this.add(new JLabel());
+
+        for (Officer officer : reversedOfficer) {
+            JPanel officerPanel = new JPanel();
+            officerPanel.setLayout(new BoxLayout(officerPanel, BoxLayout.Y_AXIS));
+
+
+            officerPanel.add(new JLabel(officer.getFullName()));
+            officerPanel.add(new JLabel("Bekannt als: " + officer.getUsername()));
+            officerPanel.add(new JLabel("Mitglied seit:" + officer.getDateTimeEntered()));
+
+
+            this.add(officerPanel);
 
 
         }

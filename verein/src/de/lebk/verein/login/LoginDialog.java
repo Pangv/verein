@@ -16,22 +16,11 @@ import java.awt.event.KeyListener;
  */
 public class LoginDialog extends JDialog {
 
-    // Properties
-    private final int horizontalGap = 10;
-    private final int verticalGap = 5;
-
-    // Components
-    private JPanel jPanel;
     private final String dialogTitle;
-    private JLabel jLblPlaceholder;
-    private JLabel jLblMessage;
-    private JLabel jLblLoginname;
-    private JLabel jLblPassword;
     private JTextField jTFLoginname;
     private JPasswordField jPFPassword;
 
     private JButton jBtnLogin;
-    private JButton jBtnRegister;
 
     private Club club;
     private boolean logged = false;
@@ -56,18 +45,20 @@ public class LoginDialog extends JDialog {
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        jPanel = new JPanel(new GridLayout(4, 2, horizontalGap, verticalGap));
+        int verticalGap = 5;
+        int horizontalGap = 10;
+        JPanel jPanel = new JPanel(new GridLayout(4, 2, horizontalGap, verticalGap));
         jPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        jLblPlaceholder = new JLabel(" ");
-        jLblMessage = new JLabel("Bitte melden Sie sich an");
-        jLblLoginname = new JLabel("Anmeldename");
-        jLblPassword = new JLabel("Passwort");
+        JLabel jLblPlaceholder = new JLabel(" ");
+        JLabel jLblMessage = new JLabel("Bitte melden Sie sich an");
+        JLabel jLblLoginname = new JLabel("Anmeldename");
+        JLabel jLblPassword = new JLabel("Passwort");
         jTFLoginname = new JTextField();
         jPFPassword = new JPasswordField();
 
         jBtnLogin = new JButton("Anmelden");
-        jBtnRegister = new JButton("Registrieren");
+        JButton jBtnRegister = new JButton("Registrieren");
 
         this.setTitle(dialogTitle);
 
@@ -109,7 +100,11 @@ public class LoginDialog extends JDialog {
 
         jPFPassword.addKeyListener(new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
+            public void keyTyped(KeyEvent e) {// Do Nothing
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     try {
                         tryLogin();
@@ -120,21 +115,8 @@ public class LoginDialog extends JDialog {
             }
 
             @Override
-            public void keyPressed(KeyEvent e) {
-                try {
-                    tryLogin();
-                } catch (UserNotFoundException e1) {
-                    e1.printStackTrace();
-                }
-            }
-
-            @Override
             public void keyReleased(KeyEvent e) {
-                try {
-                    tryLogin();
-                } catch (UserNotFoundException e1) {
-                    e1.printStackTrace();
-                }
+                // Do Nothing
             }
         });
 

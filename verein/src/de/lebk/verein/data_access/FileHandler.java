@@ -5,49 +5,56 @@ import de.lebk.verein.utilities.Warning;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * @author sopaetzel
  */
 public class FileHandler {
 
-    private final String OS_NAME = System.getProperty("os.name");
+    private final String PATH = System.getProperty("user.home");
 
-    private final String PATH_UNIX = "/tmp/";
-    private final String PATH_WINDOWS = "C:/";
-
-
-    private String checkOperatingSystem() {
-        String os = "";
-        if (OS_NAME.startsWith("Windows")) {
-            System.out.println("Windows detected! Version: " + OS_NAME);
-            os = "Windows";
-        }
-        if (OS_NAME.startsWith("Mac") || OS_NAME.startsWith("Linux")) {
-            System.out.println("UNIX detected! Version: " + OS_NAME);
-            os = "unix";
-        }
-
-        return os;
-    }
 
     public File openFile() throws NullPointerException {
-        File directory = null;
+        File directory = new File(PATH);
+        File file = null;
 
-        if (checkOperatingSystem().equals("unix")) {
-            directory = new File(PATH_UNIX);
-        } else if (checkOperatingSystem().equals("windows")) {
-            directory = new File(PATH_WINDOWS);
-        } else {
-            Warning.displayWarning("", "Dieses Betriebssystem ist noch nicht untersützt.");
-        }
+
         System.out.println("jfc");
-        JFileChooser jFileChooser = new JFileChooser(directory);
+        JFileChooser jFileChooser = new JFileChooser();
+        jFileChooser.setCurrentDirectory(directory);
         jFileChooser.setFileFilter(new FileNameExtensionFilter("Vereinsdatei", "xml"));
-        jFileChooser.showOpenDialog(null);
 
-        return jFileChooser.getSelectedFile();
+        jFileChooser.showSaveDialog(null);
 
+        if (!jFileChooser.getSelectedFile().exists()) {
+            try {
+                file = createNewFile(jFileChooser, file);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Warning.displayWarning(e.getMessage(), "Das XML konnte nicht erstellt werden");
+            }
+        } else {
+            file = jFileChooser.getSelectedFile();
+        }
+
+        System.out.println(jFileChooser.getSelectedFile());
+        return file;
+
+    }
+
+    private File createNewFile(JFileChooser jFileChooser, File file) throws IOException {
+        FileWriter fw = null;
+        jFileChooser.getSelectedFile().createNewFile();
+        file = jFileChooser.getSelectedFile();
+        fw = new FileWriter(file);
+        fw.write("<club></club>");
+        fw.close();
+
+        return file;
     }
 
 }
+
+
