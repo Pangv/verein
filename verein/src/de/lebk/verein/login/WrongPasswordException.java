@@ -1,8 +1,7 @@
 package de.lebk.verein.login;
 
 /**
- *
- * @author Marcel Raddatz
+ * @author mraddatz
  */
 class WrongPasswordException extends RuntimeException {
 

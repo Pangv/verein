@@ -3,7 +3,6 @@ package de.lebk.verein.payment;
 import de.lebk.verein.member.Member;
 
 /**
- *
  * @author sopaetel
  */
 public class Payment {

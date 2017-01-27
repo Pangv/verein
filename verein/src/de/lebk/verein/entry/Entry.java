@@ -12,13 +12,13 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
- *
  * @author sopaetzel
  */
 public class Entry {
 
     private static DataAccess doa;
     private static Club club;
+
     public static void main(String[] args) {
 
 

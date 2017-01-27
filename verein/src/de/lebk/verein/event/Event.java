@@ -2,16 +2,12 @@ package de.lebk.verein.event;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
+
+import javax.xml.bind.annotation.*;
 import java.util.GregorianCalendar;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
- *
  * @author sopaetzel
  */
 @XmlRootElement(name = "event")
@@ -50,14 +46,26 @@ public class Event {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @XmlElement(name = "dateTime")
     public GregorianCalendar getDateTime() {
         return dateTime;
     }
 
+    public void setDateTime(GregorianCalendar dateTime) {
+        this.dateTime = dateTime;
+    }
+
     @XmlElement(name = "organisator")
     public Member getOrganisator() {
         return organisator;
+    }
+
+    public void setOrganisator(Member organisator) {
+        this.organisator = organisator;
     }
 
     // @XmlAttribute(name = "attendee-count", required = false)
@@ -69,6 +77,10 @@ public class Event {
     @XmlElement(name = "attendee")
     public List<Member> getAttendees() {
         return attendees;
+    }
+
+    public void setAttendees(List<Member> attendees) {
+        this.attendees = attendees;
     }
 
     public void addAttendee(Member member) {
@@ -95,22 +107,6 @@ public class Event {
 
     public void changeDateTime(int year, int month, int day, int hour, int minute) {
         this.dateTime = new GregorianCalendar(year, month, month, hour, minute);
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setAttendees(List<Member> attendees) {
-        this.attendees = attendees;
-    }
-
-    public void setOrganisator(Member organisator) {
-        this.organisator = organisator;
-    }
-
-    public void setDateTime(GregorianCalendar dateTime) {
-        this.dateTime = dateTime;
     }
 
 }

@@ -1,8 +1,6 @@
 package de.lebk.verein.login;
 
-import de.lebk.verein.club.Club;
 import de.lebk.verein.utilities.MainFrame;
-import de.lebk.verein.utilities.Warning;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,18 +23,18 @@ public class LoginDialog extends JDialog {
 
     private boolean logged = false;
 
-    public void setLogged(boolean logged) {
-        this.logged = logged;
+    public LoginDialog(MainFrame owner, String dialogTitle) {
+        super(owner, true);
+        this.dialogTitle = dialogTitle;
+        createDialog();
     }
 
     public boolean isLogged() {
         return logged;
     }
 
-	public LoginDialog(MainFrame owner, String dialogTitle) {
-		super(owner, true);
-        this.dialogTitle = dialogTitle;
-        createDialog();
+    public void setLogged(boolean logged) {
+        this.logged = logged;
     }
 
     private void createDialog() {

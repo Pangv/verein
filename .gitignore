@@ -96,3 +96,5 @@ hs_err_pid*
 verein/verein.iml
 out/
 /verein/nbproject/
+data/
+verein.properties

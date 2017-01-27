@@ -7,29 +7,28 @@ import javax.xml.bind.annotation.*;
 import java.util.*;
 
 /**
- *
  * @author ebrinker
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Storage {
 
-    
-    private int amount = 2000;
+
     private static List<Lease> leases = new ArrayList<>();
+    private int amount = 2000;
 
     public int getAmount() {
         return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     @XmlElementWrapper(name = "leases")
     @XmlElement(name = "lease")
     public List<Lease> getLeases() {
         return leases;
-    }
-
-    public void setAmount(int amount){
-        this.amount = amount;
     }
 
     public void removeLease(Lease lease) {
@@ -64,10 +63,10 @@ public class Storage {
         return overdueLeases;
     }
 
-    public List<Lease> getLeasesForMember(Member member){
+    public List<Lease> getLeasesForMember(Member member) {
         List<Lease> membersLeases = new ArrayList<>();
-        for (Lease lease : leases){
-            if (lease.getMember() == member){
+        for (Lease lease : leases) {
+            if (lease.getMember() == member) {
                 membersLeases.add(lease);
             }
         }

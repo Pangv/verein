@@ -12,29 +12,28 @@ import de.lebk.verein.vote.Vote;
 
 import javax.xml.bind.annotation.*;
 import java.util.*;
+
 /**
  * @author mraddatz
  */
-@XmlRootElement(name = "club", namespace = "lebk.verein")
+@XmlRootElement(name = "club")
 @XmlType(name = "club", propOrder = {"members", "officers", "events", "payments", "money", "storage"})
 public class Club {
 
-    private double money = 2000.00;
     @XmlAttribute(name = "currency")
     private final String currency = "eur";
-
+    private double money = 2000.00;
     private List<Officer> officers = new ArrayList<>();
     private List<Member> members = new ArrayList<>();
     private List<Event> events = new ArrayList<>();
-	private Map<Member, ArrayList<Payment>> payments = new HashMap<>();
-	private Vote currentVote;
+    private Map<Member, ArrayList<Payment>> payments = new HashMap<>();
+    private Vote currentVote;
     private Storage storage = new Storage();
-    private Storage storage;
-	private Auth auth = Auth.getInstance();
+    private Auth auth = Auth.getInstance();
 
-	public Club() {
-		auth.setClub(this);
-	}
+    public Club() {
+        auth.setClub(this);
+    }
 
     @XmlElementWrapper(name = "members")
     @XmlElement(name = "member")
@@ -46,21 +45,22 @@ public class Club {
         this.members = members;
     }
 
-	public Member getUser(String username) throws UserNotFoundException {
-		for (Member member : this.members) {
-			if (member.getUsername().equals(username)) {
-				return member;
-			}
-		}
-		for (Member member : this.officers) {
-			if (member.getUsername().equals(username)) {
-				return member;
-			}
-		}
 
-		throw new UserNotFoundException(username);
+    public Member getUser(String username) throws UserNotFoundException {
+        for (Member member : this.members) {
+            if (member.getUsername().equals(username)) {
+                return member;
+            }
+        }
+        for (Member member : this.officers) {
+            if (member.getUsername().equals(username)) {
+                return member;
+            }
+        }
 
-	}
+        throw new UserNotFoundException(username);
+
+    }
 
     @XmlAttribute(name = "memberCount")
     public int getMemberCount() {
@@ -97,6 +97,7 @@ public class Club {
 
     /**
      * Legt eine Liste aller Vorstände für diese Verein fest
+     *
      * @param officerList Die Liste aller Vorstände
      */
     public void setOfficerList(List<Officer> officerList) {
@@ -105,6 +106,7 @@ public class Club {
 
     /**
      * Entfernt einen Vorstand aus der Liste der Vorstände dieses Vereins
+     *
      * @param officer Der Vorstand der zurücktritt.
      */
     public void retireOfficier(Officer officer) {
@@ -113,11 +115,12 @@ public class Club {
 
     /**
      * Legt ein neues Mitglied für den Verein an
+     *
      * @param firstName Der Vorname des Mitglieds
-     * @param lastName Der Nachname des Mitglieds
-     * @param username Der Username des Mitglieds
-     * @param password Das Passwort des Mitglieds
-     * @param sex Das Geschlecht des Mitglieds
+     * @param lastName  Der Nachname des Mitglieds
+     * @param username  Der Username des Mitglieds
+     * @param password  Das Passwort des Mitglieds
+     * @param sex       Das Geschlecht des Mitglieds
      */
     public void join(String firstName, String lastName, String username, String password, char sex) {
         this.members.add(new Member(firstName, lastName, username, password, sex, new GregorianCalendar(Locale.getDefault())));
@@ -125,6 +128,7 @@ public class Club {
 
     /**
      * Entfernt ein Mitglied aus dem Verein
+     *
      * @param member Das Mitglied das den Verein verlässt
      */
     public void leave(Member member) {
@@ -140,7 +144,7 @@ public class Club {
 
     public void endVote() {
         /*
-			TODO implement counting and results
+            TODO implement counting and results
          */
         this.currentVote = null;
     }
@@ -178,17 +182,16 @@ public class Club {
 
 
     public Map<Member, ArrayList<Payment>> getOpenPayments() {
-		Map<Member, ArrayList<Payment>> openPayments = new HashMap<>();
-		for (Member member : this.payments.keySet()) {
-			ArrayList<Payment> payments = this.payments.get(member);
-			payments.removeIf(Payment::isPaid);
-			openPayments.put(member, payments);
-		}
-		return openPayments;
-	}
+        Map<Member, ArrayList<Payment>> openPayments = new HashMap<>();
+        for (Member member : this.payments.keySet()) {
+            ArrayList<Payment> payments = this.payments.get(member);
+            payments.removeIf(Payment::isPaid);
+            openPayments.put(member, payments);
+        }
+        return openPayments;
+    }
 
     /**
-     *
      * @return Das Lager des Vereins
      */
     public Storage getStorage() {

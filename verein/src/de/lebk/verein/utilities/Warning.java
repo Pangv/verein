@@ -3,7 +3,6 @@ package de.lebk.verein.utilities;
 import javax.swing.*;
 
 /**
- *
  * @author sopaetzel
  */
 public class Warning extends JOptionPane {

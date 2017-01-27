@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
  * @author sopaetzel
  */
 public class ProfileDialog extends JDialog {
@@ -107,11 +106,11 @@ public class ProfileDialog extends JDialog {
         jBtnLeaveClub.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               if( JOptionPane.showConfirmDialog(null, "Sind Sie sicher, dass Sie austreten wollen?") == JOptionPane.OK_OPTION){
-                  JOptionPane.showMessageDialog(null, "Och nö");
-                   club.leave(member);
-                  System.exit(-99);
-               }
+                if (JOptionPane.showConfirmDialog(null, "Sind Sie sicher, dass Sie austreten wollen?") == JOptionPane.OK_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Och nö");
+                    club.leave(member);
+                    System.exit(-99);
+                }
             }
         });
 

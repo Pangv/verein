@@ -1,7 +1,6 @@
 package de.lebk.verein.event;
 
 /**
- *
  * @author sopaetzel
  */
 public enum EventTypes {

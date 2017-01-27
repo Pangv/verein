@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
  * @author Sven-Oliver Pätzel
  */
 public class EventManager extends JPanel {
@@ -115,7 +114,7 @@ public class EventManager extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Button Clicked");
-                eventDialog = new EventDialog(null, "Veranstaltung: " + jCmbEventType.getSelectedItem() + " erstellen", jCmbEventType.getSelectedItem().toString(), club, loggedMember);
+                eventDialog = new EventDialog("Veranstaltung: " + jCmbEventType.getSelectedItem() + " erstellen", jCmbEventType.getSelectedItem().toString(), club, loggedMember);
             }
         });
 

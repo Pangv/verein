@@ -7,26 +7,26 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 
 /**
- *
  * @author sopaetzel
  */
 public class DataAccess {
     private static DataAccess instance = null;
 
     private static FileHandler fileHandler = new FileHandler();
-
+    private static JAXBContext jc;
     // Files
     //private final URL CLUB_XML_URL = ClassLoader.getSystemResource("club.xml");
     private final File CLUB_XML = fileHandler.openFile();
-    private static JAXBContext jc;
-    
-    private DataAccess(){}
+
+    private DataAccess() {
+    }
 
     /**
      * Erstellt eine globale Instanz (Singleton) des JAXBContext
+     *
      * @throws JAXBException wird geworfen wenn keine Instanz erstellt werden kann.
      */
-    public static DataAccess getInstance() throws JAXBException{
+    public static DataAccess getInstance() throws JAXBException {
         if (instance == null) {
             instance = new DataAccess();
             jc = JAXBContext.newInstance(Club.class);

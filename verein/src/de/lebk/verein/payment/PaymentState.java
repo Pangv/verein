@@ -1,7 +1,7 @@
 package de.lebk.verein.payment;
 
 /**
- * Created by marcel on 22.12.16.
+ * @author mraddatz
  */
 public enum PaymentState {
     PAID("paid"),
@@ -18,7 +18,7 @@ public enum PaymentState {
     }
 
     /* (non-Javadoc)
-		 * @see java.lang.Enum#toString()
+         * @see java.lang.Enum#toString()
      */
     @Override
     public String toString() {

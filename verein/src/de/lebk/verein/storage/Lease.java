@@ -6,13 +6,12 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.GregorianCalendar;
 
 /**
- *
  * @author ebrinker
  */
 @XmlType(name = "lease", propOrder = {"member", "amount", "dueDate"})
 public class Lease {
 
-    
+
     private Member member;
     private int amount;
     private GregorianCalendar dueDate;

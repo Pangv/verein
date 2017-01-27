@@ -49,7 +49,7 @@ public class Member {
     }
 
     public String getDateTimeEntered() {
-        return entered.get(Calendar.DATE) + "." + entered.get(Calendar.MONTH) + "."
+        return entered.get(Calendar.DATE) + "." + entered.get(Calendar.MONTH) + 1 + "."
                 + entered.get(Calendar.YEAR);
     }
 

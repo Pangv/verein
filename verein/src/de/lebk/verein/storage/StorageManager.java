@@ -25,12 +25,11 @@ public class StorageManager extends JPanel {
     private JLabel lblStones;
 
     private JTextField txtAmount;
+    private JList<Lease> myLeases;
 
 
     private JButton btnLease;
     private JButton btnReturn;
-
-
 
 
     public StorageManager(Club club) {
@@ -69,19 +68,16 @@ public class StorageManager extends JPanel {
     private JPanel initBottomLeft() {
         JPanel bottomLeft = new JPanel();
         bottomLeft.setLayout(new BoxLayout(bottomLeft, BoxLayout.Y_AXIS));
-        JList<Lease> myLeases = new JList<>();
-        String[] data = {"Eins", "Zwei", "Drei"};
-        JList<String> myString = new JList<>(data);
-        JScrollPane myLeasesScrollPane = new JScrollPane(myString);
+        myLeases = new JList<>();
+        JScrollPane myLeasesScrollPane = new JScrollPane(myLeases);
 
-//        List<Lease> leasesForMember = club.getStorage().getLeasesForMember(Auth.getInstance().getCurrentUser());
-//        Lease[] leasesArr = leasesForMember.toArray(new Lease[0]);
-//        myLeases.setModel(new DefaultListModel<>(leasesArr));
-//        myLeases.setCellRenderer(new LeaseListCellRenderer());
+
+        //myLeases.setModel();
+        myLeases.setCellRenderer(new LeaseListCellRenderer());
         JLabel lblMyList = new JLabel("Meine Liste");
 
 
-        myLeasesScrollPane.setViewportView(myString);
+        myLeasesScrollPane.setViewportView(myLeases);
         bottomLeft.add(lblMyList);
         bottomLeft.add(myLeasesScrollPane);
 
@@ -142,7 +138,7 @@ public class StorageManager extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    //club.getStorage().removeLease(myLeases.getSelectedValue());
+                    club.getStorage().removeLease(myLeases.getSelectedValue());
                     club.getStorage().setAmount(club.getStorage().getAmount() - 1);
 
                 } catch (NullPointerException ex) {

@@ -2,50 +2,38 @@ package de.lebk.verein.event;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
-import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
- *
  * @author sopaetzel
  */
 public class EventDialog extends JDialog {
 
-    private String eventType;
-    private Club club;
-    private Member member;
-
     JLabel jLblTitle;
     JLabel jLblDateTime;
-
     JTextField jTFTitle;
-
     JComboBox<Integer> jCombYear;
     JComboBox<Integer> jCombMonth;
     JComboBox<Integer> jCombDay;
     JComboBox<Integer> jCombHour;
     JComboBox<Integer> jCombMinute;
-
     JButton jBtnAbort;
     JButton jBtnCreate;
+    private String eventType;
+    private Club club;
+    private Member member;
 
     public EventDialog() {
     }
 
-    public EventDialog(Frame owner, String title, String eventType, Club club, Member member) {
-        super(owner, title, true);
+    public EventDialog(String title, String eventType, Club club, Member member) {
+        super((Frame) null, title, true);
         this.eventType = eventType;
         this.club = club;
         this.member = member;

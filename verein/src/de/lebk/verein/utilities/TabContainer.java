@@ -10,7 +10,6 @@ import de.lebk.verein.storage.StorageManager;
 import javax.swing.*;
 
 /**
- *
  * @author sopaetzel
  */
 class TabContainer extends JTabbedPane {

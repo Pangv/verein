@@ -1,19 +1,12 @@
 package de.lebk.verein.login;
 
-import javax.swing.JOptionPane;
-
 /**
- *
- * @author Marcel Raddatz
+ * @author mraddatz
+ * @author sopaetzel
  */
 public class UserNotFoundException extends RuntimeException {
-
-	public UserNotFoundException() {
-		super("No such user");
-	}
-
-	public UserNotFoundException(String username) {
-		super("No such user: " + username);
-	}
+    public UserNotFoundException(String username) {
+        super("No such user: " + username);
+    }
 
 }

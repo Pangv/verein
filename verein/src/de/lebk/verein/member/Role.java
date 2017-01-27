@@ -1,7 +1,7 @@
 package de.lebk.verein.member;
 
 /**
- * Created by marcel on 28.12.16.
+ * @author mraddatz
  */
 public enum Role {
     OFFICER("Officer"),

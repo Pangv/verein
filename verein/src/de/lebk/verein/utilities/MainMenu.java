@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
  * @author sopaetzel
  */
 class MainMenu extends JMenuBar {
@@ -78,8 +77,8 @@ class MainMenu extends JMenuBar {
                     DataAccess.getInstance().writeXML(club);
                     parent.setVisible(false);
                     Auth.getInstance().logout();
-					LoginDialog login = new LoginDialog(null, "Neu anmelden");
-					if (login.isLogged()) {
+                    LoginDialog login = new LoginDialog(null, "Neu anmelden");
+                    if (login.isLogged()) {
                         parent.setVisible(true);
                     }
 
