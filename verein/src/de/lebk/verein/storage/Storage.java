@@ -37,13 +37,14 @@ public class Storage {
         lease.getMember().getLeases().remove(lease);
     }
 
-    public void addLease(Member member, int amount, GregorianCalendar dueDate) {
-        Lease leaseToAdd = new Lease(member, amount, dueDate);
+	public void addLease(Member member, int amount, GregorianCalendar dueDate)
+		throws OutOfStonesException {
+		Lease leaseToAdd = new Lease(member, amount, dueDate);
         leases.add(leaseToAdd);
         member.getLeases().add(leaseToAdd);
         if ((getAmount() - amount) < 0) {
-            Warning.displayWarning("kleiner Null", "Es können nicht mehr Steine ausgeliehen werden als vorhanden sind.");
-        } else {
+			throw new OutOfStonesException();
+		} else {
             setAmount(getAmount() - amount);
         }
     }

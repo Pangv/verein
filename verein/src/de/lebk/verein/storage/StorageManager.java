@@ -127,9 +127,12 @@ public class StorageManager extends JPanel {
                     } else {
                         lblStones.setText("Steine");
                     }
-                } catch (NumberFormatException ex) {
-                    Warning.displayWarning(ex.getMessage(), "Bitte nur ganzahlige Zahlen verwenden.");
-                }
+				} catch (NumberFormatException ex) {
+					Warning.displayWarning(ex.getMessage(), "Bitte nur ganzahlige Zahlen verwenden.");
+				} catch (OutOfStonesException ex) {
+					Warning.displayWarning("kleiner Null",
+						"Es können nicht mehr Steine ausgeliehen werden als vorhanden sind.");
+				}
             }
         });
 
