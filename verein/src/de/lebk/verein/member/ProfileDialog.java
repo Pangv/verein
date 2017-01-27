@@ -94,6 +94,10 @@ public class ProfileDialog extends JDialog {
         grid.gridy = 3;
         this.add(jBtnSaveChanges, grid);
 
+        if (!Auth.getInstance().getCurrentUser().getClass().getSimpleName().equals("Officer")) {
+            this.remove(jBtnResignation);
+        }
+
         this.setResizable(false);
         this.pack();
         this.setVisible(true);
@@ -132,7 +136,7 @@ public class ProfileDialog extends JDialog {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                JOptionPane.showInputDialog("");
             }
         });
 

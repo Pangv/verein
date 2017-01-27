@@ -1,8 +1,6 @@
 package de.lebk.verein.member;
 
 import de.lebk.verein.event.Event;
-import de.lebk.verein.storage.Lease;
-import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -13,7 +11,7 @@ import java.util.List;
 /**
  * @author mraddatz
  */
-@XmlType(propOrder = {"firstName", "lastName", "password", "username", "sex", "entered", "leases", "events"})
+@XmlType(propOrder = {"firstName", "lastName", "password", "username", "sex", "entered", "events"})
 public class Member {
 
     private String firstName;
@@ -22,7 +20,6 @@ public class Member {
     private String password;
     private char sex;
     private GregorianCalendar entered;
-    private List<Lease> leases = new ArrayList<>();
     private List<Event> events;
 
     public Member() {
@@ -106,15 +103,6 @@ public class Member {
 
     public void setEntered(GregorianCalendar entered) {
         this.entered = entered;
-    }
-
-    @XmlElement(name = "leases", namespace = "de.lebk.verein.member")
-    public List<Lease> getLeases() {
-        return leases;
-    }
-
-    public void setLeases(List<Lease> leases) {
-        this.leases = leases;
     }
 
     public List<Event> getEvents() {

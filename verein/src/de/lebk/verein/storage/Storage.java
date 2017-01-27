@@ -1,7 +1,6 @@
 package de.lebk.verein.storage;
 
 import de.lebk.verein.member.Member;
-import de.lebk.verein.utilities.Warning;
 
 import javax.xml.bind.annotation.*;
 import java.util.*;
@@ -27,21 +26,18 @@ public class Storage {
         this.amount = amount;
     }
 
-    
     public List<Lease> getLeases() {
         return leases;
     }
 
     public void removeLease(Lease lease) {
         leases.remove(lease);
-        lease.getMember().getLeases().remove(lease);
     }
 
 	public void addLease(Member member, int amount, GregorianCalendar dueDate)
 		throws OutOfStonesException {
 		Lease leaseToAdd = new Lease(member, amount, dueDate);
         leases.add(leaseToAdd);
-        member.getLeases().add(leaseToAdd);
         if ((getAmount() - amount) < 0) {
 			throw new OutOfStonesException();
 		} else {

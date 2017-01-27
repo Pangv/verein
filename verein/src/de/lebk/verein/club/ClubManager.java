@@ -23,8 +23,9 @@ public class ClubManager extends JPanel {
 
     private void createComponent() {
         this.setLayout(new BorderLayout());
-        this.add(createUserPanel(), BorderLayout.SOUTH);
         this.add(createPaymentsPanel(), BorderLayout.NORTH);
+        this.add(createFunctionsPanel(), BorderLayout.NORTH);
+        this.add(createUserPanel(), BorderLayout.NORTH);
     }
 
     private JPanel createFunctionsPanel() {

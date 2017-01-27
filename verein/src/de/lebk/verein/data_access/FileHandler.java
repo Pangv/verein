@@ -30,7 +30,7 @@ public class FileHandler {
 
         if (!jFileChooser.getSelectedFile().exists()) {
             try {
-                file = createNewFile(jFileChooser, file);
+                file = createNewFile(jFileChooser);
             } catch (IOException e) {
                 e.printStackTrace();
                 Warning.displayWarning(e.getMessage(), "Das XML konnte nicht erstellt werden");
@@ -44,10 +44,10 @@ public class FileHandler {
 
     }
 
-    private File createNewFile(JFileChooser jFileChooser, File file) throws IOException {
+    private File createNewFile(JFileChooser jFileChooser) throws IOException {
         FileWriter fw = null;
         jFileChooser.getSelectedFile().createNewFile();
-        file = jFileChooser.getSelectedFile();
+        File file = jFileChooser.getSelectedFile();
         fw = new FileWriter(file);
         fw.write("<club></club>");
         fw.close();

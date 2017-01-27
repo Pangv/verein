@@ -1,6 +1,6 @@
 package de.lebk.verein.event;
 
-import de.lebk.verein.club.Club;
+import de.lebk.verein.login.Auth;
 import de.lebk.verein.member.Member;
 
 import javax.xml.bind.annotation.*;
@@ -11,25 +11,25 @@ import java.util.List;
  * @author sopaetzel
  */
 @XmlRootElement(name = "event")
-@XmlType(name = "event", propOrder = {"eventType", "title", "dateTime", "organisator", "attendees"})
+@XmlType(name = "event", propOrder = {"eventType", "title", "dateTime", "organizer", "attendees"})
 public class Event {
 
     private String eventType;
     private String title;
     private List<Member> attendees;
-    private Member organisator;
+    private Member organizer;
     private GregorianCalendar dateTime;
 
     public Event() {
     }
 
-    public Event(String eventType, String title, Member organisator, GregorianCalendar dateTime) {
+    public Event(String eventType, String title, Member organizer, GregorianCalendar dateTime) {
         this.eventType = eventType;
         this.title = title;
-        this.organisator = organisator;
+        this.organizer = organizer;
         this.dateTime = dateTime;
         System.out.println("Event erstellt: "
-                + this.getTitle() + " [" + this.getEventType() + "," + this.getOrganisator().getFullName() + "," + this.getDateTime() + "]");
+                + this.getTitle() + " [" + this.getEventType() + "," + this.getOrganizer().getFullName() + "," + this.getDateTime() + "]");
     }
 
     @XmlAttribute(name = "event-type")
@@ -59,13 +59,13 @@ public class Event {
         this.dateTime = dateTime;
     }
 
-    @XmlElement(name = "organisator")
-    public Member getOrganisator() {
-        return organisator;
+    @XmlElement(name = "organizer")
+    public Member getOrganizer() {
+        return organizer;
     }
 
-    public void setOrganisator(Member organisator) {
-        this.organisator = organisator;
+    public void setOrganizer(Member organizer) {
+        this.organizer = organizer;
     }
 
     // @XmlAttribute(name = "attendee-count", required = false)
@@ -93,16 +93,16 @@ public class Event {
         member.removeEvent(this);
     }
 
-    public void changeOrgnisator(Member member) {
-        this.organisator = member;
+    public void changeOrganisator(Member member) {
+        this.organizer = member;
     }
 
-    public void cancelEvent(Club club) {
-        club.getEvents().remove(this);
+    public void cancelEvent() {
+        Auth.getInstance().getClub().getEvents().remove(this);
     }
 
-    public void addEvent(Club club) {
-        club.getEvents().add(this);
+    public void addEvent() {
+        Auth.getInstance().getClub().getEvents().add(this);
     }
 
     public void changeDateTime(int year, int month, int day, int hour, int minute) {

@@ -4,7 +4,6 @@ import de.lebk.verein.club.Club;
 import de.lebk.verein.member.Member;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,8 +17,7 @@ public class EventManager extends JPanel {
 
     private EventDialog eventDialog;
 
-    private JTable jTblEvents;
-    private TableModel defaultModel;
+    private JList<Event> lstEvents;
     private JScrollPane scrollPane;
 
     private JButton jBtnJoin;
@@ -41,9 +39,9 @@ public class EventManager extends JPanel {
         GridBagConstraints grid = new GridBagConstraints();
         this.setLayout(new GridBagLayout());
 
-        jTblEvents = new JTable();
-        jTblEvents.setModel(new EventTableModel(this.club));
-        scrollPane = new JScrollPane(jTblEvents);
+        lstEvents = new JList<>();
+
+        scrollPane = new JScrollPane(lstEvents);
         scrollPane.setPreferredSize(new Dimension(200, 50));
 
         jBtnJoin = new JButton("Anmelden");
@@ -106,7 +104,7 @@ public class EventManager extends JPanel {
         jBtnJoin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object selectedRow = jTblEvents.getSelectedRow();
+                Object selectedRow = lstEvents.getSelectedIndex();
             }
         });
 

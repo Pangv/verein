@@ -1,6 +1,7 @@
 package de.lebk.verein.event;
 
 import de.lebk.verein.club.Club;
+import de.lebk.verein.login.Auth;
 import de.lebk.verein.member.Member;
 
 import javax.swing.*;
@@ -164,7 +165,7 @@ public class EventDialog extends JDialog {
     }
 
     private Integer[] getHourModel() {
-        int hourOfDay = 1;
+        int hourOfDay = 0;
         Integer[] model = new Integer[23];
         for (int i = 0; i < model.length; i++) {
             model[i] = hourOfDay++;
@@ -191,7 +192,7 @@ public class EventDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Event creation executed");
-                club.addEvent(new Event(eventType, jTFTitle.getText(), member, new GregorianCalendar((int) jCombYear.getSelectedItem(), (int) jCombMonth.getSelectedItem() - 1,
+                club.addEvent(new Event(eventType, jTFTitle.getText(), Auth.getInstance().getCurrentUser(), new GregorianCalendar((int) jCombYear.getSelectedItem(), (int) jCombMonth.getSelectedItem() - 1,
                         (int) jCombDay.getSelectedItem(), (int) jCombHour.getSelectedItem(), (int) jCombMinute.getSelectedItem())));
 
                 JOptionPane.showMessageDialog(null, "Veranstaltung hinzugefügt");

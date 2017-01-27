@@ -72,7 +72,6 @@ public class StorageManager extends JPanel {
         JScrollPane myLeasesScrollPane = new JScrollPane(myLeases);
 
 
-        //myLeases.setModel();
         myLeases.setCellRenderer(new LeaseListCellRenderer());
         JLabel lblMyList = new JLabel("Meine Liste");
 

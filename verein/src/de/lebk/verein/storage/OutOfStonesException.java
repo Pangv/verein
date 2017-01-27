@@ -1,7 +1,7 @@
 package de.lebk.verein.storage;
 
 /**
- * Created by marcel on 27.01.17.
+ * @author mraddatz
  */
 public class OutOfStonesException extends RuntimeException {
 	public OutOfStonesException() {

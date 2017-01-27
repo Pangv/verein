@@ -39,12 +39,17 @@ public class Auth {
 
     }
 
+
     public Role getRole() {
         return role;
     }
 
     public Member getCurrentUser() {
         return currentUser;
+    }
+
+    public Club getClub() {
+        return club;
     }
 
     public void setClub(Club club) {
