@@ -12,10 +12,9 @@ import java.util.*;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Storage {
-
-
-    private static List<Lease> leases = new ArrayList<>();
+    private List<Lease> leases = new ArrayList<>();
     private int amount = 2000;
+    private GregorianCalendar today = new GregorianCalendar();
 
     public int getAmount() {
         return amount;
@@ -37,7 +36,9 @@ public class Storage {
     }
 
     public void addLease(Member member, int amount, GregorianCalendar dueDate) {
-        leases.add(new Lease(member, amount, dueDate));
+        Lease leaseToAdd = new Lease(member, amount, dueDate);
+        leases.add(leaseToAdd);
+        member.getLeases().add(leaseToAdd);
         if ((getAmount() - amount) < 0) {
             Warning.displayWarning("kleiner Null", "Es können nicht mehr Steine ausgeliehen werden als vorhanden sind.");
         } else {
@@ -46,7 +47,6 @@ public class Storage {
     }
 
     public Map<Member, List<Lease>> getAllOverdueLeases() {
-        GregorianCalendar today = new GregorianCalendar();
         Map<Member, List<Lease>> overdueLeases = new HashMap<>();
         for (Lease lease : leases) {
             if (lease.getDueDate().before(today)) {
@@ -75,7 +75,6 @@ public class Storage {
 
 
     public List<Lease> getOverdueLeasesForMember(Member member) {
-        GregorianCalendar today = new GregorianCalendar();
         List<Lease> overdueLeases = new ArrayList<>();
         for (Lease lease : leases) {
             if (lease.getMember() == member && lease.getDueDate().before(today)) {
@@ -83,5 +82,9 @@ public class Storage {
             }
         }
         return overdueLeases;
+    }
+    
+    public void setToday(GregorianCalendar today) {
+        this.today = today;
     }
 }

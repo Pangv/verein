@@ -2,6 +2,7 @@ package de.lebk.verein.member;
 
 import de.lebk.verein.event.Event;
 import de.lebk.verein.storage.Lease;
+import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -21,7 +22,7 @@ public class Member {
     private String password;
     private char sex;
     private GregorianCalendar entered;
-    private List<Lease> leases;
+    private List<Lease> leases = new ArrayList<>();
     private List<Event> events;
 
     public Member() {
