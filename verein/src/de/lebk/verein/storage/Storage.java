@@ -12,6 +12,9 @@ import java.util.*;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Storage {
+    
+    @XmlElementWrapper(name = "leases")
+    @XmlElement(name = "lease")
     private List<Lease> leases = new ArrayList<>();
     private int amount = 2000;
     private GregorianCalendar today = new GregorianCalendar();
@@ -24,8 +27,7 @@ public class Storage {
         this.amount = amount;
     }
 
-    @XmlElementWrapper(name = "leases")
-    @XmlElement(name = "lease")
+    
     public List<Lease> getLeases() {
         return leases;
     }
