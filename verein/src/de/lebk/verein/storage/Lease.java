@@ -49,5 +49,8 @@ public class Lease {
         this.dueDate = dueDate;
     }
 
-
+    @Override
+    public String toString() {
+        return getMember() + "; " + getAmount() + "; " + getDueDate();
+    }
 }
