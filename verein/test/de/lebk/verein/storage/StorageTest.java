@@ -17,12 +17,9 @@ public class StorageTest {
     public void testRemoveLease() {
         Storage storage = new Storage();
         Member ownerOfLease = new Member();
-        storage.addLease(ownerOfLease, 5, new GregorianCalendar());
-
-        storage.removeLease(ownerOfLease.getLeases().get(0));
-
-        assertEquals("If a lease is removed by the storage the lease should be "
-                + "removed from its owner", ownerOfLease.getLeases().size(), 0);
+        storage.addLease(ownerOfLease,20, new GregorianCalendar());
+        storage.removeLease(storage.getLeases().get(0));
+        
         assertEquals("If a lease is removed by the storage the lease should be "
                 + "removed from the storage", storage.getLeases().size(), 0);
     }
@@ -34,8 +31,6 @@ public class StorageTest {
 
         storage.addLease(ownerOfLease, 5, new GregorianCalendar());
 
-        assertEquals("If a lease is added by the storage the lease should be "
-                + "added to the given member", ownerOfLease.getLeases().size(), 1);
         assertEquals("If a lease is added by the storage the lease should be "
                 + "added to the storage", storage.getLeases().size(), 1);
     }
