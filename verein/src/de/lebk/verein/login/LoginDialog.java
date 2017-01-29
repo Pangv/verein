@@ -4,10 +4,7 @@ import de.lebk.verein.utilities.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 /**
  * @author sopaetzel
@@ -19,7 +16,6 @@ public class LoginDialog extends JDialog {
     private JPasswordField jPFPassword;
 
     private JButton jBtnLogin;
-    private JButton jBtnRegister;
 
     private boolean logged = false;
 
@@ -55,7 +51,6 @@ public class LoginDialog extends JDialog {
         jPFPassword = new JPasswordField();
 
         jBtnLogin = new JButton("Anmelden");
-        JButton jBtnRegister = new JButton("Registrieren");
 
         this.setTitle(dialogTitle);
 
@@ -69,7 +64,6 @@ public class LoginDialog extends JDialog {
         jPanel.add(jPFPassword);
 
         jPanel.add(jBtnLogin);
-        jPanel.add(jBtnRegister);
 
         this.add(jPanel);
 
@@ -90,7 +84,7 @@ public class LoginDialog extends JDialog {
                 } catch (UserNotFoundException | WrongPasswordException ex) {
                     JOptionPane.showMessageDialog(null, "Username oder Password nicht korrekt.",
                             "Nicht gefunden", JOptionPane.ERROR_MESSAGE);
-                    System.err.println(ex.getMessage());
+                    ex.printStackTrace();
                 }
             }
         });
@@ -106,8 +100,10 @@ public class LoginDialog extends JDialog {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     try {
                         tryLogin();
-                    } catch (UserNotFoundException e1) {
-                        e1.printStackTrace();
+                    } catch (UserNotFoundException | WrongPasswordException ex) {
+                        JOptionPane.showMessageDialog(null, "Username oder Password nicht korrekt.",
+                                "Nicht gefunden", JOptionPane.ERROR_MESSAGE);
+                        ex.printStackTrace();
                     }
                 }
             }
@@ -119,9 +115,49 @@ public class LoginDialog extends JDialog {
         });
 
 
+        this.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(!getParent().isVisible()){
+                    System.exit(0);
+                }
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
+
+
     }
 
-    private void tryLogin() throws UserNotFoundException {
+    private void tryLogin() throws UserNotFoundException, WrongPasswordException {
         logged = Auth.getInstance().login(jTFLoginname.getText(), jPFPassword.getText());
         dispose();
     }

@@ -8,7 +8,6 @@ import de.lebk.verein.member.Officer;
 import de.lebk.verein.payment.Payment;
 import de.lebk.verein.payment.PaymentState;
 import de.lebk.verein.storage.Storage;
-import de.lebk.verein.vote.Vote;
 
 import javax.xml.bind.annotation.*;
 import java.util.*;
@@ -27,7 +26,6 @@ public class Club {
     private List<Member> members = new ArrayList<>();
     private List<Event> events = new ArrayList<>();
     private Map<Member, ArrayList<Payment>> payments = new HashMap<>();
-    private Vote currentVote;
     private Storage storage = new Storage();
     private Auth auth = Auth.getInstance();
 
@@ -133,24 +131,6 @@ public class Club {
      */
     public void leave(Member member) {
         this.members.remove(member);
-    }
-
-
-    public void initOfficerVote() {
-        if (currentVote != null) {
-            this.currentVote = new Vote();
-        }
-    }
-
-    public void endVote() {
-        /*
-            TODO implement counting and results
-         */
-        this.currentVote = null;
-    }
-
-    public Vote getCurrentVote() {
-        return currentVote;
     }
 
     @XmlElement
