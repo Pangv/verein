@@ -1,10 +1,8 @@
 package de.lebk.verein.member;
 
-import com.sun.corba.se.impl.transport.CorbaResponseWaitingRoomImpl;
 import de.lebk.verein.club.Club;
 import de.lebk.verein.data_access.DataAccess;
 import de.lebk.verein.login.Auth;
-import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import javax.xml.bind.JAXBException;
@@ -140,7 +138,7 @@ public class ProfileDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                  String oldPassword = Auth.getInstance().getCurrentUser().getPassword();
-                String newPassword = null;
+                String newPassword;
                 if ((newPassword = JOptionPane.showInputDialog("Ändern Sie Ihr Passwort"))!=null){
                     if (!oldPassword.equals(newPassword)){
                         Auth.getInstance().getCurrentUser().setPassword(newPassword);

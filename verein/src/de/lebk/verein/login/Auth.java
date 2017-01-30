@@ -39,7 +39,6 @@ public class Auth {
 
     }
 
-
     public Role getRole() {
         return role;
     }

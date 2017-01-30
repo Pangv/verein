@@ -3,7 +3,6 @@ package de.lebk.verein.utilities;
 import de.lebk.verein.club.Club;
 import de.lebk.verein.data_access.DataAccess;
 import de.lebk.verein.login.Auth;
-import de.lebk.verein.login.LoginDialog;
 import de.lebk.verein.member.ProfileDialog;
 
 import javax.swing.*;

@@ -70,13 +70,10 @@ public class StorageManager extends JPanel {
         bottomLeft.setLayout(new BoxLayout(bottomLeft, BoxLayout.Y_AXIS));
         myLeases = new JList<>();
         JScrollPane myLeasesScrollPane = new JScrollPane(myLeases);
-
-
-        myLeases.setCellRenderer(new LeaseListCellRenderer());
         JLabel lblMyList = new JLabel("Meine Liste");
 
 
-        myLeasesScrollPane.setViewportView(myLeases);
+
         bottomLeft.add(lblMyList);
         bottomLeft.add(myLeasesScrollPane);
 

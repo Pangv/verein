@@ -13,12 +13,14 @@ import java.util.Properties;
 class FileHandler {
 
     private Properties prop = new Properties();
-    private String lastFile;
     private OutputStream output = null;
-    private InputStream input = null;
 
     private final String PATH = System.getProperty("user.home");
 
+    /**
+     * Speichert den Pfad einer aktuellen Sitzung
+     * @param lastFile der Pfad der aktuellen Sitzung
+     */
     private void createProps(String lastFile) {
         try {
             output = new FileOutputStream("config.properties");
@@ -38,10 +40,14 @@ class FileHandler {
         }
     }
 
+    /**
+     *
+     * @return Einen Pfad einer frühren Sitzung
+     */
     private String readProps() {
         String filePath = null;
         try {
-            input = new FileInputStream("config.properties");
+            InputStream input = new FileInputStream("config.properties");
             prop.load(input);
             filePath = prop.getProperty("file");
         } catch (FileNotFoundException e) {
@@ -51,26 +57,21 @@ class FileHandler {
             Warning.displayWarning(e.getMessage(), "Einstellungen konnten nicht geladen werden");
             e.printStackTrace();
         }
-
-
         return filePath;
-
     }
 
-
+    /**
+     *
+     * @return Eine gewählte Datei
+     * @throws NullPointerException Wenn die Datei nicht gefunden wird
+     */
     File openFile() throws NullPointerException {
         File directory = new File(PATH);
         File file = null;
-
-
-        System.out.println("jfc");
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setCurrentDirectory(directory);
         jFileChooser.setFileFilter(new FileNameExtensionFilter("Vereinsdatei", "xml"));
-
-
         if(readProps() != null && JOptionPane.showConfirmDialog(null, "Wollen Sie Ihren letzten Verein laden?", "Letzte Einstellungen laden", JOptionPane.YES_NO_OPTION ,JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-            System.out.println("Show Properties");
             file = new File(readProps());
         }else {
             jFileChooser.showSaveDialog(null);
@@ -83,7 +84,6 @@ class FileHandler {
                     Warning.displayWarning(e.getMessage(), "Das XML konnte nicht erstellt werden");
                 }
             } else {
-
                 file = jFileChooser.getSelectedFile();
             }
 
@@ -92,15 +92,14 @@ class FileHandler {
             }
         }
 
-
         System.out.println(jFileChooser.getSelectedFile());
-
         return file;
 
     }
 
     private File chooseFile(JFileChooser jFileChooser) throws IOException {
-        FileWriter fw = null;
+        FileWriter fw;
+        //noinspection ResultOfMethodCallIgnored
         jFileChooser.getSelectedFile().createNewFile();
         File file = jFileChooser.getSelectedFile();
         fw = new FileWriter(file);

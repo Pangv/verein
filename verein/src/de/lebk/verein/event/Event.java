@@ -4,6 +4,8 @@ import de.lebk.verein.login.Auth;
 import de.lebk.verein.member.Member;
 
 import javax.xml.bind.annotation.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -109,4 +111,12 @@ public class Event {
         this.dateTime = new GregorianCalendar(year, month, month, hour, minute);
     }
 
+    @Override
+    public String toString() {
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+
+        return "Titel: " + this.title
+                + "\t\t >>>>Veranstalter: " + this.organizer.getFullName()
+                + "\t\t >>>>Datum & Uhrzeit: " + dateFormat.format(dateTime.getTime());
+    }
 }

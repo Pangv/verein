@@ -10,11 +10,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MemberManager extends JPanel {
 
-
-
-
-
-
     JTable tblMember = new JTable(new DefaultTableModel(new Object[]{"Username","Vorname", "Nachname", "Geschlecht", "Eintritt"}, 0));
     JTable tblOfficer = new JTable(new DefaultTableModel(new Object[]{"Username","Vorname", "Nachname", "Geschlecht", "Eintritt"}, 0));
 

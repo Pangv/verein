@@ -23,7 +23,7 @@ public class MainFrame extends JFrame {
     private final int minHeight = 300;
     private final Dimension initDimension = new Dimension(initWidth, initHeight);
     private final Dimension minDimension = new Dimension(minWidth, minHeight);
-    private boolean DEBUG = false;
+    private boolean DEBUG = true;
     private Club club;
     private Member member;
 
@@ -48,9 +48,7 @@ public class MainFrame extends JFrame {
                 }
             }
         }
-
-
-        this.setTitle(this.getTitle() + " [" + member.getFullName() + "]");
+        this.setTitle(this.getTitle() + " [> " + member.getFullName() + " <]");
     }
 
     /**
@@ -101,9 +99,9 @@ public class MainFrame extends JFrame {
         try {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(frame, "Wollen Sie Ihre Änderungen vor dem Schließen speichern?", "Ungespeicherte Änderungen", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE)) {
                 DataAccess.getInstance().writeXML(club);
-                System.out.println("Schließen mit Speichern");
+                System.out.println("Closing with saving");
             } else {
-                System.out.println("Schließen ohne Speichern");
+                System.out.println("Closing without saving");
             }
         } catch (JAXBException e1) {
             e1.printStackTrace();

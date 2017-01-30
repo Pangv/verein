@@ -158,6 +158,7 @@ public class LoginDialog extends JDialog {
     }
 
     private void tryLogin() throws UserNotFoundException, WrongPasswordException {
+        //noinspection deprecation
         logged = Auth.getInstance().login(jTFLoginname.getText(), jPFPassword.getText());
         dispose();
     }

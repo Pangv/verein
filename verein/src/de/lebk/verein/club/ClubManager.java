@@ -1,6 +1,5 @@
 package de.lebk.verein.club;
 
-import de.lebk.verein.member.Member;
 import de.lebk.verein.utilities.Warning;
 
 import javax.swing.*;
@@ -30,23 +29,9 @@ public class ClubManager extends JPanel {
 
     private JPanel createFunctionsPanel() {
         JPanel pnlFunctions = new JPanel();
-        JList<Member> lstMember = new JList<>();
 
-        JButton btnShowMember = new JButton("Mitglieder anzeigen");
 
-        btnShowMember.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog memberDialog = new JDialog();
-                Member[] members = new Member[club.getMembers().size()];
-                int i = 0;
-                for (Member member : club.getMembers()) {
-                    members[i] = member;
-                    i++;
-                }
 
-            }
-        });
         return pnlFunctions;
     }
 
@@ -112,7 +97,9 @@ public class ClubManager extends JPanel {
         btnCreateUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //noinspection deprecation
                 if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtUsername.getText().equals("") && !pwfPassword.getText().equals("")) {
+                    //noinspection deprecation
                     club.join(txtFirstName.getText(), txtLastName.getText(), txtUsername.getText(), pwfPassword.getText(), rbtnMale.isSelected() ? 'm' : 'f');
                     JOptionPane.showMessageDialog(null, "");
                 } else {

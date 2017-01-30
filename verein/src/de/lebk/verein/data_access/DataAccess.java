@@ -15,7 +15,6 @@ public class DataAccess {
     private static FileHandler fileHandler = new FileHandler();
     private static JAXBContext jc;
     // Files
-    //private final URL CLUB_XML_URL = ClassLoader.getSystemResource("club.xml");
     private final File CLUB_XML = fileHandler.openFile();
 
     private DataAccess() {
