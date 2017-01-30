@@ -43,7 +43,6 @@ public class LoginDialog extends JDialog {
         JPanel jPanel = new JPanel(new GridLayout(4, 2, horizontalGap, verticalGap));
         jPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JLabel jLblPlaceholder = new JLabel(" ");
         JLabel jLblMessage = new JLabel("Bitte melden Sie sich an");
         JLabel jLblLoginname = new JLabel("Anmeldename");
         JLabel jLblPassword = new JLabel("Passwort");
@@ -55,7 +54,7 @@ public class LoginDialog extends JDialog {
         this.setTitle(dialogTitle);
 
         jPanel.add(jLblMessage, CENTER_ALIGNMENT);
-        jPanel.add(jLblPlaceholder);
+        jPanel.add(new JLabel());
 
         jPanel.add(jLblLoginname);
         jPanel.add(jTFLoginname);
@@ -63,6 +62,7 @@ public class LoginDialog extends JDialog {
         jPanel.add(jLblPassword);
         jPanel.add(jPFPassword);
 
+        jPanel.add(new JLabel());
         jPanel.add(jBtnLogin);
 
         this.add(jPanel);

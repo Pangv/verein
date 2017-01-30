@@ -22,16 +22,27 @@ class DashboardUsersPanel extends JPanel {
     }
 
     private void createComponent() {
-        this.setLayout(new GridLayout(0, 3));
+        this.setLayout(new GridLayout(2, 0));
 
-        this.add(new JLabel("Neue Mitglieder"));
-        this.add(new JLabel());
-        this.add(new JLabel());
+        this.add(latestMembersPanel());
+        this.add(latestOfficersPanel());
 
+
+    }
+
+    private JPanel latestMembersPanel(){
+
+
+        JPanel pnlLatestMembers = new JPanel();
         List<Member> reversedMember = club.getMembers();
-        List<Officer> reversedOfficer = club.getOfficers();
-        Collections.reverse(reversedOfficer);
         Collections.reverse(reversedMember);
+
+
+        pnlLatestMembers.add(new JLabel("Neue Mitglieder"));
+        pnlLatestMembers.add(new JLabel());
+        pnlLatestMembers.add(new JLabel());
+
+
 
         for (Member member : reversedMember) {
             JPanel userPanel = new JPanel();
@@ -43,14 +54,25 @@ class DashboardUsersPanel extends JPanel {
             userPanel.add(new JLabel("Mitglied seit:" + member.getDateTimeEntered()));
 
 
-            this.add(userPanel);
+            pnlLatestMembers.add(userPanel);
 
 
         }
 
-        this.add(new JLabel("Neue Vorstände"));
-        this.add(new JLabel());
-        this.add(new JLabel());
+        return pnlLatestMembers;
+
+    }
+
+    private JPanel latestOfficersPanel(){
+
+        JPanel pnlLatestOfficers = new JPanel();
+        List<Officer> reversedOfficer = club.getOfficers();
+        Collections.reverse(reversedOfficer);
+
+
+        pnlLatestOfficers.add(new JLabel("Neue Vorstände"));
+        pnlLatestOfficers.add(new JLabel());
+        pnlLatestOfficers.add(new JLabel());
 
         for (Officer officer : reversedOfficer) {
             JPanel officerPanel = new JPanel();
@@ -62,10 +84,13 @@ class DashboardUsersPanel extends JPanel {
             officerPanel.add(new JLabel("Mitglied seit:" + officer.getDateTimeEntered()));
 
 
-            this.add(officerPanel);
+            pnlLatestOfficers.add(officerPanel);
 
 
         }
+
+        return pnlLatestOfficers;
+
     }
 
 }

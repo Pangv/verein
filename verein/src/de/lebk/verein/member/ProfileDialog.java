@@ -1,9 +1,13 @@
 package de.lebk.verein.member;
 
+import com.sun.corba.se.impl.transport.CorbaResponseWaitingRoomImpl;
 import de.lebk.verein.club.Club;
+import de.lebk.verein.data_access.DataAccess;
 import de.lebk.verein.login.Auth;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
+import javax.xml.bind.JAXBException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +41,6 @@ public class ProfileDialog extends JDialog {
         JLabel jLblDateJoined = new JLabel("Mitglied seit: " + member.getDateTimeEntered());
 
         jBtnLeaveClub = new JButton("Austreten");
-        JButton jBtnSaveChanges = new JButton("Sichern");
         JButton jBtnResignation = new JButton("Rücktritt");
         jBtnChangePassword = new JButton("Passwort ändern");
 
@@ -88,11 +91,6 @@ public class ProfileDialog extends JDialog {
         grid.gridx = 3;
         grid.gridy = 2;
         this.add(jBtnChangePassword, grid);
-        // adding saveChanges button
-        grid.gridwidth = 1;
-        grid.gridx = 3;
-        grid.gridy = 3;
-        this.add(jBtnSaveChanges, grid);
 
         if (!Auth.getInstance().getCurrentUser().getClass().getSimpleName().equals("Officer")) {
             this.remove(jBtnResignation);
@@ -113,6 +111,11 @@ public class ProfileDialog extends JDialog {
                 if (JOptionPane.showConfirmDialog(null, "Sind Sie sicher, dass Sie austreten wollen?") == JOptionPane.OK_OPTION) {
                     JOptionPane.showMessageDialog(null, "Och nö");
                     club.leave(member);
+                    try {
+                        DataAccess.getInstance().writeXML(club);
+                    } catch (JAXBException e1) {
+                        e1.printStackTrace();
+                    }
                     System.exit(-99);
                 }
             }
@@ -136,7 +139,19 @@ public class ProfileDialog extends JDialog {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showInputDialog("");
+                 String oldPassword = Auth.getInstance().getCurrentUser().getPassword();
+                String newPassword = null;
+                if ((newPassword = JOptionPane.showInputDialog("Ändern Sie Ihr Passwort"))!=null){
+                    if (!oldPassword.equals(newPassword)){
+                        Auth.getInstance().getCurrentUser().setPassword(newPassword);
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Das Passwort unterscheidet sich nicht. Versuchen Sie es erneut.", "Hinweis", JOptionPane.INFORMATION_MESSAGE);
+                        Auth.getInstance().getCurrentUser().setPassword(oldPassword);
+                    }
+                }
+
+
+
             }
         });
 

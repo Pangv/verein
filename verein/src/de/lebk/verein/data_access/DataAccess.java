@@ -60,8 +60,6 @@ public class DataAccess {
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(element, CLUB_XML);
-
-        //FIXME SystemResource lässt sich nicht beschreiben / ändern
     }
 
 }

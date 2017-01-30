@@ -52,11 +52,14 @@ public class ClubManager extends JPanel {
 
     private JPanel createPaymentsPanel() {
         JPanel pnlPayments = new JPanel();
+
         pnlPayments.setLayout(new GridLayout(2, 5));
 
 
         JButton btnExecutePayment = new JButton("Beitragszahlung durchführen");
+        JButton btnRequestPayment = new JButton("Beitragszahlung auslösen");
         this.add(btnExecutePayment);
+        this.add(btnRequestPayment);
 
         return pnlPayments;
     }

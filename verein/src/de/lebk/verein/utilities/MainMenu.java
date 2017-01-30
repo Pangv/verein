@@ -75,13 +75,8 @@ class MainMenu extends JMenuBar {
                 try {
                     JOptionPane.showMessageDialog(jMenuProfile, "Ausgeloggt!");
                     DataAccess.getInstance().writeXML(club);
-                    parent.setVisible(false);
+                    parent.dispose();
                     Auth.getInstance().logout();
-                    LoginDialog login = new LoginDialog(null, "Neu anmelden");
-                    if (login.isLogged()) {
-                        parent.setVisible(true);
-                    }
-
                 } catch (JAXBException ex) {
                     ex.printStackTrace();
                 }

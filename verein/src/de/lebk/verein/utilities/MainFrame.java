@@ -67,7 +67,7 @@ public class MainFrame extends JFrame {
                 onCloseOperation(frame);
             }
         });
-        this.setTitle("Vereinsverwaltung");
+        this.setTitle("Volksfront von Judäa");
         this.setPreferredSize(initDimension);
         this.setMinimumSize(minDimension);
         this.setIconImage(new ImageIcon(ClassLoader.getSystemResource("logo.png")).getImage());

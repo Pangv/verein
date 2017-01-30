@@ -69,7 +69,7 @@ class FileHandler {
         jFileChooser.setFileFilter(new FileNameExtensionFilter("Vereinsdatei", "xml"));
 
 
-        if(readProps() != null && JOptionPane.showConfirmDialog(null, "Wollen Sie Ihren letzten Verein laden?", "Letzte Einstellungen laden", JOptionPane.OK_CANCEL_OPTION ,JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
+        if(readProps() != null && JOptionPane.showConfirmDialog(null, "Wollen Sie Ihren letzten Verein laden?", "Letzte Einstellungen laden", JOptionPane.YES_NO_OPTION ,JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
             System.out.println("Show Properties");
             file = new File(readProps());
         }else {
