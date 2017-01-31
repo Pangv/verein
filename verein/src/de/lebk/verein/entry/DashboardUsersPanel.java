@@ -5,6 +5,9 @@ import de.lebk.verein.member.Member;
 import de.lebk.verein.member.Officer;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Collections;
 import java.util.List;
@@ -19,15 +22,26 @@ class DashboardUsersPanel extends JPanel {
     DashboardUsersPanel(Club club) {
         this.club = club;
         this.createComponent();
+
     }
 
     private void createComponent() {
-        this.setLayout(new GridLayout(2, 0));
+        this.setLayout(new GridLayout(4, 0, 20, 20));
 
+        JLabel lblNewMember = new JLabel("Neue Mitglieder");
+        lblNewMember.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+        lblNewMember.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        JLabel lblNewOfficer = new JLabel("Neue Vorstände");
+        lblNewOfficer.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+        lblNewOfficer.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+
+
+        this.add(lblNewMember);
         this.add(latestMembersPanel());
+        this.add(lblNewOfficer);
         this.add(latestOfficersPanel());
-
-
     }
 
     private JPanel latestMembersPanel(){
@@ -37,26 +51,18 @@ class DashboardUsersPanel extends JPanel {
         List<Member> reversedMember = club.getMembers();
         Collections.reverse(reversedMember);
 
-
-        pnlLatestMembers.add(new JLabel("Neue Mitglieder"));
-        pnlLatestMembers.add(new JLabel());
-        pnlLatestMembers.add(new JLabel());
-
-
+        pnlLatestMembers.setLayout(new BoxLayout(pnlLatestMembers, BoxLayout.X_AXIS));
 
         for (Member member : reversedMember) {
             JPanel userPanel = new JPanel();
             userPanel.setLayout(new BoxLayout(userPanel, BoxLayout.Y_AXIS));
-
+            userPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
             userPanel.add(new JLabel(member.getFullName()));
             userPanel.add(new JLabel("Bekannt als: " + member.getUsername()));
             userPanel.add(new JLabel("Mitglied seit:" + member.getDateTimeEntered()));
 
-
-            pnlLatestMembers.add(userPanel);
-
-
+            pnlLatestMembers.add(userPanel, BorderLayout.WEST);
         }
 
         return pnlLatestMembers;
@@ -69,22 +75,19 @@ class DashboardUsersPanel extends JPanel {
         List<Officer> reversedOfficer = club.getOfficers();
         Collections.reverse(reversedOfficer);
 
+        pnlLatestOfficers.setLayout(new BoxLayout(pnlLatestOfficers, BoxLayout.X_AXIS));
 
-        pnlLatestOfficers.add(new JLabel("Neue Vorstände"));
-        pnlLatestOfficers.add(new JLabel());
-        pnlLatestOfficers.add(new JLabel());
 
         for (Officer officer : reversedOfficer) {
             JPanel officerPanel = new JPanel();
             officerPanel.setLayout(new BoxLayout(officerPanel, BoxLayout.Y_AXIS));
-
+            officerPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
             officerPanel.add(new JLabel(officer.getFullName()));
             officerPanel.add(new JLabel("Bekannt als: " + officer.getUsername()));
             officerPanel.add(new JLabel("Mitglied seit:" + officer.getDateTimeEntered()));
 
-
-            pnlLatestOfficers.add(officerPanel);
+            pnlLatestOfficers.add(officerPanel, BorderLayout.WEST);
 
 
         }

@@ -91,8 +91,6 @@ class FileHandler {
                 createProps(file.getAbsolutePath());
             }
         }
-
-        System.out.println(jFileChooser.getSelectedFile());
         return file;
 
     }

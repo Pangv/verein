@@ -3,6 +3,7 @@ package de.lebk.verein.member;
 import de.lebk.verein.login.Auth;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -10,12 +11,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MemberManager extends JPanel {
 
-    JTable tblMember = new JTable(new DefaultTableModel(new Object[]{"Username","Vorname", "Nachname", "Geschlecht", "Eintritt"}, 0));
-    JTable tblOfficer = new JTable(new DefaultTableModel(new Object[]{"Username","Vorname", "Nachname", "Geschlecht", "Eintritt"}, 0));
+    private JTable tblMember = new JTable(new DefaultTableModel(new Object[]{"Username","Vorname", "Nachname", "Geschlecht", "Eintritt"}, 0));
+    private JTable tblOfficer = new JTable(new DefaultTableModel(new Object[]{"Username","Vorname", "Nachname", "Geschlecht", "Eintritt"}, 0));
 
-    JScrollPane scrlMemberPane = new JScrollPane(tblMember);
-    JScrollPane scrlOfficerPane = new JScrollPane(tblOfficer);
-
+    private JScrollPane scrlMemberPane = new JScrollPane(tblMember);
+    private JScrollPane scrlOfficerPane = new JScrollPane(tblOfficer);
 
     public MemberManager() {
         createComponent();
@@ -23,20 +23,23 @@ public class MemberManager extends JPanel {
 
     private void createComponent(){
 
+        JButton btnPromote = new JButton("Zum Vorstand ernennen.");
+        JButton btnDemote = new JButton("Vorstand 'entfernen'.");
+
         JPanel pnlMember= new JPanel();
         pnlMember.setLayout(new BoxLayout(pnlMember, BoxLayout.Y_AXIS));
-        JPanel pnlOfficer  = new JPanel();
-        pnlOfficer.setLayout(new BoxLayout(pnlOfficer, BoxLayout.Y_AXIS));
-
-
         pnlMember.add(new JLabel("Mitglieder"));
         pnlMember.add(scrlMemberPane);
+        pnlMember.add(btnDemote);
+
+        JPanel pnlOfficer  = new JPanel();
+        pnlOfficer.setLayout(new BoxLayout(pnlOfficer, BoxLayout.Y_AXIS));
         pnlOfficer.add(new JLabel("Vorstände"));
         pnlOfficer.add(scrlOfficerPane);
+        pnlOfficer.add(btnPromote);
 
         addMember();
         addOfficer();
-
 
         this.add(pnlMember);
         this.add(pnlOfficer);

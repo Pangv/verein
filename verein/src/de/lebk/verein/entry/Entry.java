@@ -38,11 +38,12 @@ public class Entry {
             e.printStackTrace();
         }
 
-        Officer admin = new Officer("John", "Lassiter", "admin", "admin", 'm', new GregorianCalendar(
-                Locale.getDefault()
-        ));
 
         if (!initialAdminExists()) {
+            Officer admin = new Officer("John", "Lassiter", "admin", "admin", 'm', new GregorianCalendar(
+                    Locale.getDefault()
+            ));
+
             club.getOfficers().add(admin);
         }
 
@@ -56,10 +57,8 @@ public class Entry {
         boolean adminExists = false;
         for (Officer officer : club.getOfficers()) {
             if (officer.getUsername().contains(club.getOfficers().get(i++).getUsername())) {
-                System.out.println("admin vorhanden");
                 adminExists = true;
             } else {
-                System.out.println("admin nicht vorhanden");
                 adminExists = false;
             }
         }
