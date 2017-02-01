@@ -21,7 +21,7 @@ public class EventInfoDialog extends JDialog {
     }
 
 
-    private void init(){
+    private void init() {
         btnDeleteEvent = new JButton("Veranstaltung entfernen");
         JLabel lblTitle = new JLabel(event.getTitle());
         JLabel lblEventType = new JLabel(event.getEventType());
@@ -32,8 +32,7 @@ public class EventInfoDialog extends JDialog {
         this.add(lblOrganizer);
 
 
-
-        for (Member member : event.getAttendees()){
+        for (Member member : event.getAttendees()) {
             JLabel lblAttendee = new JLabel(member.getFullName());
             this.add(lblAttendee);
         }
@@ -44,7 +43,7 @@ public class EventInfoDialog extends JDialog {
         this.setVisible(true);
     }
 
-    private void actionListeners(){
+    private void actionListeners() {
         btnDeleteEvent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

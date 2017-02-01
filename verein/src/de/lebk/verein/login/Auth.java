@@ -5,7 +5,7 @@ import de.lebk.verein.member.Member;
 import de.lebk.verein.member.Role;
 
 /**
- * @author raddatz
+ * @author mraddatz
  */
 public class Auth {
 

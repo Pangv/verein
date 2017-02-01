@@ -9,6 +9,7 @@ import de.lebk.verein.utilities.Warning;
 import javax.swing.*;
 import javax.xml.bind.JAXBException;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.Locale;
 
 /**
@@ -55,8 +56,12 @@ public class Entry {
     private static boolean initialAdminExists() {
         int i = 0;
         boolean adminExists = false;
-        for (Officer officer : club.getOfficers()) {
-            if (officer.getUsername().contains(club.getOfficers().get(i++).getUsername())) {
+
+        Iterator<Officer> officerIterator = club.getOfficers().iterator();
+        Officer officer;
+        while (officerIterator.hasNext()){
+            officer = officerIterator.next();
+            if (officer.getUsername().equals("admin")){
                 adminExists = true;
             } else {
                 adminExists = false;

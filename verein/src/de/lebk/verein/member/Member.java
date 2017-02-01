@@ -69,7 +69,6 @@ public class Member {
         this.lastName = lastName;
     }
 
-    @XmlElement(name = "password")
     public String getPassword() {
         return password;
     }
@@ -78,7 +77,6 @@ public class Member {
         this.password = password;
     }
 
-    @XmlElement(name = "username")
     public String getUsername() {
         return username;
     }
@@ -87,7 +85,6 @@ public class Member {
         this.username = username;
     }
 
-    @XmlElement(name = "sex")
     public char getSex() {
         return sex;
     }
@@ -96,7 +93,6 @@ public class Member {
         this.sex = sex;
     }
 
-    @XmlElement(name = "entered")
     public GregorianCalendar getEntered() {
         return entered;
     }

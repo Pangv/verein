@@ -5,9 +5,7 @@ import de.lebk.verein.member.Member;
 import de.lebk.verein.member.Officer;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Collections;
 import java.util.List;
@@ -37,14 +35,13 @@ class DashboardUsersPanel extends JPanel {
         lblNewOfficer.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 
-
         this.add(lblNewMember);
         this.add(latestMembersPanel());
         this.add(lblNewOfficer);
         this.add(latestOfficersPanel());
     }
 
-    private JPanel latestMembersPanel(){
+    private JPanel latestMembersPanel() {
 
 
         JPanel pnlLatestMembers = new JPanel();
@@ -69,7 +66,7 @@ class DashboardUsersPanel extends JPanel {
 
     }
 
-    private JPanel latestOfficersPanel(){
+    private JPanel latestOfficersPanel() {
 
         JPanel pnlLatestOfficers = new JPanel();
         List<Officer> reversedOfficer = club.getOfficers();

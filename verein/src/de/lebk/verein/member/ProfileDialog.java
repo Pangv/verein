@@ -17,9 +17,9 @@ public class ProfileDialog extends JDialog {
 
     // Components
 
-    private JButton jBtnLeaveClub;
-    private JButton jBtnChangePassword;
-
+    JButton btnResignation;
+    private JButton btnLeaveClub;
+    private JButton btnChangePassword;
     private Member member = Auth.getInstance().getCurrentUser();
     private Club club;
 
@@ -38,9 +38,9 @@ public class ProfileDialog extends JDialog {
         JLabel jLblFirstName = new JLabel("Vorname:\t" + member.getFirstName());
         JLabel jLblDateJoined = new JLabel("Mitglied seit: " + member.getDateTimeEntered());
 
-        jBtnLeaveClub = new JButton("Austreten");
-        JButton jBtnResignation = new JButton("Rücktritt");
-        jBtnChangePassword = new JButton("Passwort ändern");
+        btnLeaveClub = new JButton("Austreten");
+        btnResignation = new JButton("Rücktritt");
+        btnChangePassword = new JButton("Passwort ändern");
 
         grid.anchor = GridBagConstraints.FIRST_LINE_START;
         grid.fill = GridBagConstraints.VERTICAL;
@@ -78,20 +78,20 @@ public class ProfileDialog extends JDialog {
         grid.gridwidth = 1;
         grid.gridx = 3;
         grid.gridy = 0;
-        this.add(jBtnLeaveClub, grid);
+        this.add(btnLeaveClub, grid);
         // adding resignation button
         grid.gridwidth = 1;
         grid.gridx = 3;
         grid.gridy = 1;
-        this.add(jBtnResignation, grid);
+        this.add(btnResignation, grid);
         // adding changePassword button
         grid.gridwidth = 1;
         grid.gridx = 3;
         grid.gridy = 2;
-        this.add(jBtnChangePassword, grid);
+        this.add(btnChangePassword, grid);
 
         if (!Auth.getInstance().getCurrentUser().getClass().getSimpleName().equals("Officer")) {
-            this.remove(jBtnResignation);
+            this.remove(btnResignation);
         }
 
         this.setResizable(false);
@@ -103,7 +103,7 @@ public class ProfileDialog extends JDialog {
 
     private void defineActions() {
 
-        jBtnLeaveClub.addActionListener(new ActionListener() {
+        btnLeaveClub.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(null, "Sind Sie sicher, dass Sie austreten wollen?") == JOptionPane.OK_OPTION) {
@@ -116,6 +116,22 @@ public class ProfileDialog extends JDialog {
                     }
                     System.exit(-99);
                 }
+            }
+        });
+
+
+        btnResignation.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (JOptionPane.showConfirmDialog(null, "Sind Sie sicher, dass Sie zurücktreten wollen?") == JOptionPane.OK_OPTION) {
+                    club.retireOfficer((Officer) Auth.getInstance().getCurrentUser());
+                }
+                try {
+                    DataAccess.getInstance().writeXML(club);
+                } catch (JAXBException e1) {
+                    e1.printStackTrace();
+                }
+                System.exit(-88);
             }
         });
 
@@ -132,22 +148,21 @@ public class ProfileDialog extends JDialog {
          * length more than one (like ababab) or add .* before \1 to reject
          * non-continuous repeated appearances too.
          */
-        jBtnChangePassword.addActionListener(new ActionListener() {
+        btnChangePassword.addActionListener(new ActionListener() {
             String securePasswordPolicy = "^(?=.*[A-Z])(?=.*\\d)(?!.*(.)\\1\\1)[a-zA-Z0-9@]{6,12}$";
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                 String oldPassword = Auth.getInstance().getCurrentUser().getPassword();
+                String oldPassword = Auth.getInstance().getCurrentUser().getPassword();
                 String newPassword;
-                if ((newPassword = JOptionPane.showInputDialog("Ändern Sie Ihr Passwort"))!=null){
-                    if (!oldPassword.equals(newPassword)){
+                if ((newPassword = JOptionPane.showInputDialog("Ändern Sie Ihr Passwort")) != null) {
+                    if (!oldPassword.equals(newPassword)) {
                         Auth.getInstance().getCurrentUser().setPassword(newPassword);
-                    }else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "Das Passwort unterscheidet sich nicht. Versuchen Sie es erneut.", "Hinweis", JOptionPane.INFORMATION_MESSAGE);
                         Auth.getInstance().getCurrentUser().setPassword(oldPassword);
                     }
                 }
-
 
 
             }

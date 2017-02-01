@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * @author Sven-Oliver Pätzel
+ * @author sopaetzel
  */
 public class EventManager extends JPanel {
 
@@ -37,6 +37,8 @@ public class EventManager extends JPanel {
         this.club = club;
         this.defineActions();
         this.loggedMember = member;
+        addEventsToAllList();
+        addEventsToAllList();
     }
 
     private void createComponent() {
@@ -169,19 +171,19 @@ public class EventManager extends JPanel {
     private void addEventsToAllList() {
         DefaultListModel<Event> model = new DefaultListModel<>();
         lstAllEvents.setModel(model);
-       for (Event event : Auth.getInstance().getClub().getEvents()){
-           model.addElement(event);
-       }
+        for (Event event : Auth.getInstance().getClub().getEvents()) {
+            model.addElement(event);
+        }
     }
 
     private void addEventsToOwnList() {
         DefaultListModel<Event> model = new DefaultListModel<>();
         lstOwnEvents.setModel(model);
-       if (Auth.getInstance().getCurrentUser() != null && Auth.getInstance().getCurrentUser().getEvents() != null){
-            for (Event event : Auth.getInstance().getCurrentUser().getEvents()){
+        if (Auth.getInstance().getCurrentUser() != null && Auth.getInstance().getCurrentUser().getEvents() != null) {
+            for (Event event : Auth.getInstance().getCurrentUser().getEvents()) {
                 model.addElement(event);
             }
-       }
+        }
     }
 
 }

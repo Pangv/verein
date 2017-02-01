@@ -1,5 +1,6 @@
 package de.lebk.verein.club;
 
+import de.lebk.verein.payment.Payment;
 import de.lebk.verein.utilities.Warning;
 
 import javax.swing.*;
@@ -14,6 +15,9 @@ public class ClubManager extends JPanel {
 
 
     private Club club;
+    private double payment = 0.0;
+    private boolean isPayed = false;
+
 
     public ClubManager(Club club) {
         this.club = club;
@@ -22,29 +26,71 @@ public class ClubManager extends JPanel {
 
     private void createComponent() {
         this.setLayout(new BorderLayout());
-        this.add(createPaymentsPanel(), BorderLayout.NORTH);
-        this.add(createFunctionsPanel(), BorderLayout.NORTH);
         this.add(createUserPanel(), BorderLayout.NORTH);
+        this.add(createFunctionsPanel(), BorderLayout.CENTER);
+        this.add(createPaymentsPanel(), BorderLayout.SOUTH);
     }
 
     private JPanel createFunctionsPanel() {
         JPanel pnlFunctions = new JPanel();
 
 
-
         return pnlFunctions;
     }
 
     private JPanel createPaymentsPanel() {
-        JPanel pnlPayments = new JPanel();
-
-        pnlPayments.setLayout(new GridLayout(2, 5));
-
-
+        JPanel pnlPayments = new JPanel(new GridLayout(0, 3));
         JButton btnExecutePayment = new JButton("Beitragszahlung durchführen");
         JButton btnRequestPayment = new JButton("Beitragszahlung auslösen");
-        this.add(btnExecutePayment);
-        this.add(btnRequestPayment);
+        JTextField txtRequestAmount = new JTextField();
+        JLabel lblAmount = new JLabel("Überweisungsmenge");
+        JLabel lblPayment = new JLabel("");
+
+        pnlPayments.add(lblAmount);
+        pnlPayments.add(lblPayment);
+        pnlPayments.add(new JLabel());
+        pnlPayments.add(txtRequestAmount);
+        pnlPayments.add(btnRequestPayment);
+        pnlPayments.add(btnExecutePayment);
+
+        btnRequestPayment.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                   if(txtRequestAmount.getText().matches("\\d+")){
+                       if (lblPayment.getText().equals("") && !txtRequestAmount.getText().equals("")) {
+                           lblPayment.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 18));
+                           lblPayment.setForeground(Color.red);
+                           lblPayment.setText("Es ist eine Gebühr von " + txtRequestAmount.getText() + "€ offen.");
+
+                           payment = Double.parseDouble(txtRequestAmount.getText());
+                       }else {
+                           JOptionPane.showMessageDialog(null, "Die Zahlung wurde bereits durchgeführt.");
+                       }
+                   }
+                }catch (NumberFormatException ex){
+                    ex.printStackTrace();
+                    Warning.displayWarning(ex.getMessage(), "Nur nummerische Werte eingeben");
+                }
+
+            }
+        });
+
+        btnExecutePayment.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!isPayed && lblPayment.getText().contains("Es")) {
+                    JOptionPane.showMessageDialog(null, "Gebühr bezahlt", "", JOptionPane.INFORMATION_MESSAGE);
+                    lblPayment.setText(" ");
+                    club.setMoney(payment);
+                    isPayed = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Die Zahlung wurde bereits durchgeführt.");
+
+                }
+            }
+        });
+
 
         return pnlPayments;
     }
@@ -93,7 +139,6 @@ public class ClubManager extends JPanel {
 
         rbtnMale.setSelected(true);
 
-
         btnCreateUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,7 +146,7 @@ public class ClubManager extends JPanel {
                 if (!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtUsername.getText().equals("") && !pwfPassword.getText().equals("")) {
                     //noinspection deprecation
                     club.join(txtFirstName.getText(), txtLastName.getText(), txtUsername.getText(), pwfPassword.getText(), rbtnMale.isSelected() ? 'm' : 'f');
-                    JOptionPane.showMessageDialog(null, "");
+                    JOptionPane.showMessageDialog(null, "Mitglied wurde erfolgreich erstellt");
                 } else {
                     Warning.displayWarning("Fields are empty", "Alle Felder müssen gefüllt sein.");
                 }

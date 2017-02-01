@@ -107,7 +107,7 @@ public class Club {
      *
      * @param officer Der Vorstand der zurücktritt.
      */
-    public void retireOfficier(Officer officer) {
+    public void retireOfficer(Officer officer) {
         this.officers.remove(officer);
     }
 
@@ -136,6 +136,10 @@ public class Club {
     @XmlElement
     public double getMoney() {
         return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
     }
 
     public void requestMoney(Member member, double amount) {

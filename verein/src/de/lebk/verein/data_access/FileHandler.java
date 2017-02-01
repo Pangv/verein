@@ -12,13 +12,13 @@ import java.util.Properties;
  */
 class FileHandler {
 
+    private final String PATH = System.getProperty("user.home");
     private Properties prop = new Properties();
     private OutputStream output = null;
 
-    private final String PATH = System.getProperty("user.home");
-
     /**
      * Speichert den Pfad einer aktuellen Sitzung
+     *
      * @param lastFile der Pfad der aktuellen Sitzung
      */
     private void createProps(String lastFile) {
@@ -41,7 +41,6 @@ class FileHandler {
     }
 
     /**
-     *
      * @return Einen Pfad einer frühren Sitzung
      */
     private String readProps() {
@@ -61,7 +60,6 @@ class FileHandler {
     }
 
     /**
-     *
      * @return Eine gewählte Datei
      * @throws NullPointerException Wenn die Datei nicht gefunden wird
      */
@@ -71,9 +69,9 @@ class FileHandler {
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setCurrentDirectory(directory);
         jFileChooser.setFileFilter(new FileNameExtensionFilter("Vereinsdatei", "xml"));
-        if(readProps() != null && JOptionPane.showConfirmDialog(null, "Wollen Sie Ihren letzten Verein laden?", "Letzte Einstellungen laden", JOptionPane.YES_NO_OPTION ,JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+        if (readProps() != null && JOptionPane.showConfirmDialog(null, "Wollen Sie Ihren letzten Verein laden?", "Letzte Einstellungen laden", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
             file = new File(readProps());
-        }else {
+        } else {
             jFileChooser.showSaveDialog(null);
 
             if (!jFileChooser.getSelectedFile().exists()) {

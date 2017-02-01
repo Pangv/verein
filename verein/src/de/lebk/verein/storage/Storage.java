@@ -11,7 +11,7 @@ import java.util.*;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Storage {
-    
+
     @XmlElementWrapper(name = "leases")
     @XmlElement(name = "lease")
     private List<Lease> leases = new ArrayList<>();
@@ -34,13 +34,13 @@ public class Storage {
         leases.remove(lease);
     }
 
-	public void addLease(Member member, int amount, GregorianCalendar dueDate)
-		throws OutOfStonesException {
-		Lease leaseToAdd = new Lease(member, amount, dueDate);
+    public void addLease(Member member, int amount, GregorianCalendar dueDate)
+            throws OutOfStonesException {
+        Lease leaseToAdd = new Lease(member, amount, dueDate);
         leases.add(leaseToAdd);
         if ((getAmount() - amount) < 0) {
-			throw new OutOfStonesException();
-		} else {
+            throw new OutOfStonesException();
+        } else {
             setAmount(getAmount() - amount);
         }
     }
@@ -82,7 +82,7 @@ public class Storage {
         }
         return overdueLeases;
     }
-    
+
     public void setToday(GregorianCalendar today) {
         this.today = today;
     }

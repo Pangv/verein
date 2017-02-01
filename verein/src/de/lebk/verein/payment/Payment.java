@@ -3,7 +3,6 @@ package de.lebk.verein.payment;
 import de.lebk.verein.member.Member;
 
 /**
- *
  * @author Raddatz
  */
 public class Payment {
@@ -48,5 +47,10 @@ public class Payment {
 
     public boolean isPaid() {
         return this.state.equals(PaymentState.PAID);
+    }
+
+    @Override
+    public String toString() {
+        return getAmount() + " € Status: " + getState().getText();
     }
 }

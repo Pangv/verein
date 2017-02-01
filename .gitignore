@@ -98,3 +98,8 @@ out/
 /verein/nbproject/
 data/
 verein.properties
+/config.properties
+config.properties
+/verein/test/
+/verein.xml
+!/verein/test/

@@ -128,7 +128,7 @@ public class LoginDialog extends JDialog {
 
             @Override
             public void windowClosed(WindowEvent e) {
-                if(!getParent().isVisible()){
+                if (!getParent().isVisible()) {
                     System.exit(0);
                 }
             }
