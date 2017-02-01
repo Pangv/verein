@@ -63,6 +63,7 @@ public class Entry {
             officer = officerIterator.next();
             if (officer.getUsername().equals("admin")){
                 adminExists = true;
+                return adminExists;
             } else {
                 adminExists = false;
             }

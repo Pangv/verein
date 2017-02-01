@@ -17,7 +17,8 @@ public class EventInfoDialog extends JDialog {
 
     public EventInfoDialog(Event event) {
         this.event = event;
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        init();
     }
 
 
@@ -32,10 +33,15 @@ public class EventInfoDialog extends JDialog {
         this.add(lblOrganizer);
 
 
-        for (Member member : event.getAttendees()) {
-            JLabel lblAttendee = new JLabel(member.getFullName());
-            this.add(lblAttendee);
+        if (event.getAttendeeCount() > 0) {
+            for (Member member : event.getAttendees()) {
+                JLabel lblAttendee = new JLabel(member.getFullName());
+                this.add(lblAttendee);
+            }
+        } else {
+            this.add(new JLabel("keine Teilnehmner"));
         }
+
 
         this.add(btnDeleteEvent);
         this.actionListeners();

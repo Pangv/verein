@@ -1,17 +1,14 @@
 package de.lebk.verein.member;
 
-import de.lebk.verein.event.Event;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 /**
  * @author mraddatz
  */
-@XmlType(propOrder = {"firstName", "lastName", "password", "username", "sex", "entered", "events"})
+@XmlType(propOrder = {"firstName", "lastName", "password", "username", "sex", "entered"})
 public class Member {
 
     private String firstName;
@@ -20,7 +17,6 @@ public class Member {
     private String password;
     private char sex;
     private GregorianCalendar entered;
-    private List<Event> events;
 
     public Member() {
     }
@@ -101,20 +97,5 @@ public class Member {
         this.entered = entered;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
-    public void addEvent(Event event) {
-        this.events.add(event);
-    }
-
-    public void removeEvent(Event event) {
-        this.events.remove(event);
-    }
 
 }

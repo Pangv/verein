@@ -6,6 +6,7 @@ import de.lebk.verein.member.Member;
 import javax.xml.bind.annotation.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Event {
 
     private String eventType;
     private String title;
-    private List<Member> attendees;
+    private List<Member> attendees = new ArrayList<>();
     private Member organizer;
     private GregorianCalendar dateTime;
 
@@ -87,12 +88,10 @@ public class Event {
 
     public void addAttendee(Member member) {
         this.attendees.add(member);
-        member.addEvent(this);
     }
 
     public void removeAttendee(Member member) {
         this.attendees.remove(member);
-        member.removeEvent(this);
     }
 
     public void changeOrganisator(Member member) {

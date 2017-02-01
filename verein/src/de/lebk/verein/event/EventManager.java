@@ -38,7 +38,7 @@ public class EventManager extends JPanel {
         this.defineActions();
         this.loggedMember = member;
         addEventsToAllList();
-        addEventsToAllList();
+        addEventsToOwnList();
     }
 
     private void createComponent() {
@@ -146,14 +146,36 @@ public class EventManager extends JPanel {
         jBtnJoin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Event event = lstAllEvents.getSelectedValue();
+                if (event.getAttendees() != null && !event.getAttendees().contains(Auth.getInstance().getCurrentUser())) {
+                    event.addAttendee(Auth.getInstance().getCurrentUser());
+                    Auth.getInstance().getClub().addEvent(event);
 
+                    addEventsToOwnList();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sie sind bereits angemeldet");
+                }
+            }
+        });
+
+        jBtnLeave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Auth.getInstance().getClub().)
+                addEventsToOwnList();
+            }
+        });
+
+        jBtnInfo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new EventInfoDialog(lstAllEvents.getSelectedValue());
             }
         });
 
         jBtnCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Button Clicked");
                 new EventDialog("Veranstaltung: " + jCmbEventType.getSelectedItem() + " erstellen", jCmbEventType.getSelectedItem().toString(), club, loggedMember);
             }
         });
@@ -179,9 +201,11 @@ public class EventManager extends JPanel {
     private void addEventsToOwnList() {
         DefaultListModel<Event> model = new DefaultListModel<>();
         lstOwnEvents.setModel(model);
-        if (Auth.getInstance().getCurrentUser() != null && Auth.getInstance().getCurrentUser().getEvents() != null) {
-            for (Event event : Auth.getInstance().getCurrentUser().getEvents()) {
-                model.addElement(event);
+        if (Auth.getInstance() != null && Auth.getInstance().getClub().getEvents().size() > 0) {
+            for (Event event : Auth.getInstance().getClub().getEvents()) {
+                if (Auth.getInstance().getClub().getEvents() != null && event.getAttendees() != null && !event.getAttendees().contains(Auth.getInstance().getCurrentUser())) {
+                    model.addElement(event);
+                }
             }
         }
     }

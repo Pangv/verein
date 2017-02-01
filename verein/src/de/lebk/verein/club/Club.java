@@ -76,6 +76,11 @@ public class Club {
         return events;
     }
 
+/*    public Event getEvent(Event event){
+
+        return
+    }*/
+
     public void setEvents(List<Event> events) {
         this.events = events;
     }

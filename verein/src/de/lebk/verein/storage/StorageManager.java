@@ -68,6 +68,7 @@ public class StorageManager extends JPanel {
     private JPanel initBottomLeft() {
         JPanel bottomLeft = new JPanel();
         bottomLeft.setLayout(new BoxLayout(bottomLeft, BoxLayout.Y_AXIS));
+        JButton btnRefresh = new JButton("Liste aktualisieren");
         myLeases = new JList<>();
         JScrollPane myLeasesScrollPane = new JScrollPane(myLeases);
         JLabel lblMyList = new JLabel("Meine Liste");
@@ -75,6 +76,15 @@ public class StorageManager extends JPanel {
 
         bottomLeft.add(lblMyList);
         bottomLeft.add(myLeasesScrollPane);
+        bottomLeft.add(btnRefresh);
+
+
+        btnRefresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addLeasesToMyList();
+            }
+        });
 
 
         return bottomLeft;
@@ -122,11 +132,13 @@ public class StorageManager extends JPanel {
                     } else {
                         lblStones.setText("Steine");
                     }
+                    addLeasesToMyList();
                 } catch (NumberFormatException ex) {
                     Warning.displayWarning(ex.getMessage(), "Bitte nur ganzahlige Zahlen verwenden.");
                 } catch (OutOfStonesException ex) {
                     Warning.displayWarning("kleiner Null",
                             "Es können nicht mehr Steine ausgeliehen werden als vorhanden sind.");
+                    throw new OutOfStonesException();
                 }
             }
         });
@@ -137,7 +149,9 @@ public class StorageManager extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     club.getStorage().removeLease(myLeases.getSelectedValue());
-                    club.getStorage().setAmount(club.getStorage().getAmount() - 1);
+                    club.getStorage().setAmount(club.getStorage().getAmount() + myLeases.getSelectedValue().getAmount());
+                    lblStoneAmount.setText(club.getStorage().getAmount() + "");
+
 
                 } catch (NullPointerException ex) {
                     Warning.displayWarning(ex.getMessage(), "Kein Element ausgewählt");
@@ -158,6 +172,16 @@ public class StorageManager extends JPanel {
             }
         });
 
+    }
+
+    private void addLeasesToMyList() {
+        DefaultListModel<Lease> model = new DefaultListModel<>();
+        myLeases.setModel(model);
+        if (Auth.getInstance().getCurrentUser() != null && Auth.getInstance().getClub().getEvents().size() > 0) {
+            for (Lease lease : Auth.getInstance().getClub().getStorage().getLeasesForMember(Auth.getInstance().getCurrentUser())) {
+                model.addElement(lease);
+            }
+        }
     }
 
 

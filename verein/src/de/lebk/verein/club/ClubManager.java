@@ -1,6 +1,5 @@
 package de.lebk.verein.club;
 
-import de.lebk.verein.payment.Payment;
 import de.lebk.verein.utilities.Warning;
 
 import javax.swing.*;
@@ -82,7 +81,7 @@ public class ClubManager extends JPanel {
                 if (!isPayed && lblPayment.getText().contains("Es")) {
                     JOptionPane.showMessageDialog(null, "Gebühr bezahlt", "", JOptionPane.INFORMATION_MESSAGE);
                     lblPayment.setText(" ");
-                    club.setMoney(payment);
+                    club.setMoney(club.getMoney() + payment);
                     isPayed = true;
                 } else {
                     JOptionPane.showMessageDialog(null, "Die Zahlung wurde bereits durchgeführt.");

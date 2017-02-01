@@ -23,7 +23,6 @@ public class MainFrame extends JFrame {
     private final int minHeight = 300;
     private final Dimension initDimension = new Dimension(initWidth, initHeight);
     private final Dimension minDimension = new Dimension(minWidth, minHeight);
-    private boolean DEBUG = true;
     private Club club;
     private Member member;
 
@@ -31,6 +30,7 @@ public class MainFrame extends JFrame {
         this.club = club;
         this.createAndHideGUI();
 
+        boolean DEBUG = true;
         if (DEBUG) {
             this.showGUI();
             try {

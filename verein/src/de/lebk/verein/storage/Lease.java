@@ -3,6 +3,8 @@ package de.lebk.verein.storage;
 import de.lebk.verein.member.Member;
 
 import javax.xml.bind.annotation.XmlType;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 /**
@@ -51,6 +53,8 @@ public class Lease {
 
     @Override
     public String toString() {
-        return getMember() + "; " + getAmount() + "; " + getDueDate();
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+
+        return getMember().getFullName() + "; " + getAmount() + "; " + dateFormat.format(getDueDate().getTime());
     }
 }
