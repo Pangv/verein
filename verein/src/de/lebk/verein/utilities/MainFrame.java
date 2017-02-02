@@ -41,7 +41,7 @@ public class MainFrame extends JFrame {
             }
         } else {
             if (Auth.getInstance().getCurrentUser() == null) {
-                LoginDialog loginDialog = new LoginDialog(this, "Anmeldung");
+                LoginDialog loginDialog = new LoginDialog(this);
                 member = Auth.getInstance().getCurrentUser();
                 if (loginDialog.isLogged()) {
                     this.showGUI();

@@ -54,7 +54,7 @@ public class Event {
     }
 
     @XmlElement(name = "dateTime")
-    public GregorianCalendar getDateTime() {
+    private GregorianCalendar getDateTime() {
         return dateTime;
     }
 

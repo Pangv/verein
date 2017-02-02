@@ -161,7 +161,7 @@ public class EventManager extends JPanel {
         jBtnLeave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Auth.getInstance().getClub().)
+                Auth.getInstance().getClub().getEvents().remove(lstOwnEvents.getSelectedValue());
                 addEventsToOwnList();
             }
         });
@@ -201,13 +201,10 @@ public class EventManager extends JPanel {
     private void addEventsToOwnList() {
         DefaultListModel<Event> model = new DefaultListModel<>();
         lstOwnEvents.setModel(model);
-        if (Auth.getInstance() != null && Auth.getInstance().getClub().getEvents().size() > 0) {
-            for (Event event : Auth.getInstance().getClub().getEvents()) {
-                if (Auth.getInstance().getClub().getEvents() != null && event.getAttendees() != null && !event.getAttendees().contains(Auth.getInstance().getCurrentUser())) {
-                    model.addElement(event);
-                }
-            }
+        for (Event event : Auth.getInstance().getClub().getEventsForMember(Auth.getInstance().getCurrentUser())) {
+            model.addElement(event);
         }
+
     }
 
 }

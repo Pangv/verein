@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * @author sopaetzel
  */
-public class DashboardAttributesPanel extends JPanel {
+class DashboardAttributesPanel extends JPanel {
 
     private Club club;
 
@@ -18,7 +18,7 @@ public class DashboardAttributesPanel extends JPanel {
         this.initComponents();
     }
 
-    private void initComponents(){
+    private void initComponents() {
         this.setLayout(new GridLayout(1, 3));
 
         JLabel lblMemberCount = new JLabel("Mitgliederanzahl: " + club.getMemberCount());

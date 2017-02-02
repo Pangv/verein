@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 /**
  * @author sopaetzel
@@ -177,11 +178,14 @@ public class StorageManager extends JPanel {
     private void addLeasesToMyList() {
         DefaultListModel<Lease> model = new DefaultListModel<>();
         myLeases.setModel(model);
-        if (Auth.getInstance().getCurrentUser() != null && Auth.getInstance().getClub().getEvents().size() > 0) {
-            for (Lease lease : Auth.getInstance().getClub().getStorage().getLeasesForMember(Auth.getInstance().getCurrentUser())) {
-                model.addElement(lease);
-            }
+
+        Iterator<Lease> leaseIterator = club.getStorage().getLeasesForMember(Auth.getInstance().getCurrentUser()).iterator();
+        Lease lease;
+        while (leaseIterator.hasNext()) {
+            lease = leaseIterator.next();
+            model.addElement(lease);
         }
+
     }
 
 

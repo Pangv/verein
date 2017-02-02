@@ -17,7 +17,7 @@ public class Dashboard extends JPanel {
         createComponent();
     }
 
-    public void createComponent() {
+    private void createComponent() {
         this.setLayout(new BorderLayout(20, 20));
         this.add(new DashboardAttributesPanel(club), BorderLayout.NORTH);
         this.add(new DashboardUsersPanel(club), BorderLayout.CENTER);

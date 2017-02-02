@@ -26,15 +26,7 @@ public class ClubManager extends JPanel {
     private void createComponent() {
         this.setLayout(new BorderLayout());
         this.add(createUserPanel(), BorderLayout.NORTH);
-        this.add(createFunctionsPanel(), BorderLayout.CENTER);
         this.add(createPaymentsPanel(), BorderLayout.SOUTH);
-    }
-
-    private JPanel createFunctionsPanel() {
-        JPanel pnlFunctions = new JPanel();
-
-
-        return pnlFunctions;
     }
 
     private JPanel createPaymentsPanel() {
@@ -56,18 +48,18 @@ public class ClubManager extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                   if(txtRequestAmount.getText().matches("\\d+")){
-                       if (lblPayment.getText().equals("") && !txtRequestAmount.getText().equals("")) {
-                           lblPayment.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 18));
-                           lblPayment.setForeground(Color.red);
-                           lblPayment.setText("Es ist eine Gebühr von " + txtRequestAmount.getText() + "€ offen.");
+                    if (txtRequestAmount.getText().matches("\\d+")) {
+                        if (lblPayment.getText().equals("") && !txtRequestAmount.getText().equals("")) {
+                            lblPayment.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 18));
+                            lblPayment.setForeground(Color.red);
+                            lblPayment.setText("Es ist eine Gebühr von " + txtRequestAmount.getText() + "€ offen.");
 
-                           payment = Double.parseDouble(txtRequestAmount.getText());
-                       }else {
-                           JOptionPane.showMessageDialog(null, "Die Zahlung wurde bereits durchgeführt.");
-                       }
-                   }
-                }catch (NumberFormatException ex){
+                            payment = Double.parseDouble(txtRequestAmount.getText());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Die Zahlung wurde bereits durchgeführt.");
+                        }
+                    }
+                } catch (NumberFormatException ex) {
                     ex.printStackTrace();
                     Warning.displayWarning(ex.getMessage(), "Nur nummerische Werte eingeben");
                 }

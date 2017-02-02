@@ -59,9 +59,9 @@ public class Entry {
 
         Iterator<Officer> officerIterator = club.getOfficers().iterator();
         Officer officer;
-        while (officerIterator.hasNext()){
+        while (officerIterator.hasNext()) {
             officer = officerIterator.next();
-            if (officer.getUsername().equals("admin")){
+            if (officer.getUsername().equals("admin")) {
                 adminExists = true;
                 return adminExists;
             } else {

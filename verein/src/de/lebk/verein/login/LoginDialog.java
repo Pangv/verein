@@ -19,9 +19,9 @@ public class LoginDialog extends JDialog {
 
     private boolean logged = false;
 
-    public LoginDialog(MainFrame owner, String dialogTitle) {
+    public LoginDialog(MainFrame owner) {
         super(owner, true);
-        this.dialogTitle = dialogTitle;
+        this.dialogTitle = "Anmeldung";
         createDialog();
     }
 

@@ -37,7 +37,7 @@ public class Storage {
     public void addLease(Member member, int amount, GregorianCalendar dueDate)
             throws OutOfStonesException {
         Lease leaseToAdd = new Lease(member, amount, dueDate);
-        leases.add(leaseToAdd);
+        this.leases.add(leaseToAdd);
         if ((getAmount() - amount) < 0) {
             throw new OutOfStonesException();
         } else {
@@ -64,8 +64,12 @@ public class Storage {
 
     public List<Lease> getLeasesForMember(Member member) {
         List<Lease> membersLeases = new ArrayList<>();
-        for (Lease lease : leases) {
-            if (lease.getMember() == member) {
+        Iterator<Lease> leaseIterator = leases.iterator();
+        Lease lease;
+
+        while (leaseIterator.hasNext()) {
+            lease = leaseIterator.next();
+            if (lease.getMember().getUsername().equals(member.getUsername())) {
                 membersLeases.add(lease);
             }
         }

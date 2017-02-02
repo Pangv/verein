@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * @author sopaetzel
  */
-public class EventInfoDialog extends JDialog {
+class EventInfoDialog extends JDialog {
 
     private Event event;
     private JButton btnDeleteEvent;

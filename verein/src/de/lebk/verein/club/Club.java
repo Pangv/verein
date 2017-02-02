@@ -76,13 +76,25 @@ public class Club {
         return events;
     }
 
-/*    public Event getEvent(Event event){
-
-        return
-    }*/
-
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public List<Event> getEventsForMember(Member member) {
+        List<Event> memberEvents = new ArrayList<>();
+        Iterator<Event> eventIterator = events.iterator();
+        Event event;
+
+        int i = 0;
+        while (eventIterator.hasNext()) {
+            event = eventIterator.next();
+            if (event.getAttendees() != null && member != null) {
+                if (event.getAttendees().get(i++).getUsername().equals(member.getUsername())) {
+                    memberEvents.add(event);
+                }
+            }
+        }
+        return memberEvents;
     }
 
     public void addEvent(Event event) {

@@ -14,18 +14,16 @@ import java.util.GregorianCalendar;
 /**
  * @author sopaetzel
  */
-public class EventDialog extends JDialog {
+class EventDialog extends JDialog {
 
-    JLabel jLblTitle;
-    JLabel jLblDateTime;
-    JTextField jTFTitle;
-    JComboBox<Integer> jCombYear;
-    JComboBox<Integer> jCombMonth;
-    JComboBox<Integer> jCombDay;
-    JComboBox<Integer> jCombHour;
-    JComboBox<Integer> jCombMinute;
-    JButton jBtnAbort;
-    JButton jBtnCreate;
+    private JTextField txtFTitle;
+    private JComboBox<Integer> cbxYear;
+    private JComboBox<Integer> cbxMonth;
+    private JComboBox<Integer> cbxDay;
+    private JComboBox<Integer> cbxHour;
+    private JComboBox<Integer> cbxMinute;
+    private JButton btnAbort;
+    private JButton btnCreate;
     private String eventType;
     private Club club;
     private Member member;
@@ -46,23 +44,23 @@ public class EventDialog extends JDialog {
         GridBagConstraints grid = new GridBagConstraints();
         this.setLayout(new GridBagLayout());
 
-        jTFTitle = new JTextField();
+        txtFTitle = new JTextField();
 
-        jLblTitle = new JLabel("Titel");
-        jLblDateTime = new JLabel("Datum / Uhrzeit");
+        JLabel lblTitle = new JLabel("Titel");
+        JLabel jLblDateTime = new JLabel("Datum / Uhrzeit");
 
-        jCombYear = new JComboBox<>(getYearModel());
-        jCombYear.setSelectedIndex(0);
-        jCombMonth = new JComboBox<>(getMonthModel());
-        jCombMonth.setSelectedIndex(0);
-        jCombDay = new JComboBox<>(getDayModel());
-        jCombDay.setSelectedIndex(0);
+        cbxYear = new JComboBox<>(getYearModel());
+        cbxYear.setSelectedIndex(0);
+        cbxMonth = new JComboBox<>(getMonthModel());
+        cbxMonth.setSelectedIndex(0);
+        cbxDay = new JComboBox<>(getDayModel());
+        cbxDay.setSelectedIndex(0);
 
-        jCombHour = new JComboBox<>(getHourModel());
-        jCombMinute = new JComboBox<>(getMinuteModel());
+        cbxHour = new JComboBox<>(getHourModel());
+        cbxMinute = new JComboBox<>(getMinuteModel());
 
-        jBtnAbort = new JButton("Abbruch");
-        jBtnCreate = new JButton("Erstellen");
+        btnAbort = new JButton("Abbruch");
+        btnCreate = new JButton("Erstellen");
 
         grid.anchor = GridBagConstraints.FIRST_LINE_START;
         grid.insets = new Insets(2, 2, 2, 2);
@@ -74,13 +72,13 @@ public class EventDialog extends JDialog {
         grid.gridwidth = 5;
         grid.gridx = 0;
         grid.gridy = 0;
-        this.add(jLblTitle, grid);
+        this.add(lblTitle, grid);
 
         grid.gridheight = 1;
         grid.gridwidth = 5;
         grid.gridx = 0;
         grid.gridy = 1;
-        this.add(jTFTitle, grid);
+        this.add(txtFTitle, grid);
 
         grid.gridheight = 1;
         grid.gridwidth = 5;
@@ -92,43 +90,43 @@ public class EventDialog extends JDialog {
         grid.gridwidth = 1;
         grid.gridx = 0;
         grid.gridy = 3;
-        this.add(jCombDay, grid);
+        this.add(cbxDay, grid);
 
         grid.gridheight = 1;
         grid.gridwidth = 1;
         grid.gridx = 1;
         grid.gridy = 3;
-        this.add(jCombMonth, grid);
+        this.add(cbxMonth, grid);
 
         grid.gridheight = 1;
         grid.gridwidth = 1;
         grid.gridx = 2;
         grid.gridy = 3;
-        this.add(jCombYear, grid);
+        this.add(cbxYear, grid);
 
         grid.gridheight = 1;
         grid.gridwidth = 1;
         grid.gridx = 3;
         grid.gridy = 3;
-        this.add(jCombHour, grid);
+        this.add(cbxHour, grid);
 
         grid.gridheight = 1;
         grid.gridwidth = 1;
         grid.gridx = 4;
         grid.gridy = 3;
-        this.add(jCombMinute, grid);
+        this.add(cbxMinute, grid);
 
         grid.gridheight = 1;
         grid.gridwidth = 1;
         grid.gridx = 3;
         grid.gridy = 5;
-        this.add(jBtnAbort, grid);
+        this.add(btnAbort, grid);
 
         grid.gridheight = 1;
         grid.gridwidth = 1;
         grid.gridx = 4;
         grid.gridy = 5;
-        this.add(jBtnCreate, grid);
+        this.add(btnCreate, grid);
 
         defineActions();
 
@@ -188,19 +186,19 @@ public class EventDialog extends JDialog {
 
     private void defineActions() {
 
-        jBtnCreate.addActionListener(new ActionListener() {
+        btnCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Event creation executed");
-                club.addEvent(new Event(eventType, jTFTitle.getText(), Auth.getInstance().getCurrentUser(), new GregorianCalendar((int) jCombYear.getSelectedItem(), (int) jCombMonth.getSelectedItem() - 1,
-                        (int) jCombDay.getSelectedItem(), (int) jCombHour.getSelectedItem(), (int) jCombMinute.getSelectedItem())));
+                club.addEvent(new Event(eventType, txtFTitle.getText(), Auth.getInstance().getCurrentUser(), new GregorianCalendar((int) cbxYear.getSelectedItem(), (int) cbxMonth.getSelectedItem() - 1,
+                        (int) cbxDay.getSelectedItem(), (int) cbxHour.getSelectedItem(), (int) cbxMinute.getSelectedItem())));
 
                 JOptionPane.showMessageDialog(null, "Veranstaltung hinzugefügt");
                 dispose();
             }
         });
 
-        jBtnAbort.addActionListener(new ActionListener() {
+        btnAbort.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
