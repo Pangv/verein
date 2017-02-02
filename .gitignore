@@ -90,3 +90,16 @@ nbdist/
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /verein/nbproject/private/
+/JAXBTest/nbproject/private/
+/verein/src/test/
+.idea/
+verein/verein.iml
+out/
+/verein/nbproject/
+data/
+verein.properties
+/config.properties
+config.properties
+/verein/test/
+/verein.xml
+!/verein/test/

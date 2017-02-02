@@ -1,3 +1,18 @@
 Manifest-Version: 1.0
-X-COMMENT: Main-Class will be added automatically by build
+Ant-Version: Apache Ant 1.9.7
+Built-By: sopaetzel
+Created-By: 1.8.0_112-b15 (Oracle Corporation)
+SplashScreen-Image: resources/logo.png
+Main-Class: de.lebk.verein.entry.Entry
+
+Name: common
+Specification-Title: Example
+Implementation-Title: common
+Implementation-Version: ${version} ${TODAY}
+Specification-Version: ${version}
+Specification-Vendor: Example Organization
+Implementation-Vendor: Example Corp.
+
+Name: common/class1.class
+Sealed: false
 
