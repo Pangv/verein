@@ -153,6 +153,7 @@ public class StorageManager extends JPanel {
                     club.getStorage().setAmount(club.getStorage().getAmount() + myLeases.getSelectedValue().getAmount());
                     lblStoneAmount.setText(club.getStorage().getAmount() + "");
 
+                    addLeasesToMyList();
 
                 } catch (NullPointerException ex) {
                     Warning.displayWarning(ex.getMessage(), "Kein Element ausgewählt");
