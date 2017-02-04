@@ -89,9 +89,10 @@ public class Club {
         while (eventIterator.hasNext()) {
             event = eventIterator.next();
             if (event.getAttendees() != null && member != null) {
-                if (event.getAttendees().get(i++).getUsername().equals(member.getUsername())) {
+                if (event.getAttendees().get(i).getUsername().equals(member.getUsername())) {
                     memberEvents.add(event);
                 }
+                i++;
             }
         }
         return memberEvents;

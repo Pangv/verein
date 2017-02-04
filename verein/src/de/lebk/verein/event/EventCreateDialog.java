@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
 /**
  * @author sopaetzel
  */
-class EventDialog extends JDialog {
+class EventCreateDialog extends JDialog {
 
     private JTextField txtFTitle;
     private JComboBox<Integer> cbxYear;
@@ -28,10 +28,10 @@ class EventDialog extends JDialog {
     private Club club;
     private Member member;
 
-    public EventDialog() {
+    public EventCreateDialog() {
     }
 
-    public EventDialog(String title, String eventType, Club club, Member member) {
+    public EventCreateDialog(String title, String eventType, Club club, Member member) {
         super((Frame) null, title, true);
         this.eventType = eventType;
         this.club = club;

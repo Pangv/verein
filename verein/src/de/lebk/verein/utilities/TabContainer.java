@@ -2,7 +2,7 @@ package de.lebk.verein.utilities;
 
 import de.lebk.verein.club.Club;
 import de.lebk.verein.club.ClubManager;
-import de.lebk.verein.entry.Dashboard;
+import de.lebk.verein.dashboard.Dashboard;
 import de.lebk.verein.event.EventManager;
 import de.lebk.verein.login.Auth;
 import de.lebk.verein.member.MemberManager;

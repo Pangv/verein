@@ -1,4 +1,4 @@
-package de.lebk.verein.entry;
+package de.lebk.verein.dashboard;
 
 import de.lebk.verein.club.Club;
 
